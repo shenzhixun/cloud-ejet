@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/cloud-ejet.iml" filepath="$PROJECT_DIR$/.idea/cloud-ejet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ejet-comm-web/ejet-comm-web.iml" filepath="$PROJECT_DIR$/ejet-comm-web/ejet-comm-web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ejet-comm-web-db/ejet-comm-web-db.iml" filepath="$PROJECT_DIR$/ejet-comm-web-db/ejet-comm-web-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ejet-parent/ejet-parent.iml" filepath="$PROJECT_DIR$/ejet-parent/ejet-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/khsh-empi/khsh-empi.iml" filepath="$PROJECT_DIR$/khsh-empi/khsh-empi.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ejet-comm-web" />
+        <module name="ejet-comm-web-db" />
+        <module name="khsh-empi" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ejet-comm-web" target="8" />
+      <module name="ejet-comm-web-db" target="8" />
+      <module name="ejet-parent" target="1.8" />
+      <module name="khsh-empi" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
