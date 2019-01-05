@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>ejet-comm-web</artifactId>
+        <groupId>com.ejet</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../ejet-parent/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>ejet-comm-web-db</artifactId>
+
+
+    <!-- 项目属性 -->
+    <properties>
+        <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+
+    <dependencies>
+
+        <!--mysql -->
+        <dependency>
+        <groupId>mysql</groupId>
+        <artifactId>mysql-connector-java</artifactId>
+        </dependency>
+        <!-- Druid 数据连接池依赖 -->
+        <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>druid</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>com.ejet</groupId>
+            <artifactId>ejet-comm-web</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
+
+    </dependencies>
+
+
+</project>
