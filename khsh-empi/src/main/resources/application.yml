@@ -1,7 +1,7 @@
 server:
   port: 8099
   servlet:
-    context-path: /bss
+    context-path: /empi
     session:
       cookie:
         max-age: 60000s
@@ -33,10 +33,11 @@ spring:
   #数据源配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/etl_kettle?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:3306/empi?useSSL=false&serverTimezone=UTC
     username: root
     password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
     initialSize: 3

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.khsh.datac.empi.mapper.PixEmpiIdentityDao">
+
+	<sql id="SqlWhere">
+		<where>
+			1=1
+			<if test="id!=null ">and id=#{id} </if>
+			<if test="regUuid!=null and regUuid!='' ">and reg_uuid=#{regUuid} </if>
+			<if test="empi!=null and empi!='' ">and empi=#{empi} </if>
+			<if test="idType!=null and idType!='' ">and id_type=#{idType} </if>
+			<if test="idCode!=null and idCode!='' ">and id_code=#{idCode} </if>
+			<if test="idNo!=null and idNo!='' ">and id_no=#{idNo} </if>
+			<if test="idFlag!=null and idFlag!='' ">and id_flag=#{idFlag} </if>
+			<if test="status!=null and status!='' ">and status=#{status} </if>
+			<if test="remark!=null and remark!='' ">and remark=#{remark} </if>
+			<if test="createBy!=null and createBy!='' ">and create_by=#{createBy} </if>
+			<if test="createTime!=null and createTime!='' ">and create_time=#{createTime} </if>
+			<if test="updateTime!=null and updateTime!='' ">and update_time=#{updateTime} </if>
+		</where>
+	</sql>
+	<sql id="SqlWherePK">
+		<where>
+			1=1
+			<if test="id!=null ">and id=#{id} </if>
+		</where>
+	</sql>
+	<sql id="SqlSet">
+		<set>
+			<if test="id!=null "> id=#{id}, </if>
+			<if test="regUuid!=null and regUuid!='' "> reg_uuid=#{regUuid}, </if>
+			<if test="empi!=null and empi!='' "> empi=#{empi}, </if>
+			<if test="idType!=null and idType!='' "> id_type=#{idType}, </if>
+			<if test="idCode!=null and idCode!='' "> id_code=#{idCode}, </if>
+			<if test="idNo!=null and idNo!='' "> id_no=#{idNo}, </if>
+			<if test="idFlag!=null and idFlag!='' "> id_flag=#{idFlag}, </if>
+			<if test="status!=null and status!='' "> status=#{status}, </if>
+			<if test="remark!=null and remark!='' "> remark=#{remark}, </if>
+			<if test="createBy!=null and createBy!='' "> create_by=#{createBy}, </if>
+			<if test="createTime!=null and createTime!='' "> create_time=#{createTime}, </if>
+			<if test="updateTime!=null and updateTime!='' "> update_time=#{updateTime}, </if>
+		</set>
+	</sql>
+
+
+	<insert  id="insertAutoKey" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" useGeneratedKeys="true" keyProperty="id" >
+		 INSERT INTO pix_empi_identity (
+ 			reg_uuid, empi, id_type, id_code, 
+ 			id_no, id_flag, status, remark, create_by, 
+ 			create_time, update_time ) 	 VALUES ( 
+ 			#{regUuid}, #{empi}, #{idType}, #{idCode}, 
+ 			#{idNo}, #{idFlag}, #{status}, #{remark}, #{createBy}, 
+ 			#{createTime}, #{updateTime} ) 
+	</insert>
+
+	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" useGeneratedKeys="true" keyProperty="id" >
+		 INSERT INTO pix_empi_identity (
+ 			reg_uuid, empi, id_type, id_code, 
+ 			id_no, id_flag, status, remark, create_by, 
+ 			create_time, update_time,  id ) 
+		 VALUES( 
+ 			#{regUuid}, #{empi}, #{idType}, #{idCode}, 
+ 			#{idNo}, #{idFlag}, #{status}, #{remark}, #{createBy}, 
+ 			#{createTime}, #{updateTime},  #{id} ) 
+	</insert>
+
+	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
+		 DELETE FROM pix_empi_identity
+		 <include refid="SqlWhere"></include> 
+	</delete>
+
+	<update  id="update" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
+		 UPDATE pix_empi_identity
+		 <include refid="SqlSet"></include> 
+		 <include refid="SqlWherePK"></include> 
+	</update>
+
+	<select  id="findByPK" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" resultType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
+		 SELECT * FROM pix_empi_identity
+		 <include refid="SqlWherePK"></include> 
+		 <if test=" orderCond !=null ">  order by ${orderCond} </if> 
+	</select>
+
+	<select  id="queryByCond" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" resultType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
+		 SELECT * FROM pix_empi_identity
+		 <include refid="SqlWhere"></include> 
+		 <if test=" extSQL !=null "> ${extSQL} </if> 
+		 <if test=" orderCond !=null ">  order by ${orderCond} </if> 
+	</select>
+
+	<select  id="queryByPage" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" resultType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
+		 SELECT * FROM pix_empi_identity
+		 <include refid="SqlWhere"></include> 
+		 <if test="extSQL!=null "> ${extSQL} </if> 
+	</select>
+
+	<select  id="findMaxId" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" resultType="int" >
+		 SELECT max(id) FROM pix_empi_identity
+		 <include refid="SqlWhere"></include> 
+	</select>
+
+</mapper>

@@ -1,11 +1,15 @@
 package com.khsh.datac.empi;
 
+import com.ejet.core.CommWebApplication;
 import com.ejet.core.db.CommWebDBApplication;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +23,9 @@ import java.util.List;
  * History:
  * Version: 1.0
  */
+@EnableTransactionManagement // 启注解事务管理，等同于xml配置方式的 <tx:annotation-driven />
+@SpringBootApplication()
+@EnableCaching
 public class EMPIApplication extends SpringBootServletInitializer {
     private static final Logger logger = LoggerFactory.getLogger(CommWebDBApplication.class);
 
@@ -33,9 +40,9 @@ public class EMPIApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         List<Class> list  = new ArrayList<>();
-        list.add(CommWebDBApplication.class);       //本项目
+        list.add(EMPIApplication.class);            //本项目
         list.add(CommWebDBApplication.class);       //db项目
-        list.add(EMPIApplication.class);         //基础项目
+        list.add(CommWebApplication.class);         //基础项目
         SpringApplication.run(list.toArray(new Class[list.size()]), args);
     }
 
