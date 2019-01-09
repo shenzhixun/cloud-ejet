@@ -1,5 +1,7 @@
 package com.khsh.datac.empi.vo;
 
+import com.khsh.datac.empi.model.PixEmpiModel;
+
 /**
  * Copyright (C), 2016-2019, 武汉康华数海有限公司
  * FileName: EmpiVO
@@ -9,7 +11,7 @@ package com.khsh.datac.empi.vo;
  * History:
  * Version: 1.0
  */
-public class EmpiVO extends PixEmpiVO {
+public class EmpiVO extends PixEmpiModel {
     /**
      * 身份证号
      */

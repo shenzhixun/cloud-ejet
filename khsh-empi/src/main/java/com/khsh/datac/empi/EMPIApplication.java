@@ -27,11 +27,11 @@ import java.util.List;
 @SpringBootApplication()
 @EnableCaching
 public class EMPIApplication extends SpringBootServletInitializer {
-    private static final Logger logger = LoggerFactory.getLogger(CommWebDBApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(EMPIApplication.class);
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(CommWebDBApplication.class);
+        return application.sources(EMPIApplication.class);
     }
 
     static {
@@ -41,8 +41,8 @@ public class EMPIApplication extends SpringBootServletInitializer {
     public static void main(String[] args) {
         List<Class> list  = new ArrayList<>();
         list.add(EMPIApplication.class);            //本项目
-        list.add(CommWebDBApplication.class);       //db项目
         list.add(CommWebApplication.class);         //基础项目
+        list.add(CommWebDBApplication.class);       //db项目
         SpringApplication.run(list.toArray(new Class[list.size()]), args);
     }
 
