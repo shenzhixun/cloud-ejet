@@ -21,6 +21,7 @@
 			<if test="createBy!=null and createBy!='' ">and create_by=#{createBy} </if>
 			<if test="createTime!=null and createTime!='' ">and create_time=#{createTime} </if>
 			<if test="updateTime!=null and updateTime!='' ">and update_time=#{updateTime} </if>
+			<if test="ext!=null and ext!='' ">and ext=#{ext} </if>
 		</where>
 	</sql>
 	<sql id="SqlWherePK">
@@ -46,6 +47,7 @@
 			<if test="createBy!=null and createBy!='' "> create_by=#{createBy}, </if>
 			<if test="createTime!=null and createTime!='' "> create_time=#{createTime}, </if>
 			<if test="updateTime!=null and updateTime!='' "> update_time=#{updateTime}, </if>
+			<if test="ext!=null and ext!='' "> ext=#{ext}, </if>
 		</set>
 	</sql>
 
@@ -54,12 +56,12 @@
 		 INSERT INTO pix_empi_register_ext (
  			reg_uuid, empi, country, nation, 
  			edu_degree, job, phone, email, marriage_state, 
- 			status, remark, create_by, create_time, update_time ) 
- 				 VALUES ( 
+ 			status, remark, create_by, create_time, update_time, 
+ 			ext ) 	 VALUES ( 
  			#{regUuid}, #{empi}, #{country}, #{nation}, 
  			#{eduDegree}, #{job}, #{phone}, #{email}, #{marriageState}, 
- 			#{status}, #{remark}, #{createBy}, #{createTime}, #{updateTime} ) 
- 			
+ 			#{status}, #{remark}, #{createBy}, #{createTime}, #{updateTime}, 
+ 			#{ext} ) 
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterExtModel" useGeneratedKeys="true" keyProperty="id" >
@@ -67,12 +69,12 @@
  			reg_uuid, empi, country, nation, 
  			edu_degree, job, phone, email, marriage_state, 
  			status, remark, create_by, create_time, update_time, 
- 			 id ) 
+ 			ext,  id ) 
 		 VALUES( 
  			#{regUuid}, #{empi}, #{country}, #{nation}, 
  			#{eduDegree}, #{job}, #{phone}, #{email}, #{marriageState}, 
  			#{status}, #{remark}, #{createBy}, #{createTime}, #{updateTime}, 
- 			 #{id} ) 
+ 			#{ext},  #{id} ) 
 	</insert>
 
 	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterExtModel" >

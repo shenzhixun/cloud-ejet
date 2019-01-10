@@ -24,6 +24,7 @@
 			<if test="createBy!=null and createBy!='' ">and create_by=#{createBy} </if>
 			<if test="createTime!=null and createTime!='' ">and create_time=#{createTime} </if>
 			<if test="updateTime!=null and updateTime!='' ">and update_time=#{updateTime} </if>
+			<if test="ext!=null and ext!='' ">and ext=#{ext} </if>
 		</where>
 	</sql>
 	<sql id="SqlWherePK">
@@ -52,6 +53,7 @@
 			<if test="createBy!=null and createBy!='' "> create_by=#{createBy}, </if>
 			<if test="createTime!=null and createTime!='' "> create_time=#{createTime}, </if>
 			<if test="updateTime!=null and updateTime!='' "> update_time=#{updateTime}, </if>
+			<if test="ext!=null and ext!='' "> ext=#{ext}, </if>
 		</set>
 	</sql>
 
@@ -61,11 +63,11 @@
  			reg_uuid, empi, relation, rel_name, 
  			rel_name_pin, rel_sex, rel_phone, addr_province, addr_city, 
  			addr_area, addr_detail, zip_code, status, remark, 
- 			create_by, create_time, update_time ) 	 VALUES ( 
+ 			create_by, create_time, update_time, ext ) 	 VALUES ( 
  			#{regUuid}, #{empi}, #{relation}, #{relName}, 
  			#{relNamePin}, #{relSex}, #{relPhone}, #{addrProvince}, #{addrCity}, 
  			#{addrArea}, #{addrDetail}, #{zipCode}, #{status}, #{remark}, 
- 			#{createBy}, #{createTime}, #{updateTime} ) 
+ 			#{createBy}, #{createTime}, #{updateTime}, #{ext} ) 
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityContactModel" useGeneratedKeys="true" keyProperty="id" >
@@ -73,12 +75,12 @@
  			reg_uuid, empi, relation, rel_name, 
  			rel_name_pin, rel_sex, rel_phone, addr_province, addr_city, 
  			addr_area, addr_detail, zip_code, status, remark, 
- 			create_by, create_time, update_time,  id ) 
+ 			create_by, create_time, update_time, ext,  id ) 
 		 VALUES( 
  			#{regUuid}, #{empi}, #{relation}, #{relName}, 
  			#{relNamePin}, #{relSex}, #{relPhone}, #{addrProvince}, #{addrCity}, 
  			#{addrArea}, #{addrDetail}, #{zipCode}, #{status}, #{remark}, 
- 			#{createBy}, #{createTime}, #{updateTime},  #{id} ) 
+ 			#{createBy}, #{createTime}, #{updateTime}, #{ext},  #{id} ) 
 	</insert>
 
 	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityContactModel" >

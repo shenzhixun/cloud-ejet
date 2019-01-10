@@ -14,7 +14,14 @@ CREATE TABLE `pix_empi_register` (
   `sex`                 tinyint(2)        DEFAULT NULL COMMENT  '性别 1：男 2：女',
   `birthday`            varchar(16)       DEFAULT NULL COMMENT  '出生日期yyyy.MM.dd',
 
+  `id_card`             varchar(100)      DEFAULT NULL COMMENT  '身份证',
+  `yibao_card`          varchar(100)      DEFAULT NULL COMMENT  '医保卡',
+  `jiuzhen_card`        varchar(100)      DEFAULT NULL COMMENT  '就诊卡',
+  `huzhao_card`         varchar(100)      DEFAULT NULL COMMENT  '护照',
+
   `patient_id`          varchar(100)      DEFAULT NULL COMMENT  '患者id',
+  `patient_in_id`       varchar(100)      DEFAULT NULL COMMENT  'in患者id',
+
   `empi_flag`           tinyint(2)        DEFAULT NULL COMMENT  '是否主索引标志 1：是 2：否',
 
   `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
@@ -22,12 +29,41 @@ CREATE TABLE `pix_empi_register` (
   `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
   `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
-
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
    PRIMARY KEY (`id`)
 ) comment='empi注册信息表'
  ENGINE=InnoDB
  DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
+
+-- -----------------------------------------------
+-- 注册扩展信息表 `pix_empi_register_ext`
+-- -----------------------------------------------
+DROP TABLE IF EXISTS `pix_empi_register_ext`;
+CREATE TABLE `pix_empi_register_ext` (
+  `id`                  int(11)           NOT NULL AUTO_INCREMENT,
+  `reg_uuid`            varchar(100)      NOT NULL COMMENT      '注册uuid号',
+  `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
+
+  `country`             varchar(100)      DEFAULT NULL COMMENT  '国家',
+  `nation`              varchar(100)      DEFAULT NULL COMMENT  '民族',
+  `edu_degree`          varchar(32)       DEFAULT NULL COMMENT  '文化程度',
+  `job`                 varchar(100)      DEFAULT NULL COMMENT  '职业',
+  `phone`               varchar(100)      DEFAULT NULL COMMENT  '联系电话',
+  `email`               varchar(100)      DEFAULT NULL COMMENT  '邮箱',
+
+  `marriage_state`      varchar(100)      DEFAULT NULL COMMENT  '婚姻状况',
+
+  `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
+  `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
+  `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
+  `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
+  `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
+   PRIMARY KEY (`id`)
+) comment='注册扩展信息表'
+ ENGINE=InnoDB
+ DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
 -- -----------------------------------------------
 -- empi信息表 `pix_empi`
@@ -45,7 +81,7 @@ CREATE TABLE `pix_empi` (
   `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
   `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
-
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
    PRIMARY KEY (`id`)
 ) comment='empi信息表'
  ENGINE=InnoDB
@@ -61,7 +97,8 @@ CREATE TABLE `pix_empi_identity` (
   `id`                  int(11)           NOT NULL AUTO_INCREMENT,
   `reg_uuid`            varchar(100)      NOT NULL COMMENT      '注册uuid号',
   `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
-  `id_type`             varchar(100)      DEFAULT NULL COMMENT  '身份识别类型id',
+  `id_type`             tinyint(2)        DEFAULT NULL COMMENT  '身份识别类型id',
+  `id_name`             varchar(100)      DEFAULT NULL COMMENT  '身份识别号码',
   `id_code`             varchar(100)      DEFAULT NULL COMMENT  '身份识别编码',
   `id_no`               varchar(32)       DEFAULT NULL COMMENT  '身份识别号码',
   `id_flag`             varchar(32)       DEFAULT NULL COMMENT  '缺省标识',
@@ -71,7 +108,7 @@ CREATE TABLE `pix_empi_identity` (
   `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
   `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
-
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
    PRIMARY KEY (`id`)
 ) comment='empi身份识别信息表'
  ENGINE=InnoDB
@@ -103,39 +140,9 @@ CREATE TABLE `pix_empi_identity_contact` (
   `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
   `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
-
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
    PRIMARY KEY (`id`)
 ) comment='empi身份识别联系人信息表'
- ENGINE=InnoDB
- DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
-
-
--- -----------------------------------------------
--- 注册扩展信息表 `pix_empi_register_ext`
--- -----------------------------------------------
-DROP TABLE IF EXISTS `pix_empi_register_ext`;
-CREATE TABLE `pix_empi_register_ext` (
-  `id`                  int(11)           NOT NULL AUTO_INCREMENT,
-  `reg_uuid`            varchar(100)      NOT NULL COMMENT      '注册uuid号',
-  `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
-
-  `country`             varchar(100)      DEFAULT NULL COMMENT  '国家',
-  `nation`              varchar(100)      DEFAULT NULL COMMENT  '民族',
-  `edu_degree`          varchar(32)       DEFAULT NULL COMMENT  '文化程度',
-  `job`                 varchar(100)      DEFAULT NULL COMMENT  '职业',
-  `phone`               varchar(100)      DEFAULT NULL COMMENT  '联系电话',
-  `email`               varchar(100)      DEFAULT NULL COMMENT  '邮箱',
-
-  `marriage_state`      varchar(100)      DEFAULT NULL COMMENT  '婚姻状况',
-
-  `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
-  `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
-  `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
-  `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
-  `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
-
-   PRIMARY KEY (`id`)
-) comment='注册扩展信息表'
  ENGINE=InnoDB
  DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
 
@@ -147,18 +154,45 @@ DROP TABLE IF EXISTS `pix_empi_weight_config`;
 CREATE TABLE `pix_empi_weight_config` (
   `id`                  int(11)           NOT NULL AUTO_INCREMENT,
 
-  `name`                varchar(100)      DEFAULT NULL COMMENT  '配置名称',
-  `weight_code`         varchar(100)      DEFAULT NULL COMMENT  '配置编码',
+  `conf_name`           varchar(100)      DEFAULT NULL COMMENT  '配置名称',
+  `conf_type`           varchar(100)      DEFAULT NULL COMMENT  '配置类型',
+  `conf_code`           varchar(100)      DEFAULT NULL COMMENT  '配置编码',
   `priority`            int(11)           DEFAULT NULL COMMENT  '优先级',
   `weight_value`        int(11)           DEFAULT NULL COMMENT  '权重值, 小1',
+  `nullable`            int(1)            DEFAULT NULL COMMENT  '是否允许为空, 1: 允许为空  0：不允许为空',
 
   `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
   `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
   `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
   `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
-
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
    PRIMARY KEY (`id`)
 ) comment='empi权重配置'
  ENGINE=InnoDB
  DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
+
+
+-- -----------------------------------------------
+-- empi日志信息 `pix_empi_log`
+-- -----------------------------------------------
+CREATE TABLE `pix_empi_log` (
+  `id`              int(11) NOT NULL AUTO_INCREMENT,
+  `log_level`       int(11) NOT NULL DEFAULT '0' COMMENT '日志级别, 1：debug，2：info 3：warn 4：error',
+  `log_subject`     varchar(100) DEFAULT NULL COMMENT '日志简述',
+  `log_detail`      text                      COMMENT '日志详情',
+  `log_result`      int(2) DEFAULT '-1' COMMENT '结果：1：成功 0：失败',
+  `before_buss_id`  varchar(100) DEFAULT NULL COMMENT '开始业务id',
+  `after_buss_id`   varchar(100) DEFAULT NULL COMMENT '最后业务id',
+
+  `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
+  `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
+  `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
+  `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
+  `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
+  `ext1`                varchar(100)       DEFAULT NULL COMMENT '扩展',
+  PRIMARY KEY (`id`),
+  KEY `log_level` (`log_level`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日志表';
+

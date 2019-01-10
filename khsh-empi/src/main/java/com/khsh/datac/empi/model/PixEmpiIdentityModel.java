@@ -10,7 +10,9 @@ public class PixEmpiIdentityModel extends CoBaseVO {
 	/**  患者empi  */
  	private String empi;
 	/**  身份识别类型id  */
- 	private String idType;
+ 	private Integer idType;
+	/**  身份识别号码  */
+ 	private String idName;
 	/**  身份识别编码  */
  	private String idCode;
 	/**  身份识别号码  */
@@ -27,6 +29,8 @@ public class PixEmpiIdentityModel extends CoBaseVO {
  	private String createTime;
 	/**  修改时间  */
  	private String updateTime;
+	/**  扩展  */
+ 	private String ext;
 
 	public void setId(Integer id) {
 		this.id=id;
@@ -52,12 +56,20 @@ public class PixEmpiIdentityModel extends CoBaseVO {
 		return empi;
 	}
 
-	public void setIdType(String idType) {
+	public void setIdType(Integer idType) {
 		this.idType=idType;
 	}
 
-	public String getIdType(){
+	public Integer getIdType(){
 		return idType;
+	}
+
+	public void setIdName(String idName) {
+		this.idName=idName;
+	}
+
+	public String getIdName(){
+		return idName;
 	}
 
 	public void setIdCode(String idCode) {
@@ -122,6 +134,14 @@ public class PixEmpiIdentityModel extends CoBaseVO {
 
 	public String getUpdateTime(){
 		return updateTime;
+	}
+
+	public void setExt(String ext) {
+		this.ext=ext;
+	}
+
+	public String getExt(){
+		return ext;
 	}
 
 

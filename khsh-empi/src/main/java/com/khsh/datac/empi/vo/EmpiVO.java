@@ -1,6 +1,10 @@
 package com.khsh.datac.empi.vo;
 
 import com.khsh.datac.empi.model.PixEmpiModel;
+import lombok.Data;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Copyright (C), 2016-2019, 武汉康华数海有限公司
@@ -11,7 +15,21 @@ import com.khsh.datac.empi.model.PixEmpiModel;
  * History:
  * Version: 1.0
  */
+@Data
 public class EmpiVO extends PixEmpiModel {
+    /**
+     * 身份唯一标识信息
+     */
+    private List<PixEmpiIdentityVO> identityList = new ArrayList<>();
+
+    /**
+     * 机构id(如果跨区域时，则为医院代号)
+     */
+    private String regCorpId;
+    /**
+     * 应用系统id
+     */
+    private String regSysId;
     /**
      * 身份证号
      */
@@ -33,7 +51,6 @@ public class EmpiVO extends PixEmpiModel {
      * 就诊卡（院内）
      */
     private String jiuzhenCard;
-
     /**
      * 护照
      */
@@ -43,14 +60,22 @@ public class EmpiVO extends PixEmpiModel {
      */
     private String jiashiCard;
 
+
+    /**  患者id  */
+    private String patientId;
+    /**  in患者id  */
+    private String patientInId;
+    /**  是否主索引标志 1：是 2：否  */
+    private Integer empiFlag;
+
+
+
     /**
      * 患者姓名
      */
     private String name;
-    /**
-     * 患者性别
-     */
-    private String sex;
+    /**  性别 1：男 2：女  */
+    private Integer sex;
     /**
      * 患者出生日期
      */
@@ -76,139 +101,6 @@ public class EmpiVO extends PixEmpiModel {
     /**  婚姻状况  */
     private String marriageState;
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public String getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(String birthday) {
-        this.birthday = birthday;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    public String getNation() {
-        return nation;
-    }
-
-    public void setNation(String nation) {
-        this.nation = nation;
-    }
-
-    public String getEduDegree() {
-        return eduDegree;
-    }
-
-    public void setEduDegree(String eduDegree) {
-        this.eduDegree = eduDegree;
-    }
-
-    public String getJob() {
-        return job;
-    }
-
-    public void setJob(String job) {
-        this.job = job;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getMarriageState() {
-        return marriageState;
-    }
-
-    public void setMarriageState(String marriageState) {
-        this.marriageState = marriageState;
-    }
-
-    public String getIdCard() {
-        return idCard;
-    }
-
-    public void setIdCard(String idCard) {
-        this.idCard = idCard;
-    }
-
-    public String getShebaoCard() {
-        return shebaoCard;
-    }
-
-    public void setShebaoCard(String shebaoCard) {
-        this.shebaoCard = shebaoCard;
-    }
-
-    public String getYibaoCard() {
-        return yibaoCard;
-    }
-
-    public void setYibaoCard(String yibaoCard) {
-        this.yibaoCard = yibaoCard;
-    }
-
-    public String getJunguanCard() {
-        return junguanCard;
-    }
-
-    public void setJunguanCard(String junguanCard) {
-        this.junguanCard = junguanCard;
-    }
-
-    public String getJiuzhenCard() {
-        return jiuzhenCard;
-    }
-
-    public void setJiuzhenCard(String jiuzhenCard) {
-        this.jiuzhenCard = jiuzhenCard;
-    }
-
-    public String getHuzhaoCard() {
-        return huzhaoCard;
-    }
-
-    public void setHuzhaoCard(String huzhaoCard) {
-        this.huzhaoCard = huzhaoCard;
-    }
-
-    public String getJiashiCard() {
-        return jiashiCard;
-    }
-
-    public void setJiashiCard(String jiashiCard) {
-        this.jiashiCard = jiashiCard;
-    }
 }

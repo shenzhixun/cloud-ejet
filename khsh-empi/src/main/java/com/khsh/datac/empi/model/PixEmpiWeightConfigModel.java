@@ -6,13 +6,17 @@ public class PixEmpiWeightConfigModel extends CoBaseVO {
 	/**    */
  	private Integer id;
 	/**  配置名称  */
- 	private String name;
+ 	private String confName;
+	/**  配置类型  */
+ 	private String confType;
 	/**  配置编码  */
- 	private String weightCode;
+ 	private String confCode;
 	/**  优先级  */
  	private Integer priority;
 	/**  权重值, 小1  */
  	private Integer weightValue;
+	/**  是否允许为空, 1: 允许为空  0：不允许为空  */
+ 	private Integer nullable;
 	/**  状态标识 1：正常 0：禁用  */
  	private Integer status;
 	/**  备注  */
@@ -23,6 +27,8 @@ public class PixEmpiWeightConfigModel extends CoBaseVO {
  	private String createTime;
 	/**  修改时间  */
  	private String updateTime;
+	/**  扩展  */
+ 	private String ext;
 
 	public void setId(Integer id) {
 		this.id=id;
@@ -32,20 +38,28 @@ public class PixEmpiWeightConfigModel extends CoBaseVO {
 		return id;
 	}
 
-	public void setName(String name) {
-		this.name=name;
+	public void setConfName(String confName) {
+		this.confName=confName;
 	}
 
-	public String getName(){
-		return name;
+	public String getConfName(){
+		return confName;
 	}
 
-	public void setWeightCode(String weightCode) {
-		this.weightCode=weightCode;
+	public void setConfType(String confType) {
+		this.confType=confType;
 	}
 
-	public String getWeightCode(){
-		return weightCode;
+	public String getConfType(){
+		return confType;
+	}
+
+	public void setConfCode(String confCode) {
+		this.confCode=confCode;
+	}
+
+	public String getConfCode(){
+		return confCode;
 	}
 
 	public void setPriority(Integer priority) {
@@ -62,6 +76,14 @@ public class PixEmpiWeightConfigModel extends CoBaseVO {
 
 	public Integer getWeightValue(){
 		return weightValue;
+	}
+
+	public void setNullable(Integer nullable) {
+		this.nullable=nullable;
+	}
+
+	public Integer getNullable(){
+		return nullable;
 	}
 
 	public void setStatus(Integer status) {
@@ -102,6 +124,14 @@ public class PixEmpiWeightConfigModel extends CoBaseVO {
 
 	public String getUpdateTime(){
 		return updateTime;
+	}
+
+	public void setExt(String ext) {
+		this.ext=ext;
+	}
+
+	public String getExt(){
+		return ext;
 	}
 
 

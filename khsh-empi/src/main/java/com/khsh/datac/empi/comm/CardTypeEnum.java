@@ -7,11 +7,12 @@ public enum CardTypeEnum {
     NONE("NONE","NONE无识别信息"),
     ID_CARD("ID_CARD","身份证"),
     YIBAO_CARD("YIBAO_CARD","医保卡"),
-    SHEBAO_CARD("SHEBAO_CARD", "社保卡"),
-    JUNGUAN_CARD("JUNGUAN_CARD", "军官证"),
     JIUZHEN_CARD("JIUZHEN_CARD", "就诊卡"),
     HUZHAO_CARD("HUZHAO_CARD", "护照"),
-    JIASHI_CARD("JIASHI_CARD", "驾驶证");
+
+    JIASHI_CARD("JIASHI_CARD", "驾驶证"),
+    JUNGUAN_CARD("JUNGUAN_CARD", "军官证"),
+    SHEBAO_CARD("SHEBAO_CARD", "社保卡");
 
     private String name;
     private String desc;

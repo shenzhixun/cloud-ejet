@@ -23,6 +23,8 @@ public class PixEmpiModel extends CoBaseVO {
  	private String createTime;
 	/**  修改时间  */
  	private String updateTime;
+	/**  扩展  */
+ 	private String ext;
 
 	public void setId(Integer id) {
 		this.id=id;
@@ -102,6 +104,14 @@ public class PixEmpiModel extends CoBaseVO {
 
 	public String getUpdateTime(){
 		return updateTime;
+	}
+
+	public void setExt(String ext) {
+		this.ext=ext;
+	}
+
+	public String getExt(){
+		return ext;
 	}
 
 

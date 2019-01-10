@@ -1,7 +1,10 @@
 package com.khsh.datac.empi.vo;
 
 import com.khsh.datac.empi.model.PixEmpiModel;
-public class PixEmpiVO extends PixEmpiModel { 
+import lombok.Data;
+
+@Data
+public class PixEmpiVO extends PixEmpiModel {
 
 
 

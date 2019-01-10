@@ -7,15 +7,18 @@
 		<where>
 			1=1
 			<if test="id!=null ">and id=#{id} </if>
-			<if test="name!=null and name!='' ">and name=#{name} </if>
-			<if test="weightCode!=null and weightCode!='' ">and weight_code=#{weightCode} </if>
+			<if test="confName!=null and confName!='' ">and conf_name=#{confName} </if>
+			<if test="confType!=null and confType!='' ">and conf_type=#{confType} </if>
+			<if test="confCode!=null and confCode!='' ">and conf_code=#{confCode} </if>
 			<if test="priority!=null ">and priority=#{priority} </if>
 			<if test="weightValue!=null ">and weight_value=#{weightValue} </if>
+			<if test="nullable!=null ">and nullable=#{nullable} </if>
 			<if test="status!=null and status!='' ">and status=#{status} </if>
 			<if test="remark!=null and remark!='' ">and remark=#{remark} </if>
 			<if test="createBy!=null and createBy!='' ">and create_by=#{createBy} </if>
 			<if test="createTime!=null and createTime!='' ">and create_time=#{createTime} </if>
 			<if test="updateTime!=null and updateTime!='' ">and update_time=#{updateTime} </if>
+			<if test="ext!=null and ext!='' ">and ext=#{ext} </if>
 		</where>
 	</sql>
 	<sql id="SqlWherePK">
@@ -27,38 +30,41 @@
 	<sql id="SqlSet">
 		<set>
 			<if test="id!=null "> id=#{id}, </if>
-			<if test="name!=null and name!='' "> name=#{name}, </if>
-			<if test="weightCode!=null and weightCode!='' "> weight_code=#{weightCode}, </if>
+			<if test="confName!=null and confName!='' "> conf_name=#{confName}, </if>
+			<if test="confType!=null and confType!='' "> conf_type=#{confType}, </if>
+			<if test="confCode!=null and confCode!='' "> conf_code=#{confCode}, </if>
 			<if test="priority!=null "> priority=#{priority}, </if>
 			<if test="weightValue!=null "> weight_value=#{weightValue}, </if>
+			<if test="nullable!=null "> nullable=#{nullable}, </if>
 			<if test="status!=null and status!='' "> status=#{status}, </if>
 			<if test="remark!=null and remark!='' "> remark=#{remark}, </if>
 			<if test="createBy!=null and createBy!='' "> create_by=#{createBy}, </if>
 			<if test="createTime!=null and createTime!='' "> create_time=#{createTime}, </if>
 			<if test="updateTime!=null and updateTime!='' "> update_time=#{updateTime}, </if>
+			<if test="ext!=null and ext!='' "> ext=#{ext}, </if>
 		</set>
 	</sql>
 
 
 	<insert  id="insertAutoKey" parameterType="com.khsh.datac.empi.model.PixEmpiWeightConfigModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_weight_config (
- 			name, weight_code, priority, weight_value, 
- 			status, remark, create_by, create_time, update_time ) 
- 				 VALUES ( 
- 			#{name}, #{weightCode}, #{priority}, #{weightValue}, 
- 			#{status}, #{remark}, #{createBy}, #{createTime}, #{updateTime} ) 
- 			
+ 			conf_name, conf_type, conf_code, priority, 
+ 			weight_value, nullable, status, remark, create_by, 
+ 			create_time, update_time, ext ) 	 VALUES ( 
+ 			#{confName}, #{confType}, #{confCode}, #{priority}, 
+ 			#{weightValue}, #{nullable}, #{status}, #{remark}, #{createBy}, 
+ 			#{createTime}, #{updateTime}, #{ext} ) 
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiWeightConfigModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_weight_config (
- 			name, weight_code, priority, weight_value, 
- 			status, remark, create_by, create_time, update_time, 
- 			 id ) 
+ 			conf_name, conf_type, conf_code, priority, 
+ 			weight_value, nullable, status, remark, create_by, 
+ 			create_time, update_time, ext,  id ) 
 		 VALUES( 
- 			#{name}, #{weightCode}, #{priority}, #{weightValue}, 
- 			#{status}, #{remark}, #{createBy}, #{createTime}, #{updateTime}, 
- 			 #{id} ) 
+ 			#{confName}, #{confType}, #{confCode}, #{priority}, 
+ 			#{weightValue}, #{nullable}, #{status}, #{remark}, #{createBy}, 
+ 			#{createTime}, #{updateTime}, #{ext},  #{id} ) 
 	</insert>
 
 	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiWeightConfigModel" >

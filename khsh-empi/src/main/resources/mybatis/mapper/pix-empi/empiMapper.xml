@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.khsh.datac.empi.mapper.EmpiDao">
+
+	<sql id="SqlWhere">
+		<where>
+			1=1
+			<if test="id!=null ">and id=#{id} </if>
+			<if test="regUuid!=null and regUuid!='' ">and reg_uuid=#{regUuid} </if>
+			<if test="empi!=null and empi!='' ">and empi=#{empi} </if>
+			<if test="username!=null and username!='' ">and username=#{username} </if>
+			<if test="passowrd!=null and passowrd!='' ">and passowrd=#{passowrd} </if>
+			<if test="status!=null and status!='' ">and status=#{status} </if>
+			<if test="remark!=null and remark!='' ">and remark=#{remark} </if>
+			<if test="createBy!=null and createBy!='' ">and create_by=#{createBy} </if>
+			<if test="createTime!=null and createTime!='' ">and create_time=#{createTime} </if>
+			<if test="updateTime!=null and updateTime!='' ">and update_time=#{updateTime} </if>
+		</where>
+	</sql>
+	<sql id="SqlWherePK">
+		<where>
+			1=1
+			<if test="id!=null ">and id=#{id} </if>
+		</where>
+	</sql>
+
+
+	<select  id="queryEmpi" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
+		 SELECT * FROM pix_empi
+		 <include refid="SqlWhere"></include>
+		 <if test="extSQL!=null "> ${extSQL} </if>
+	</select>
+
+	<select  id="queryIdentity" parameterType="com.khsh.datac.empi.vo.PixEmpiIdentityVO" resultType="com.khsh.datac.empi.vo.PixEmpiIdentityVO" >
+        <foreach collection="list" item="itemVO" separator=" ; union all " >
+            SELECT * FROM pix_empi_identity WHERE 1=1
+            <if test="itemVO.idType!=null and itemVO.idType!='' ">and id_type=#{itemVO.idType} </if>
+            <if test="itemVO.idName!=null and itemVO.idName!='' ">and id_name=#{itemVO.idName} </if>
+            <if test="itemVO.idCode!=null and itemVO.idCode!='' ">and id_code=#{itemVO.idCode} </if>
+            <if test="itemVO.idNo!=null and itemVO.idNo!='' ">and id_no=#{itemVO.idNo} </if>
+        </foreach>
+	</select>
+
+
+</mapper>

@@ -23,8 +23,18 @@ public class PixEmpiRegisterModel extends CoBaseVO {
  	private Integer sex;
 	/**  出生日期yyyy.MM.dd  */
  	private String birthday;
+	/**  身份证  */
+ 	private String idCard;
+	/**  医保卡  */
+ 	private String yibaoCard;
+	/**  就诊卡  */
+ 	private String jiuzhenCard;
+	/**  护照  */
+ 	private String huzhaoCard;
 	/**  患者id  */
  	private String patientId;
+	/**  in患者id  */
+ 	private String patientInId;
 	/**  是否主索引标志 1：是 2：否  */
  	private Integer empiFlag;
 	/**  状态标识 1：正常 0：禁用  */
@@ -37,6 +47,8 @@ public class PixEmpiRegisterModel extends CoBaseVO {
  	private String createTime;
 	/**  修改时间  */
  	private String updateTime;
+	/**  扩展  */
+ 	private String ext;
 
 	public void setId(Integer id) {
 		this.id=id;
@@ -118,12 +130,52 @@ public class PixEmpiRegisterModel extends CoBaseVO {
 		return birthday;
 	}
 
+	public void setIdCard(String idCard) {
+		this.idCard=idCard;
+	}
+
+	public String getIdCard(){
+		return idCard;
+	}
+
+	public void setYibaoCard(String yibaoCard) {
+		this.yibaoCard=yibaoCard;
+	}
+
+	public String getYibaoCard(){
+		return yibaoCard;
+	}
+
+	public void setJiuzhenCard(String jiuzhenCard) {
+		this.jiuzhenCard=jiuzhenCard;
+	}
+
+	public String getJiuzhenCard(){
+		return jiuzhenCard;
+	}
+
+	public void setHuzhaoCard(String huzhaoCard) {
+		this.huzhaoCard=huzhaoCard;
+	}
+
+	public String getHuzhaoCard(){
+		return huzhaoCard;
+	}
+
 	public void setPatientId(String patientId) {
 		this.patientId=patientId;
 	}
 
 	public String getPatientId(){
 		return patientId;
+	}
+
+	public void setPatientInId(String patientInId) {
+		this.patientInId=patientInId;
+	}
+
+	public String getPatientInId(){
+		return patientInId;
 	}
 
 	public void setEmpiFlag(Integer empiFlag) {
@@ -172,6 +224,14 @@ public class PixEmpiRegisterModel extends CoBaseVO {
 
 	public String getUpdateTime(){
 		return updateTime;
+	}
+
+	public void setExt(String ext) {
+		this.ext=ext;
+	}
+
+	public String getExt(){
+		return ext;
 	}
 
 
