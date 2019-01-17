@@ -29,34 +29,82 @@ public class EmpiServiceTest {
     private EmpiServiceImpl mService;
     // private EmpiVO query;
 
-    private void set(EmpiVO model) {
+    private void setHasIdentityCard(EmpiVO model) {
         if(model==null) {
             model = new EmpiVO();
         }
-        model.setName("黄开英");
-        model.setSex(Constant.SEX_FEMAIL);
-        model.setBirthday("1941-01-01");
-        model.setPatientId("e11f64e8-3f90-4727-9fb3-a997009bd80c");
+        // model.setName("陈仕见");
+        // model.setSex(Constant.SEX_FEMAIL);
+        // model.setBirthday("1974/07/20 18:21:30.000000000");
+        // model.setPatientId("b6c98001-828d-43e4-beb8-a923012f502f");
+        // model.setInpatientId("7e842cec-b5d6-484e-9251-a923012f502f");
+        // model.setRegCorpId("HB_JSZYY");
+        // model.setRegSysId("HIS");
+        // model.setIdCard("433426194101012233");
+        // model.setYibaoCard("1234");
+        // model.setJiuzhenCard("");
 
-        model.setIdCard("433426194101012233");
-        model.setYibaoCard("1234");
-        model.setJiuzhenCard("");
+        model.setName("陈天双");
+        model.setSex(Constant.SEX_FEMAIL);
+        model.setBirthday("1974/07/20 18:21:30.000000000");
+        model.setPatientId("b6c98001-828d-43e4-beb8-a923012f502f");
+        model.setInpatientId("7e842cec-b5d6-484e-9251-a923012f502f");
+        model.setRegCorpId("HB_JSZYY");
+        model.setRegSysId("HIS");
+
+        model.setIdCard("422822194907210517");
+        model.setJiuzhenCard("1234");
 
 
     }
+
+
+    private void setHasIdentityCardExt(EmpiVO model) {
+        if(model==null) {
+            model = new EmpiVO();
+        }
+        model.setName("陈仕见");
+        model.setSex(Constant.SEX_MAIL);
+        model.setBirthday("1974/07/20 18:21:30.000000000");
+        model.setPatientId("b6c98001-828d-43e4-beb8-a923012f502f");
+        model.setInpatientId("7e842cec-b5d6-484e-9251-a923012f502f");
+        model.setRegCorpId("HB_JSZYY");
+        model.setRegSysId("HIS");
+
+        model.setHuzhaoCard("099999");
+        model.setJiashiCard("9999999");
+
+
+        model.setSex(1);
+        model.setAddrDetail("深圳市xxxx");
+        model.setNation("中国");
+        model.setMarriageState("未婚");
+        model.setRelation("");
+        model.setRelPhone("13900099");
+        model.setPhone("1398989898");
+        model.setRelName("家庭x");
+
+
+    }
+
 
 
     @Test
     public void getEmpi(){
         try {
             EmpiVO query = new EmpiVO();
-            set(query);
+            //setHasIdentityCard(query);
+            setHasIdentityCardExt(query);
 
-            mService.getEmpi(query);
+            EmpiVO result = mService.getEmpi(query);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
+
 
 }

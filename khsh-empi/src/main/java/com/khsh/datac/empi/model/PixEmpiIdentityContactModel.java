@@ -9,16 +9,16 @@ public class PixEmpiIdentityContactModel extends CoBaseVO {
  	private String regUuid;
 	/**  患者empi  */
  	private String empi;
-	/**  与患者关系 1: 父亲  2：母亲 3：儿子  4：女儿    */
+	/**  与患者关系 1:本人   */
  	private String relation;
 	/**  联系人 姓名  */
- 	private String relName;
+ 	private String relationName;
 	/**  联系人 名字拼音  */
- 	private String relNamePin;
+ 	private String relationNamePin;
 	/**  联系人 性别 1：男 2：女  */
- 	private Integer relSex;
+ 	private Integer relationSex;
 	/**  联系人 电话  */
- 	private String relPhone;
+ 	private String relationPhone;
 	/**  联系人 省  */
  	private String addrProvince;
 	/**  联系人 地市  */
@@ -74,36 +74,36 @@ public class PixEmpiIdentityContactModel extends CoBaseVO {
 		return relation;
 	}
 
-	public void setRelName(String relName) {
-		this.relName=relName;
+	public void setRelationName(String relationName) {
+		this.relationName=relationName;
 	}
 
-	public String getRelName(){
-		return relName;
+	public String getRelationName(){
+		return relationName;
 	}
 
-	public void setRelNamePin(String relNamePin) {
-		this.relNamePin=relNamePin;
+	public void setRelationNamePin(String relationNamePin) {
+		this.relationNamePin=relationNamePin;
 	}
 
-	public String getRelNamePin(){
-		return relNamePin;
+	public String getRelationNamePin(){
+		return relationNamePin;
 	}
 
-	public void setRelSex(Integer relSex) {
-		this.relSex=relSex;
+	public void setRelationSex(Integer relationSex) {
+		this.relationSex=relationSex;
 	}
 
-	public Integer getRelSex(){
-		return relSex;
+	public Integer getRelationSex(){
+		return relationSex;
 	}
 
-	public void setRelPhone(String relPhone) {
-		this.relPhone=relPhone;
+	public void setRelationPhone(String relationPhone) {
+		this.relationPhone=relationPhone;
 	}
 
-	public String getRelPhone(){
-		return relPhone;
+	public String getRelationPhone(){
+		return relationPhone;
 	}
 
 	public void setAddrProvince(String addrProvince) {

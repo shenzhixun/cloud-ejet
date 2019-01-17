@@ -33,9 +33,12 @@ spring:
   #数据源配置
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    url: jdbc:mysql://127.0.0.1:3306/empi?useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://192.168.20.41:3306/empi?useSSL=false&serverTimezone=UTC
     username: root
-    password: 123456
+    password: 1234567890
+#    url: jdbc:mysql://127.0.0.1:3306/empi?useSSL=false&serverTimezone=UTC
+#    username: root
+#    password: 123456
     #driver-class-name: com.mysql.cj.jdbc.Driver
     driver-class-name: com.mysql.jdbc.Driver
     # 下面为连接池的补充设置，应用到上面所有数据源中

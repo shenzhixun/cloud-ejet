@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.khsh.datac.empi.mapper.PixEmpiIdentityDao;
 import com.khsh.datac.empi.model.PixEmpiIdentityModel;
 import com.khsh.datac.empi.service.IPixEmpiIdentityService;
+import com.khsh.datac.empi.vo.EmpiVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,5 +66,10 @@ public class PixEmpiIdentityServiceImpl implements IPixEmpiIdentityService {
  		return maxId;
  	}
 
+ 	public void insertBatch(EmpiVO vo) throws CoBusinessException {
+	    if(vo.getIdentityList()!=null && vo.getIdentityList().size()>0) {
+            mDao.insertBatch(vo);
+        }
+    }
 
 }

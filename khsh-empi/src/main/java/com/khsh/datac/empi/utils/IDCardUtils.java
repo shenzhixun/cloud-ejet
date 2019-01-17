@@ -4,6 +4,7 @@ import com.ejet.comm.exception.CoBusinessException;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
 import java.util.regex.Matcher;
@@ -69,12 +70,12 @@ public class IDCardUtils {
      * @param IDStr
      * @return null 代表合法的身份证 ,其他值代表错误信息
      */
-    public static String[] validateIDCard(String IDStr) throws CoBusinessException {
+    public static String[] validateIDCard(String IDStr, String SEP) throws CoBusinessException {
         String tipInfo = null;// 记录错误信息
         String Ai = "";
         String birthday = null;
         String sex = null;
-        String SEP = "-";
+        SEP = (SEP==null ? "-" : SEP);
         if(null == IDStr || IDStr.trim().isEmpty()) {
             tipInfo = "身份证号码长度应该为15位或18位。";
             throw new CoBusinessException(tipInfo);
@@ -197,5 +198,37 @@ public class IDCardUtils {
         }
         return true;
     }
+
+
+    /**
+     * 获取年龄
+     * @param birthDay
+     * @return
+     */
+    public static int getAgeByBirth(Date birthDay) {
+        int age = 0;
+        Calendar cal = Calendar.getInstance();
+        if (cal.before(birthDay)) { //出生日期晚于当前时间，无法计算
+            throw new IllegalArgumentException("The birthDay is before Now.It's unbelievable!");
+        }
+        int yearNow = cal.get(Calendar.YEAR);  //当前年份
+        int monthNow = cal.get(Calendar.MONTH);  //当前月份
+        int dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH); //当前日期
+        cal.setTime(birthDay);
+        int yearBirth = cal.get(Calendar.YEAR);
+        int monthBirth = cal.get(Calendar.MONTH);
+        int dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH);
+        age = yearNow - yearBirth;   //计算整岁数
+        if (monthNow <= monthBirth) {
+            if (monthNow == monthBirth) {
+                if (dayOfMonthNow < dayOfMonthBirth) age--;//当前日期在生日之前，年龄减一
+            } else {
+                age--;//当前月份在生日之前，年龄减一
+            }
+        }
+        return age;
+    }
+
+
 
 }

@@ -10,10 +10,10 @@
 			<if test="regUuid!=null and regUuid!='' ">and reg_uuid=#{regUuid} </if>
 			<if test="empi!=null and empi!='' ">and empi=#{empi} </if>
 			<if test="relation!=null and relation!='' ">and relation=#{relation} </if>
-			<if test="relName!=null and relName!='' ">and rel_name=#{relName} </if>
-			<if test="relNamePin!=null and relNamePin!='' ">and rel_name_pin=#{relNamePin} </if>
-			<if test="relSex!=null and relSex!='' ">and rel_sex=#{relSex} </if>
-			<if test="relPhone!=null and relPhone!='' ">and rel_phone=#{relPhone} </if>
+			<if test="relationName!=null and relationName!='' ">and relation_name=#{relationName} </if>
+			<if test="relationNamePin!=null and relationNamePin!='' ">and relation_name_pin=#{relationNamePin} </if>
+			<if test="relationSex!=null and relationSex!='' ">and relation_sex=#{relationSex} </if>
+			<if test="relationPhone!=null and relationPhone!='' ">and relation_phone=#{relationPhone} </if>
 			<if test="addrProvince!=null and addrProvince!='' ">and addr_province=#{addrProvince} </if>
 			<if test="addrCity!=null and addrCity!='' ">and addr_city=#{addrCity} </if>
 			<if test="addrArea!=null and addrArea!='' ">and addr_area=#{addrArea} </if>
@@ -39,10 +39,10 @@
 			<if test="regUuid!=null and regUuid!='' "> reg_uuid=#{regUuid}, </if>
 			<if test="empi!=null and empi!='' "> empi=#{empi}, </if>
 			<if test="relation!=null and relation!='' "> relation=#{relation}, </if>
-			<if test="relName!=null and relName!='' "> rel_name=#{relName}, </if>
-			<if test="relNamePin!=null and relNamePin!='' "> rel_name_pin=#{relNamePin}, </if>
-			<if test="relSex!=null and relSex!='' "> rel_sex=#{relSex}, </if>
-			<if test="relPhone!=null and relPhone!='' "> rel_phone=#{relPhone}, </if>
+			<if test="relationName!=null and relationName!='' "> relation_name=#{relationName}, </if>
+			<if test="relationNamePin!=null and relationNamePin!='' "> relation_name_pin=#{relationNamePin}, </if>
+			<if test="relationSex!=null and relationSex!='' "> relation_sex=#{relationSex}, </if>
+			<if test="relationPhone!=null and relationPhone!='' "> relation_phone=#{relationPhone}, </if>
 			<if test="addrProvince!=null and addrProvince!='' "> addr_province=#{addrProvince}, </if>
 			<if test="addrCity!=null and addrCity!='' "> addr_city=#{addrCity}, </if>
 			<if test="addrArea!=null and addrArea!='' "> addr_area=#{addrArea}, </if>
@@ -60,25 +60,25 @@
 
 	<insert  id="insertAutoKey" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityContactModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_identity_contact (
- 			reg_uuid, empi, relation, rel_name, 
- 			rel_name_pin, rel_sex, rel_phone, addr_province, addr_city, 
+ 			reg_uuid, empi, relation, relation_name, 
+ 			relation_name_pin, relation_sex, relation_phone, addr_province, addr_city, 
  			addr_area, addr_detail, zip_code, status, remark, 
  			create_by, create_time, update_time, ext ) 	 VALUES ( 
- 			#{regUuid}, #{empi}, #{relation}, #{relName}, 
- 			#{relNamePin}, #{relSex}, #{relPhone}, #{addrProvince}, #{addrCity}, 
+ 			#{regUuid}, #{empi}, #{relation}, #{relationName}, 
+ 			#{relationNamePin}, #{relationSex}, #{relationPhone}, #{addrProvince}, #{addrCity}, 
  			#{addrArea}, #{addrDetail}, #{zipCode}, #{status}, #{remark}, 
  			#{createBy}, #{createTime}, #{updateTime}, #{ext} ) 
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityContactModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_identity_contact (
- 			reg_uuid, empi, relation, rel_name, 
- 			rel_name_pin, rel_sex, rel_phone, addr_province, addr_city, 
+ 			reg_uuid, empi, relation, relation_name, 
+ 			relation_name_pin, relation_sex, relation_phone, addr_province, addr_city, 
  			addr_area, addr_detail, zip_code, status, remark, 
  			create_by, create_time, update_time, ext,  id ) 
 		 VALUES( 
- 			#{regUuid}, #{empi}, #{relation}, #{relName}, 
- 			#{relNamePin}, #{relSex}, #{relPhone}, #{addrProvince}, #{addrCity}, 
+ 			#{regUuid}, #{empi}, #{relation}, #{relationName}, 
+ 			#{relationNamePin}, #{relationSex}, #{relationPhone}, #{addrProvince}, #{addrCity}, 
  			#{addrArea}, #{addrDetail}, #{zipCode}, #{status}, #{remark}, 
  			#{createBy}, #{createTime}, #{updateTime}, #{ext},  #{id} ) 
 	</insert>

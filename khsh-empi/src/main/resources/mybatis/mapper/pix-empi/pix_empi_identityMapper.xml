@@ -50,58 +50,78 @@
 
 	<insert  id="insertAutoKey" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_identity (
- 			reg_uuid, empi, id_type, id_name, 
- 			id_code, id_no, id_flag, status, remark, 
- 			create_by, create_time, update_time, ext ) 	 VALUES ( 
- 			#{regUuid}, #{empi}, #{idType}, #{idName}, 
- 			#{idCode}, #{idNo}, #{idFlag}, #{status}, #{remark}, 
- 			#{createBy}, #{createTime}, #{updateTime}, #{ext} ) 
+ 			reg_uuid, empi, id_type, id_name,
+ 			id_code, id_no, id_flag, status, remark,
+ 			create_by, create_time, update_time, ext ) 	 VALUES (
+ 			#{regUuid}, #{empi}, #{idType}, #{idName},
+ 			#{idCode}, #{idNo}, #{idFlag}, #{status}, #{remark},
+ 			#{createBy}, #{createTime}, #{updateTime}, #{ext} )
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_identity (
- 			reg_uuid, empi, id_type, id_name, 
- 			id_code, id_no, id_flag, status, remark, 
- 			create_by, create_time, update_time, ext,  id ) 
-		 VALUES( 
- 			#{regUuid}, #{empi}, #{idType}, #{idName}, 
- 			#{idCode}, #{idNo}, #{idFlag}, #{status}, #{remark}, 
- 			#{createBy}, #{createTime}, #{updateTime}, #{ext},  #{id} ) 
+ 			reg_uuid, empi, id_type, id_name,
+ 			id_code, id_no, id_flag, status, remark,
+ 			create_by, create_time, update_time, ext,  id )
+		 VALUES(
+ 			#{regUuid}, #{empi}, #{idType}, #{idName},
+ 			#{idCode}, #{idNo}, #{idFlag}, #{status}, #{remark},
+ 			#{createBy}, #{createTime}, #{updateTime}, #{ext},  #{id} )
 	</insert>
 
 	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
 		 DELETE FROM pix_empi_identity
-		 <include refid="SqlWhere"></include> 
+		 <include refid="SqlWhere"></include>
 	</delete>
 
 	<update  id="update" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
 		 UPDATE pix_empi_identity
-		 <include refid="SqlSet"></include> 
-		 <include refid="SqlWherePK"></include> 
+		 <include refid="SqlSet"></include>
+		 <include refid="SqlWherePK"></include>
 	</update>
 
 	<select  id="findByPK" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" resultType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
 		 SELECT * FROM pix_empi_identity
-		 <include refid="SqlWherePK"></include> 
-		 <if test=" orderCond !=null ">  order by ${orderCond} </if> 
+		 <include refid="SqlWherePK"></include>
+		 <if test=" orderCond !=null ">  order by ${orderCond} </if>
 	</select>
 
 	<select  id="queryByCond" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" resultType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
 		 SELECT * FROM pix_empi_identity
-		 <include refid="SqlWhere"></include> 
-		 <if test=" extSQL !=null "> ${extSQL} </if> 
-		 <if test=" orderCond !=null ">  order by ${orderCond} </if> 
+		 <include refid="SqlWhere"></include>
+		 <if test=" extSQL !=null "> ${extSQL} </if>
+		 <if test=" orderCond !=null ">  order by ${orderCond} </if>
 	</select>
 
 	<select  id="queryByPage" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" resultType="com.khsh.datac.empi.model.PixEmpiIdentityModel" >
 		 SELECT * FROM pix_empi_identity
-		 <include refid="SqlWhere"></include> 
-		 <if test="extSQL!=null "> ${extSQL} </if> 
+		 <include refid="SqlWhere"></include>
+		 <if test="extSQL!=null "> ${extSQL} </if>
 	</select>
 
 	<select  id="findMaxId" parameterType="com.khsh.datac.empi.model.PixEmpiIdentityModel" resultType="int" >
 		 SELECT max(id) FROM pix_empi_identity
-		 <include refid="SqlWhere"></include> 
+		 <include refid="SqlWhere"></include>
 	</select>
+
+
+    <insert  id="insertBatch" parameterType="com.khsh.datac.empi.vo.EmpiVO" useGeneratedKeys="true" keyProperty="id" >
+        <selectKey resultType ="java.lang.Integer" keyProperty= "id" order= "AFTER">
+          SELECT LAST_INSERT_ID()
+        </selectKey>
+		 INSERT INTO pix_empi_identity (
+ 			reg_uuid, empi, id_type, id_name,
+ 			id_code, id_no, id_flag, status, remark,
+ 			create_by, create_time, update_time, ext)
+		 VALUES
+		 <foreach collection="identityList" item="itemVO" separator="," >
+             (
+             #{itemVO.regUuid}, #{itemVO.empi}, #{itemVO.idType}, #{itemVO.idName},
+             #{itemVO.idCode}, #{itemVO.idNo}, #{itemVO.idFlag}, #{itemVO.status}, #{itemVO.remark},
+             #{itemVO.createBy}, #{itemVO.createTime}, #{itemVO.updateTime}, #{itemVO.ext} )
+         </foreach>
+
+	</insert>
+
 
 </mapper>

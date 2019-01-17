@@ -40,7 +40,7 @@ public class PixEmpiRegisterExtServiceImpl implements IPixEmpiRegisterExtService
  		mDao.delete(model);
  	}
 
-	public PixEmpiRegisterExtModel  findByPK(PixEmpiRegisterExtModel model) throws CoBusinessException {
+	public PixEmpiRegisterExtModel findByPK(PixEmpiRegisterExtModel model) throws CoBusinessException {
  		return mDao.findByPK(model);
  	}
 

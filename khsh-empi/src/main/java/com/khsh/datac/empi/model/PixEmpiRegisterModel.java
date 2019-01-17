@@ -21,6 +21,8 @@ public class PixEmpiRegisterModel extends CoBaseVO {
  	private String namePin;
 	/**  性别 1：男 2：女  */
  	private Integer sex;
+	/**  年龄  */
+ 	private Integer age;
 	/**  出生日期yyyy.MM.dd  */
  	private String birthday;
 	/**  身份证  */
@@ -33,8 +35,8 @@ public class PixEmpiRegisterModel extends CoBaseVO {
  	private String huzhaoCard;
 	/**  患者id  */
  	private String patientId;
-	/**  in患者id  */
- 	private String patientInId;
+	/**  患者住院id  */
+ 	private String inpatientId;
 	/**  是否主索引标志 1：是 2：否  */
  	private Integer empiFlag;
 	/**  状态标识 1：正常 0：禁用  */
@@ -122,6 +124,14 @@ public class PixEmpiRegisterModel extends CoBaseVO {
 		return sex;
 	}
 
+	public void setAge(Integer age) {
+		this.age=age;
+	}
+
+	public Integer getAge(){
+		return age;
+	}
+
 	public void setBirthday(String birthday) {
 		this.birthday=birthday;
 	}
@@ -170,12 +180,12 @@ public class PixEmpiRegisterModel extends CoBaseVO {
 		return patientId;
 	}
 
-	public void setPatientInId(String patientInId) {
-		this.patientInId=patientInId;
+	public void setInpatientId(String inpatientId) {
+		this.inpatientId=inpatientId;
 	}
 
-	public String getPatientInId(){
-		return patientInId;
+	public String getInpatientId(){
+		return inpatientId;
 	}
 
 	public void setEmpiFlag(Integer empiFlag) {

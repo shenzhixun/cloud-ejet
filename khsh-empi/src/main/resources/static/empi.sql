@@ -12,15 +12,16 @@ CREATE TABLE `pix_empi_register` (
   `name`                varchar(100)      DEFAULT NULL COMMENT  '患者姓名',
   `name_pin`            varchar(100)      DEFAULT NULL COMMENT  '名字拼音',
   `sex`                 tinyint(2)        DEFAULT NULL COMMENT  '性别 1：男 2：女',
-  `birthday`            varchar(16)       DEFAULT NULL COMMENT  '出生日期yyyy.MM.dd',
+  `age`                 int(3)            DEFAULT NULL COMMENT  '年龄',
+  `birthday`            varchar(50)       DEFAULT NULL COMMENT  '出生日期yyyy.MM.dd',
 
-  `id_card`             varchar(100)      DEFAULT NULL COMMENT  '身份证',
+  `id_card`             varchar(20)      DEFAULT NULL COMMENT  '身份证',
   `yibao_card`          varchar(100)      DEFAULT NULL COMMENT  '医保卡',
   `jiuzhen_card`        varchar(100)      DEFAULT NULL COMMENT  '就诊卡',
   `huzhao_card`         varchar(100)      DEFAULT NULL COMMENT  '护照',
 
   `patient_id`          varchar(100)      DEFAULT NULL COMMENT  '患者id',
-  `patient_in_id`       varchar(100)      DEFAULT NULL COMMENT  'in患者id',
+  `inpatient_id`        varchar(100)      DEFAULT NULL COMMENT  '患者住院id',
 
   `empi_flag`           tinyint(2)        DEFAULT NULL COMMENT  '是否主索引标志 1：是 2：否',
 
@@ -30,7 +31,11 @@ CREATE TABLE `pix_empi_register` (
   `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
   `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (`id`),
+   UNIQUE INDEX `empi` (`empi`) USING BTREE,
+   UNIQUE INDEX `id_card_flag`  (`id_card`,`empi_flag`) USING BTREE,
+   KEY `patient` (`reg_corp_id`,`patient_id`) USING BTREE,
+   KEY `inpatient_id` (`reg_corp_id`,`inpatient_id`) USING BTREE
 ) comment='empi注册信息表'
  ENGINE=InnoDB
  DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
@@ -50,9 +55,11 @@ CREATE TABLE `pix_empi_register_ext` (
   `edu_degree`          varchar(32)       DEFAULT NULL COMMENT  '文化程度',
   `job`                 varchar(100)      DEFAULT NULL COMMENT  '职业',
   `phone`               varchar(100)      DEFAULT NULL COMMENT  '联系电话',
-  `email`               varchar(100)      DEFAULT NULL COMMENT  '邮箱',
-
   `marriage_state`      varchar(100)      DEFAULT NULL COMMENT  '婚姻状况',
+
+  `email`               varchar(100)      DEFAULT NULL COMMENT  '邮箱',
+  `work_dept`           varchar(200)      DEFAULT NULL COMMENT  '工作单位',
+  `work_address`        varchar(200)      DEFAULT NULL COMMENT  '工作单位地址',
 
   `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
   `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
@@ -60,6 +67,7 @@ CREATE TABLE `pix_empi_register_ext` (
   `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
   `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
+  `gson_ext`             longtext        COMMENT '扩展',
    PRIMARY KEY (`id`)
 ) comment='注册扩展信息表'
  ENGINE=InnoDB
@@ -82,7 +90,8 @@ CREATE TABLE `pix_empi` (
   `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
   `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (`id`),
+   UNIQUE INDEX `empi` (`empi`) USING BTREE
 ) comment='empi信息表'
  ENGINE=InnoDB
  DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
@@ -123,12 +132,12 @@ CREATE TABLE `pix_empi_identity_contact` (
   `id`                  int(11)           NOT NULL AUTO_INCREMENT,
   `reg_uuid`            varchar(100)      NOT NULL COMMENT      '注册uuid号',
   `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
-  `relation`            varchar(100)      DEFAULT NULL COMMENT  '与患者关系 1: 父亲  2：母亲 3：儿子  4：女儿  ',
+  `relation`            varchar(100)      DEFAULT NULL COMMENT  '与患者关系 1:本人 ',
 
-  `rel_name`            varchar(100)      DEFAULT NULL COMMENT  '联系人 姓名',
-  `rel_name_pin`        varchar(100)      DEFAULT NULL COMMENT  '联系人 名字拼音',
-  `rel_sex`             tinyint(2)        DEFAULT NULL COMMENT  '联系人 性别 1：男 2：女',
-  `rel_phone`           varchar(100)      DEFAULT NULL COMMENT  '联系人 电话',
+  `relation_name`       varchar(100)      DEFAULT NULL COMMENT  '联系人 姓名',
+  `relation_name_pin`   varchar(100)      DEFAULT NULL COMMENT  '联系人 名字拼音',
+  `relation_sex`        tinyint(2)        DEFAULT NULL COMMENT  '联系人 性别 1：男 2：女',
+  `relation_phone`      varchar(100)      DEFAULT NULL COMMENT  '联系人 电话',
   `addr_province`       varchar(100)      DEFAULT NULL COMMENT  '联系人 省',
   `addr_city`           varchar(100)      DEFAULT NULL COMMENT  '联系人 地市',
   `addr_area`           varchar(100)      DEFAULT NULL COMMENT  '联系人 区域（县）',
@@ -176,6 +185,7 @@ CREATE TABLE `pix_empi_weight_config` (
 -- -----------------------------------------------
 -- empi日志信息 `pix_empi_log`
 -- -----------------------------------------------
+DROP TABLE IF EXISTS `pix_empi_log`;
 CREATE TABLE `pix_empi_log` (
   `id`              int(11) NOT NULL AUTO_INCREMENT,
   `log_level`       int(11) NOT NULL DEFAULT '0' COMMENT '日志级别, 1：debug，2：info 3：warn 4：error',
@@ -196,3 +206,22 @@ CREATE TABLE `pix_empi_log` (
   KEY `log_level` (`log_level`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日志表';
 
+-- -----------------------------------------------
+-- empi交叉索引关联关系表 `pix_empi_r`
+-- -----------------------------------------------
+DROP TABLE IF EXISTS `pix_empi_r`;
+CREATE TABLE `pix_empi_r` (
+  `id`                  bigint(20) NOT NULL AUTO_INCREMENT,
+  `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
+  `rel_empi`            varchar(100)      NOT NULL COMMENT      '关联患者empi',
+  `rel_flag`            varchar(100)      NOT NULL COMMENT      '关联关系 1： 被关联 2：',
+
+  `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
+  `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
+  `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
+  `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `empi` (`empi`) USING BTREE,
+  UNIQUE INDEX `rel_empi` (`rel_empi`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日志表';

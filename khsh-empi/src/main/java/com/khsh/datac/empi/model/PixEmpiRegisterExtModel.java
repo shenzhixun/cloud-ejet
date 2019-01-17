@@ -19,10 +19,14 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
  	private String job;
 	/**  联系电话  */
  	private String phone;
-	/**  邮箱  */
- 	private String email;
 	/**  婚姻状况  */
  	private String marriageState;
+	/**  邮箱  */
+ 	private String email;
+	/**  工作单位  */
+ 	private String workDept;
+	/**  工作单位地址  */
+ 	private String workAddress;
 	/**  状态标识 1：正常 0：禁用  */
  	private Integer status;
 	/**  备注  */
@@ -35,6 +39,8 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
  	private String updateTime;
 	/**  扩展  */
  	private String ext;
+	/**  扩展  */
+ 	private String gsonExt;
 
 	public void setId(Integer id) {
 		this.id=id;
@@ -100,6 +106,14 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
 		return phone;
 	}
 
+	public void setMarriageState(String marriageState) {
+		this.marriageState=marriageState;
+	}
+
+	public String getMarriageState(){
+		return marriageState;
+	}
+
 	public void setEmail(String email) {
 		this.email=email;
 	}
@@ -108,12 +122,20 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
 		return email;
 	}
 
-	public void setMarriageState(String marriageState) {
-		this.marriageState=marriageState;
+	public void setWorkDept(String workDept) {
+		this.workDept=workDept;
 	}
 
-	public String getMarriageState(){
-		return marriageState;
+	public String getWorkDept(){
+		return workDept;
+	}
+
+	public void setWorkAddress(String workAddress) {
+		this.workAddress=workAddress;
+	}
+
+	public String getWorkAddress(){
+		return workAddress;
 	}
 
 	public void setStatus(Integer status) {
@@ -162,6 +184,14 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
 
 	public String getExt(){
 		return ext;
+	}
+
+	public void setGsonExt(String gsonExt) {
+		this.gsonExt=gsonExt;
+	}
+
+	public String getGsonExt(){
+		return gsonExt;
 	}
 
 
