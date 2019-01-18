@@ -94,7 +94,8 @@ public class KettleTest {
         // json.addProperty("countryName", get(Fields.In, "GJ").getString(r));//国家名称
         // json.addProperty("nation", get(Fields.In, "MZDM").getString(r));//民族代码
         // json.addProperty("nationName", get(Fields.In, "MZ").getString(r));//民族
-        // json.addProperty("job", get(Fields.In, "ZY").getString(r)); //职业
+        // json.addProperty("job", get(Fields.In, "ZYDM").getString(r)); //职业
+        // json.addProperty("jobName", get(Fields.In, "ZY").getString(r)); //职业
         // json.addProperty("birthAddress", get(Fields.In, "CSDZ").getString(r)); //出生地址
         // json.addProperty("phone", get(Fields.In, "BRLXFS").getString(r));//病人联系方式
         // json.addProperty("addrDetail", get(Fields.In, "JTDZ").getString(r)); //家庭地址

@@ -37,6 +37,7 @@
 
     <!--<modules>-->
         <!--<module>../ejet-comm-web</module>-->
+        <!--<module>../ejet-comm-web-db</module>-->
     <!--</modules>-->
 
     <dependencies>

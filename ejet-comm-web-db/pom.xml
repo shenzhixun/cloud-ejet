@@ -10,8 +10,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <description>带DB启动入口</description>
     <artifactId>ejet-comm-web-db</artifactId>
-
 
     <!-- 项目属性 -->
     <properties>
@@ -32,7 +32,6 @@
         <groupId>com.alibaba</groupId>
         <artifactId>druid</artifactId>
         </dependency>
-
 
         <dependency>
             <groupId>com.ejet</groupId>

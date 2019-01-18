@@ -10,6 +10,7 @@
 			<if test="uuid!=null and uuid!='' ">and uuid=#{uuid} </if>
 			<if test="empi!=null and empi!='' ">and empi=#{empi} </if>
 			<if test="regCorpId!=null and regCorpId!='' ">and reg_corp_id=#{regCorpId} </if>
+			<if test="regCorpName!=null and regCorpName!='' ">and reg_corp_name=#{regCorpName} </if>
 			<if test="regSysId!=null and regSysId!='' ">and reg_sys_id=#{regSysId} </if>
 			<if test="regTime!=null and regTime!='' ">and reg_time=#{regTime} </if>
 			<if test="name!=null and name!='' ">and name=#{name} </if>
@@ -20,9 +21,9 @@
 			<if test="idCard!=null and idCard!='' ">and id_card=#{idCard} </if>
 			<if test="yibaoCard!=null and yibaoCard!='' ">and yibao_card=#{yibaoCard} </if>
 			<if test="jiuzhenCard!=null and jiuzhenCard!='' ">and jiuzhen_card=#{jiuzhenCard} </if>
-			<if test="huzhaoCard!=null and huzhaoCard!='' ">and huzhao_card=#{huzhaoCard} </if>
 			<if test="patientId!=null and patientId!='' ">and patient_id=#{patientId} </if>
 			<if test="inpatientId!=null and inpatientId!='' ">and inpatient_id=#{inpatientId} </if>
+			<if test="huzhaoCard!=null and huzhaoCard!='' ">and huzhao_card=#{huzhaoCard} </if>
 			<if test="empiFlag!=null and empiFlag!='' ">and empi_flag=#{empiFlag} </if>
 			<if test="status!=null and status!='' ">and status=#{status} </if>
 			<if test="remark!=null and remark!='' ">and remark=#{remark} </if>
@@ -44,6 +45,7 @@
 			<if test="uuid!=null and uuid!='' "> uuid=#{uuid}, </if>
 			<if test="empi!=null and empi!='' "> empi=#{empi}, </if>
 			<if test="regCorpId!=null and regCorpId!='' "> reg_corp_id=#{regCorpId}, </if>
+			<if test="regCorpName!=null and regCorpName!='' "> reg_corp_name=#{regCorpName}, </if>
 			<if test="regSysId!=null and regSysId!='' "> reg_sys_id=#{regSysId}, </if>
 			<if test="regTime!=null and regTime!='' "> reg_time=#{regTime}, </if>
 			<if test="name!=null and name!='' "> name=#{name}, </if>
@@ -54,9 +56,9 @@
 			<if test="idCard!=null and idCard!='' "> id_card=#{idCard}, </if>
 			<if test="yibaoCard!=null and yibaoCard!='' "> yibao_card=#{yibaoCard}, </if>
 			<if test="jiuzhenCard!=null and jiuzhenCard!='' "> jiuzhen_card=#{jiuzhenCard}, </if>
-			<if test="huzhaoCard!=null and huzhaoCard!='' "> huzhao_card=#{huzhaoCard}, </if>
 			<if test="patientId!=null and patientId!='' "> patient_id=#{patientId}, </if>
 			<if test="inpatientId!=null and inpatientId!='' "> inpatient_id=#{inpatientId}, </if>
+			<if test="huzhaoCard!=null and huzhaoCard!='' "> huzhao_card=#{huzhaoCard}, </if>
 			<if test="empiFlag!=null and empiFlag!='' "> empi_flag=#{empiFlag}, </if>
 			<if test="status!=null and status!='' "> status=#{status}, </if>
 			<if test="remark!=null and remark!='' "> remark=#{remark}, </if>
@@ -70,31 +72,35 @@
 
 	<insert  id="insertAutoKey" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_register (
- 			uuid, empi, reg_corp_id, reg_sys_id, 
- 			reg_time, name, name_pin, sex, age, 
- 			birthday, id_card, yibao_card, jiuzhen_card, huzhao_card, 
- 			patient_id, inpatient_id, empi_flag, status, remark, 
- 			create_by, create_time, update_time, ext ) 	 VALUES ( 
- 			#{uuid}, #{empi}, #{regCorpId}, #{regSysId}, 
- 			#{regTime}, #{name}, #{namePin}, #{sex}, #{age}, 
- 			#{birthday}, #{idCard}, #{yibaoCard}, #{jiuzhenCard}, #{huzhaoCard}, 
- 			#{patientId}, #{inpatientId}, #{empiFlag}, #{status}, #{remark}, 
- 			#{createBy}, #{createTime}, #{updateTime}, #{ext} ) 
+ 			uuid, empi, reg_corp_id, reg_corp_name, 
+ 			reg_sys_id, reg_time, name, name_pin, sex, 
+ 			age, birthday, id_card, yibao_card, jiuzhen_card, 
+ 			patient_id, inpatient_id, huzhao_card, empi_flag, status, 
+ 			remark, create_by, create_time, update_time, ext ) 
+ 				 VALUES ( 
+ 			#{uuid}, #{empi}, #{regCorpId}, #{regCorpName}, 
+ 			#{regSysId}, #{regTime}, #{name}, #{namePin}, #{sex}, 
+ 			#{age}, #{birthday}, #{idCard}, #{yibaoCard}, #{jiuzhenCard}, 
+ 			#{patientId}, #{inpatientId}, #{huzhaoCard}, #{empiFlag}, #{status}, 
+ 			#{remark}, #{createBy}, #{createTime}, #{updateTime}, #{ext} ) 
+ 			
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_register (
- 			uuid, empi, reg_corp_id, reg_sys_id, 
- 			reg_time, name, name_pin, sex, age, 
- 			birthday, id_card, yibao_card, jiuzhen_card, huzhao_card, 
- 			patient_id, inpatient_id, empi_flag, status, remark, 
- 			create_by, create_time, update_time, ext,  id ) 
+ 			uuid, empi, reg_corp_id, reg_corp_name, 
+ 			reg_sys_id, reg_time, name, name_pin, sex, 
+ 			age, birthday, id_card, yibao_card, jiuzhen_card, 
+ 			patient_id, inpatient_id, huzhao_card, empi_flag, status, 
+ 			remark, create_by, create_time, update_time, ext, 
+ 			 id ) 
 		 VALUES( 
- 			#{uuid}, #{empi}, #{regCorpId}, #{regSysId}, 
- 			#{regTime}, #{name}, #{namePin}, #{sex}, #{age}, 
- 			#{birthday}, #{idCard}, #{yibaoCard}, #{jiuzhenCard}, #{huzhaoCard}, 
- 			#{patientId}, #{inpatientId}, #{empiFlag}, #{status}, #{remark}, 
- 			#{createBy}, #{createTime}, #{updateTime}, #{ext},  #{id} ) 
+ 			#{uuid}, #{empi}, #{regCorpId}, #{regCorpName}, 
+ 			#{regSysId}, #{regTime}, #{name}, #{namePin}, #{sex}, 
+ 			#{age}, #{birthday}, #{idCard}, #{yibaoCard}, #{jiuzhenCard}, 
+ 			#{patientId}, #{inpatientId}, #{huzhaoCard}, #{empiFlag}, #{status}, 
+ 			#{remark}, #{createBy}, #{createTime}, #{updateTime}, #{ext}, 
+ 			 #{id} ) 
 	</insert>
 
 	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterModel" >

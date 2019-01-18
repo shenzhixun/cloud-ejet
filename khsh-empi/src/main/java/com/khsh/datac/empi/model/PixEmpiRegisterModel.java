@@ -11,6 +11,8 @@ public class PixEmpiRegisterModel extends CoBaseVO {
  	private String empi;
 	/**  注册机构id  */
  	private String regCorpId;
+	/**  注册机构名称  */
+ 	private String regCorpName;
 	/**  注册应用系统id  */
  	private String regSysId;
 	/**  注册时间  */
@@ -31,12 +33,12 @@ public class PixEmpiRegisterModel extends CoBaseVO {
  	private String yibaoCard;
 	/**  就诊卡  */
  	private String jiuzhenCard;
-	/**  护照  */
- 	private String huzhaoCard;
 	/**  患者id  */
  	private String patientId;
 	/**  患者住院id  */
  	private String inpatientId;
+	/**  护照  */
+ 	private String huzhaoCard;
 	/**  是否主索引标志 1：是 2：否  */
  	private Integer empiFlag;
 	/**  状态标识 1：正常 0：禁用  */
@@ -82,6 +84,14 @@ public class PixEmpiRegisterModel extends CoBaseVO {
 
 	public String getRegCorpId(){
 		return regCorpId;
+	}
+
+	public void setRegCorpName(String regCorpName) {
+		this.regCorpName=regCorpName;
+	}
+
+	public String getRegCorpName(){
+		return regCorpName;
 	}
 
 	public void setRegSysId(String regSysId) {
@@ -164,14 +174,6 @@ public class PixEmpiRegisterModel extends CoBaseVO {
 		return jiuzhenCard;
 	}
 
-	public void setHuzhaoCard(String huzhaoCard) {
-		this.huzhaoCard=huzhaoCard;
-	}
-
-	public String getHuzhaoCard(){
-		return huzhaoCard;
-	}
-
 	public void setPatientId(String patientId) {
 		this.patientId=patientId;
 	}
@@ -186,6 +188,14 @@ public class PixEmpiRegisterModel extends CoBaseVO {
 
 	public String getInpatientId(){
 		return inpatientId;
+	}
+
+	public void setHuzhaoCard(String huzhaoCard) {
+		this.huzhaoCard=huzhaoCard;
+	}
+
+	public String getHuzhaoCard(){
+		return huzhaoCard;
 	}
 
 	public void setEmpiFlag(Integer empiFlag) {

@@ -13,8 +13,8 @@
 
     <description>启动入口</description>
     <artifactId>ejet-comm-web</artifactId>
-    <packaging>war</packaging>
-
+   <!-- <packaging>jar</packaging>-->
+    <packaging>jar</packaging>
 
     <!-- 项目属性 -->
     <properties>
@@ -89,7 +89,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <webResources>
                         <resource>
-                            <directory>lib</directory>
+                            <directory>../libs</directory>
                             <targetPath>libs</targetPath>
                             <includes>
                                 <include>**/*.jar</include>

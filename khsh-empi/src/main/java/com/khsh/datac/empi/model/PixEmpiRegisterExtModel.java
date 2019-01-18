@@ -11,14 +11,22 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
  	private String empi;
 	/**  国家  */
  	private String country;
+	/**  国家  */
+ 	private String countryName;
 	/**  民族  */
  	private String nation;
+	/**  民族  */
+ 	private String nationName;
 	/**  文化程度  */
  	private String eduDegree;
 	/**  职业  */
  	private String job;
+	/**  职业  */
+ 	private String jobName;
 	/**  婚姻状况  */
  	private String marriageState;
+	/**  婚姻状况  */
+ 	private String marriageStateName;
 	/**  联系电话  */
  	private String phone;
 	/**  联系人 省  */
@@ -84,12 +92,28 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
 		return country;
 	}
 
+	public void setCountryName(String countryName) {
+		this.countryName=countryName;
+	}
+
+	public String getCountryName(){
+		return countryName;
+	}
+
 	public void setNation(String nation) {
 		this.nation=nation;
 	}
 
 	public String getNation(){
 		return nation;
+	}
+
+	public void setNationName(String nationName) {
+		this.nationName=nationName;
+	}
+
+	public String getNationName(){
+		return nationName;
 	}
 
 	public void setEduDegree(String eduDegree) {
@@ -108,12 +132,28 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
 		return job;
 	}
 
+	public void setJobName(String jobName) {
+		this.jobName=jobName;
+	}
+
+	public String getJobName(){
+		return jobName;
+	}
+
 	public void setMarriageState(String marriageState) {
 		this.marriageState=marriageState;
 	}
 
 	public String getMarriageState(){
 		return marriageState;
+	}
+
+	public void setMarriageStateName(String marriageStateName) {
+		this.marriageStateName=marriageStateName;
+	}
+
+	public String getMarriageStateName(){
+		return marriageStateName;
 	}
 
 	public void setPhone(String phone) {

@@ -36,14 +36,22 @@ public class EmpiVO extends PixEmpiRegisterVO implements Serializable {
     //============ 扩展信息=====
     /**  国家  */
     private String country;
+    /**  国家  */
+    private String countryName;
     /**  民族  */
     private String nation;
+    /**  民族  */
+    private String nationName;
     /**  文化程度  */
     private String eduDegree;
     /**  职业  */
     private String job;
+    /**  职业  */
+    private String jobName;
     /**  婚姻状况  */
     private String marriageState;
+    /**  婚姻状况  */
+    private String marriageStateName;
     /**  联系电话  */
     private String phone;
     /**  联系人 省  */
@@ -95,10 +103,12 @@ public class EmpiVO extends PixEmpiRegisterVO implements Serializable {
     private String bedId;
     /** 入院科室 */
     private String inDeptName;
-    /**
-     * 住院号
-     */
+    /**  住院号 */
     private String inHospitalId;
+    /**  性别名称    */
+    private String sexName;
+
+
 
 
 }

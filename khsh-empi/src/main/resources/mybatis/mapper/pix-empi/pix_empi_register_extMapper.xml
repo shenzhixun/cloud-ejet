@@ -10,11 +10,20 @@
 			<if test="regUuid!=null and regUuid!='' ">and reg_uuid=#{regUuid} </if>
 			<if test="empi!=null and empi!='' ">and empi=#{empi} </if>
 			<if test="country!=null and country!='' ">and country=#{country} </if>
+			<if test="countryName!=null and countryName!='' ">and country_name=#{countryName} </if>
 			<if test="nation!=null and nation!='' ">and nation=#{nation} </if>
+			<if test="nationName!=null and nationName!='' ">and nation_name=#{nationName} </if>
 			<if test="eduDegree!=null and eduDegree!='' ">and edu_degree=#{eduDegree} </if>
 			<if test="job!=null and job!='' ">and job=#{job} </if>
-			<if test="phone!=null and phone!='' ">and phone=#{phone} </if>
+			<if test="jobName!=null and jobName!='' ">and job_name=#{jobName} </if>
 			<if test="marriageState!=null and marriageState!='' ">and marriage_state=#{marriageState} </if>
+			<if test="marriageStateName!=null and marriageStateName!='' ">and marriage_state_name=#{marriageStateName} </if>
+			<if test="phone!=null and phone!='' ">and phone=#{phone} </if>
+			<if test="addrProvince!=null and addrProvince!='' ">and addr_province=#{addrProvince} </if>
+			<if test="addrCity!=null and addrCity!='' ">and addr_city=#{addrCity} </if>
+			<if test="addrArea!=null and addrArea!='' ">and addr_area=#{addrArea} </if>
+			<if test="addrDetail!=null and addrDetail!='' ">and addr_detail=#{addrDetail} </if>
+			<if test="zipCode!=null and zipCode!='' ">and zip_code=#{zipCode} </if>
 			<if test="email!=null and email!='' ">and email=#{email} </if>
 			<if test="workDept!=null and workDept!='' ">and work_dept=#{workDept} </if>
 			<if test="workAddress!=null and workAddress!='' ">and work_address=#{workAddress} </if>
@@ -39,11 +48,20 @@
 			<if test="regUuid!=null and regUuid!='' "> reg_uuid=#{regUuid}, </if>
 			<if test="empi!=null and empi!='' "> empi=#{empi}, </if>
 			<if test="country!=null and country!='' "> country=#{country}, </if>
+			<if test="countryName!=null and countryName!='' "> country_name=#{countryName}, </if>
 			<if test="nation!=null and nation!='' "> nation=#{nation}, </if>
+			<if test="nationName!=null and nationName!='' "> nation_name=#{nationName}, </if>
 			<if test="eduDegree!=null and eduDegree!='' "> edu_degree=#{eduDegree}, </if>
 			<if test="job!=null and job!='' "> job=#{job}, </if>
-			<if test="phone!=null and phone!='' "> phone=#{phone}, </if>
+			<if test="jobName!=null and jobName!='' "> job_name=#{jobName}, </if>
 			<if test="marriageState!=null and marriageState!='' "> marriage_state=#{marriageState}, </if>
+			<if test="marriageStateName!=null and marriageStateName!='' "> marriage_state_name=#{marriageStateName}, </if>
+			<if test="phone!=null and phone!='' "> phone=#{phone}, </if>
+			<if test="addrProvince!=null and addrProvince!='' "> addr_province=#{addrProvince}, </if>
+			<if test="addrCity!=null and addrCity!='' "> addr_city=#{addrCity}, </if>
+			<if test="addrArea!=null and addrArea!='' "> addr_area=#{addrArea}, </if>
+			<if test="addrDetail!=null and addrDetail!='' "> addr_detail=#{addrDetail}, </if>
+			<if test="zipCode!=null and zipCode!='' "> zip_code=#{zipCode}, </if>
 			<if test="email!=null and email!='' "> email=#{email}, </if>
 			<if test="workDept!=null and workDept!='' "> work_dept=#{workDept}, </if>
 			<if test="workAddress!=null and workAddress!='' "> work_address=#{workAddress}, </if>
@@ -60,27 +78,35 @@
 
 	<insert  id="insertAutoKey" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterExtModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_register_ext (
- 			reg_uuid, empi, country, nation, 
- 			edu_degree, job, phone, marriage_state, email, 
- 			work_dept, work_address, status, remark, create_by, 
- 			create_time, update_time, ext, gson_ext ) 	 VALUES ( 
- 			#{regUuid}, #{empi}, #{country}, #{nation}, 
- 			#{eduDegree}, #{job}, #{phone}, #{marriageState}, #{email}, 
- 			#{workDept}, #{workAddress}, #{status}, #{remark}, #{createBy}, 
- 			#{createTime}, #{updateTime}, #{ext}, #{gsonExt} ) 
+ 			reg_uuid, empi, country, country_name, 
+ 			nation, nation_name, edu_degree, job, job_name, 
+ 			marriage_state, marriage_state_name, phone, addr_province, addr_city, 
+ 			addr_area, addr_detail, zip_code, email, work_dept, 
+ 			work_address, status, remark, create_by, create_time, 
+ 			update_time, ext, gson_ext ) 	 VALUES ( 
+ 			#{regUuid}, #{empi}, #{country}, #{countryName}, 
+ 			#{nation}, #{nationName}, #{eduDegree}, #{job}, #{jobName}, 
+ 			#{marriageState}, #{marriageStateName}, #{phone}, #{addrProvince}, #{addrCity}, 
+ 			#{addrArea}, #{addrDetail}, #{zipCode}, #{email}, #{workDept}, 
+ 			#{workAddress}, #{status}, #{remark}, #{createBy}, #{createTime}, 
+ 			#{updateTime}, #{ext}, #{gsonExt} ) 
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterExtModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_register_ext (
- 			reg_uuid, empi, country, nation, 
- 			edu_degree, job, phone, marriage_state, email, 
- 			work_dept, work_address, status, remark, create_by, 
- 			create_time, update_time, ext, gson_ext,  id ) 
+ 			reg_uuid, empi, country, country_name, 
+ 			nation, nation_name, edu_degree, job, job_name, 
+ 			marriage_state, marriage_state_name, phone, addr_province, addr_city, 
+ 			addr_area, addr_detail, zip_code, email, work_dept, 
+ 			work_address, status, remark, create_by, create_time, 
+ 			update_time, ext, gson_ext,  id ) 
 		 VALUES( 
- 			#{regUuid}, #{empi}, #{country}, #{nation}, 
- 			#{eduDegree}, #{job}, #{phone}, #{marriageState}, #{email}, 
- 			#{workDept}, #{workAddress}, #{status}, #{remark}, #{createBy}, 
- 			#{createTime}, #{updateTime}, #{ext}, #{gsonExt},  #{id} ) 
+ 			#{regUuid}, #{empi}, #{country}, #{countryName}, 
+ 			#{nation}, #{nationName}, #{eduDegree}, #{job}, #{jobName}, 
+ 			#{marriageState}, #{marriageStateName}, #{phone}, #{addrProvince}, #{addrCity}, 
+ 			#{addrArea}, #{addrDetail}, #{zipCode}, #{email}, #{workDept}, 
+ 			#{workAddress}, #{status}, #{remark}, #{createBy}, #{createTime}, 
+ 			#{updateTime}, #{ext}, #{gsonExt},  #{id} ) 
 	</insert>
 
 	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterExtModel" >
