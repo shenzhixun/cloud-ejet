@@ -132,7 +132,7 @@ public class EmpiServiceImpl implements IEmpiService {
     public PixEmpiIdentityContactVO setEmpiIdentityContact(EmpiVO model) {
         //联系人名字或者电话号码不为空
         if(model.getRelation()!=null &&
-                (!StringUtils.isBlank(model.getRelationName()) || !StringUtils.isBlank(model.getRelationPhone())) ) {
+                (!StringUtils.isBlank(model.getRelName()) || !StringUtils.isBlank(model.getRelPhone())) ) {
 
             PixEmpiIdentityContactVO vo = new PixEmpiIdentityContactVO();
             BeanUtils.copyProperties(model, vo);

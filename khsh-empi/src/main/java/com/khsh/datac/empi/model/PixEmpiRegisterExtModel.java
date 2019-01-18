@@ -17,10 +17,20 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
  	private String eduDegree;
 	/**  职业  */
  	private String job;
-	/**  联系电话  */
- 	private String phone;
 	/**  婚姻状况  */
  	private String marriageState;
+	/**  联系电话  */
+ 	private String phone;
+	/**  联系人 省  */
+ 	private String addrProvince;
+	/**  联系人 地市  */
+ 	private String addrCity;
+	/**  联系人 区域（县）  */
+ 	private String addrArea;
+	/**  联系人 详细地址  */
+ 	private String addrDetail;
+	/**  邮政编码  */
+ 	private String zipCode;
 	/**  邮箱  */
  	private String email;
 	/**  工作单位  */
@@ -98,6 +108,14 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
 		return job;
 	}
 
+	public void setMarriageState(String marriageState) {
+		this.marriageState=marriageState;
+	}
+
+	public String getMarriageState(){
+		return marriageState;
+	}
+
 	public void setPhone(String phone) {
 		this.phone=phone;
 	}
@@ -106,12 +124,44 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
 		return phone;
 	}
 
-	public void setMarriageState(String marriageState) {
-		this.marriageState=marriageState;
+	public void setAddrProvince(String addrProvince) {
+		this.addrProvince=addrProvince;
 	}
 
-	public String getMarriageState(){
-		return marriageState;
+	public String getAddrProvince(){
+		return addrProvince;
+	}
+
+	public void setAddrCity(String addrCity) {
+		this.addrCity=addrCity;
+	}
+
+	public String getAddrCity(){
+		return addrCity;
+	}
+
+	public void setAddrArea(String addrArea) {
+		this.addrArea=addrArea;
+	}
+
+	public String getAddrArea(){
+		return addrArea;
+	}
+
+	public void setAddrDetail(String addrDetail) {
+		this.addrDetail=addrDetail;
+	}
+
+	public String getAddrDetail(){
+		return addrDetail;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode=zipCode;
+	}
+
+	public String getZipCode(){
+		return zipCode;
 	}
 
 	public void setEmail(String email) {

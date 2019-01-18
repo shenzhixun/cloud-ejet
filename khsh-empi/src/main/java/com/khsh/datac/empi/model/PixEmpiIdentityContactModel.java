@@ -12,23 +12,23 @@ public class PixEmpiIdentityContactModel extends CoBaseVO {
 	/**  与患者关系 1:本人   */
  	private String relation;
 	/**  联系人 姓名  */
- 	private String relationName;
+ 	private String relName;
 	/**  联系人 名字拼音  */
- 	private String relationNamePin;
+ 	private String relNamePin;
 	/**  联系人 性别 1：男 2：女  */
- 	private Integer relationSex;
+ 	private Integer relSex;
 	/**  联系人 电话  */
- 	private String relationPhone;
+ 	private String relPhone;
 	/**  联系人 省  */
- 	private String addrProvince;
+ 	private String relAddrProvince;
 	/**  联系人 地市  */
- 	private String addrCity;
+ 	private String relAddrCity;
 	/**  联系人 区域（县）  */
- 	private String addrArea;
+ 	private String relAddrArea;
 	/**  联系人 详细地址  */
- 	private String addrDetail;
+ 	private String relAddrDetail;
 	/**  邮政编码  */
- 	private String zipCode;
+ 	private String relZipCode;
 	/**  状态标识 1：正常 0：禁用  */
  	private Integer status;
 	/**  备注  */
@@ -74,76 +74,76 @@ public class PixEmpiIdentityContactModel extends CoBaseVO {
 		return relation;
 	}
 
-	public void setRelationName(String relationName) {
-		this.relationName=relationName;
+	public void setRelName(String relName) {
+		this.relName=relName;
 	}
 
-	public String getRelationName(){
-		return relationName;
+	public String getRelName(){
+		return relName;
 	}
 
-	public void setRelationNamePin(String relationNamePin) {
-		this.relationNamePin=relationNamePin;
+	public void setRelNamePin(String relNamePin) {
+		this.relNamePin=relNamePin;
 	}
 
-	public String getRelationNamePin(){
-		return relationNamePin;
+	public String getRelNamePin(){
+		return relNamePin;
 	}
 
-	public void setRelationSex(Integer relationSex) {
-		this.relationSex=relationSex;
+	public void setRelSex(Integer relSex) {
+		this.relSex=relSex;
 	}
 
-	public Integer getRelationSex(){
-		return relationSex;
+	public Integer getRelSex(){
+		return relSex;
 	}
 
-	public void setRelationPhone(String relationPhone) {
-		this.relationPhone=relationPhone;
+	public void setRelPhone(String relPhone) {
+		this.relPhone=relPhone;
 	}
 
-	public String getRelationPhone(){
-		return relationPhone;
+	public String getRelPhone(){
+		return relPhone;
 	}
 
-	public void setAddrProvince(String addrProvince) {
-		this.addrProvince=addrProvince;
+	public void setRelAddrProvince(String relAddrProvince) {
+		this.relAddrProvince=relAddrProvince;
 	}
 
-	public String getAddrProvince(){
-		return addrProvince;
+	public String getRelAddrProvince(){
+		return relAddrProvince;
 	}
 
-	public void setAddrCity(String addrCity) {
-		this.addrCity=addrCity;
+	public void setRelAddrCity(String relAddrCity) {
+		this.relAddrCity=relAddrCity;
 	}
 
-	public String getAddrCity(){
-		return addrCity;
+	public String getRelAddrCity(){
+		return relAddrCity;
 	}
 
-	public void setAddrArea(String addrArea) {
-		this.addrArea=addrArea;
+	public void setRelAddrArea(String relAddrArea) {
+		this.relAddrArea=relAddrArea;
 	}
 
-	public String getAddrArea(){
-		return addrArea;
+	public String getRelAddrArea(){
+		return relAddrArea;
 	}
 
-	public void setAddrDetail(String addrDetail) {
-		this.addrDetail=addrDetail;
+	public void setRelAddrDetail(String relAddrDetail) {
+		this.relAddrDetail=relAddrDetail;
 	}
 
-	public String getAddrDetail(){
-		return addrDetail;
+	public String getRelAddrDetail(){
+		return relAddrDetail;
 	}
 
-	public void setZipCode(String zipCode) {
-		this.zipCode=zipCode;
+	public void setRelZipCode(String relZipCode) {
+		this.relZipCode=relZipCode;
 	}
 
-	public String getZipCode(){
-		return zipCode;
+	public String getRelZipCode(){
+		return relZipCode;
 	}
 
 	public void setStatus(Integer status) {
