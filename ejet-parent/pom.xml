@@ -91,7 +91,6 @@
             <artifactId>spring-context-support</artifactId>
         </dependency>
 
-
         <!-- gson -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
@@ -108,29 +107,7 @@
             <!--<systemPath>${project.basedir}/../libs/comm-utils_main.jar-->
             <!--</systemPath>-->
         <!--</dependency>-->
-
-        <!--&lt;!&ndash; 自定义lib包 &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.ejet</groupId>-->
-            <!--<artifactId>comm-result</artifactId>-->
-            <!--<version>1.0-SNAPSHOT</version>-->
-            <!--<scope>system</scope>-->
-            <!--<systemPath>${project.basedir}/../libs/comm-result_main.jar-->
-            <!--</systemPath>-->
-        <!--</dependency>-->
-
-        <!--<dependency>
-            <groupId>com.ejet</groupId>
-            <artifactId>ejet-comm-utils</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.ejet</groupId>
-            <artifactId>ejet-comm-result</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
-        </dependency>
--->
+        <!--模块依赖-->
 
     </dependencies>
 
@@ -140,12 +117,6 @@
         <dependencies>
 
             <!--Apache Commons -->
-
-            <!--<dependency>-->
-                <!--<groupId>javax.servlet</groupId>-->
-                <!--<artifactId>javax.servlet-api</artifactId>-->
-                <!--<version>${servlet-api.version}</version>-->
-            <!--</dependency>-->
 
             <!--mysql -->
             <dependency>
@@ -196,45 +167,8 @@
                 <scope>provided</scope>
             </dependency>
 
-            <!-- 自定义lib包 -->
-            <dependency>
-                <groupId>com.ejet</groupId>
-                <artifactId>comm-result</artifactId>
-                <version>1.0-SNAPSHOT</version>
-                <scope>system</scope>
-                <systemPath>${project.basedir}/../libs/comm-result_main.jar
-                </systemPath>
-            </dependency>
-
-
         </dependencies>
     </dependencyManagement>
 
-
-    <!--<build>
-    <plugins>
-        <plugin>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <version>3.7.0</version>
-            <configuration>
-                <source>1.8</source>
-                <target>1.8</target>
-                <encoding>UTF-8</encoding>
-            </configuration>
-        </plugin>
-    </plugins>
-    <resources>
-        <resource>
-            <directory>src/main/java</directory>
-            <includes>
-                <include>**/*.sql</include>
-            </includes>
-            <filtering>false</filtering>
-        </resource>
-        <resource>
-            <directory>src/main/resources</directory>
-        </resource>
-    </resources>
-</build>-->
 
 </project>

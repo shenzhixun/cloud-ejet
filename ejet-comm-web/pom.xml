@@ -25,28 +25,10 @@
 
     <dependencies>
 
-        <!--&lt;!&ndash;mysql &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>mysql</groupId>-->
-            <!--<artifactId>mysql-connector-java</artifactId>-->
-        <!--</dependency>-->
-        <!--&lt;!&ndash; Druid 数据连接池依赖 &ndash;&gt;-->
-        <!--<dependency>-->
-            <!--<groupId>com.alibaba</groupId>-->
-            <!--<artifactId>druid</artifactId>-->
-        <!--</dependency>-->
-
         <!-- 分页插件 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>
             <artifactId>pagehelper</artifactId>
-        </dependency>
-
-        <!-- gson -->
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <!--<version>${gson.version}</version>-->
         </dependency>
 
         <dependency>
@@ -63,14 +45,12 @@
         </dependency>
 
 
-        <!-- 自定义lib包 -->
         <dependency>
             <groupId>com.ejet</groupId>
             <artifactId>ejet-comm-utils</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
-
         <dependency>
             <groupId>com.ejet</groupId>
             <artifactId>ejet-comm-result</artifactId>
@@ -78,65 +58,7 @@
             <scope>compile</scope>
         </dependency>
 
-
     </dependencies>
-
-
-    <!--<build>-->
-        <!--<plugins>-->
-            <!--<plugin>-->
-                <!--<groupId>org.springframework.boot</groupId>-->
-                <!--<artifactId>spring-boot-maven-plugin</artifactId>-->
-            <!--</plugin>-->
-
-            <!--&lt;!&ndash; 打包配置 &ndash;&gt;-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-war-plugin</artifactId>-->
-                <!--<version>2.6</version>-->
-                <!--<configuration>-->
-                    <!--<failOnMissingWebXml>false</failOnMissingWebXml>-->
-                    <!--<webResources>-->
-                        <!--<resource>-->
-                            <!--<directory>../libs</directory>-->
-                            <!--<targetPath>libs</targetPath>-->
-                            <!--<includes>-->
-                                <!--<include>**/*.jar</include>-->
-                            <!--</includes>-->
-                        <!--</resource>-->
-                    <!--</webResources>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-dependency-plugin</artifactId>-->
-                <!--<version>2.10</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>copy-dependencies</id>-->
-                        <!--<phase>package</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>copy-dependencies</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<outputDirectory>${project.build.directory}/${project.build.finalName}/libs/</outputDirectory>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
-            <!--<plugin>-->
-                <!--<groupId>org.apache.maven.plugins</groupId>-->
-                <!--<artifactId>maven-compiler-plugin</artifactId>-->
-                <!--<configuration>-->
-                    <!--<source>8</source>-->
-                    <!--<target>8</target>-->
-                <!--</configuration>-->
-            <!--</plugin>-->
-
-        <!--</plugins>-->
-
-    <!--</build>-->
 
 
 
