@@ -133,7 +133,7 @@ public class EmpiServiceImpl implements IEmpiService {
     /**
      *  设置联系人信息
      */
-    public PixEmpiIdentityContactVO setEmpiIdentityContact(EmpiVO model) {
+    private PixEmpiIdentityContactVO setEmpiIdentityContact(EmpiVO model) {
         //联系人名字或者电话号码不为空
         if(model.getRelation()!=null &&
                 (!StringUtils.isBlank(model.getRelName()) || !StringUtils.isBlank(model.getRelPhone())) ) {
@@ -212,7 +212,6 @@ public class EmpiServiceImpl implements IEmpiService {
         return null;
     }
 
-
     /**
      * 创建empi信息
      *
@@ -282,97 +281,14 @@ public class EmpiServiceImpl implements IEmpiService {
         return model;
     }
 
-
-
-
-
-
-
-    //获取empi信息
-    @Override
-    public EmpiVO getEmpi(EmpiVO model) throws CoBusinessException {
-        //检查必须输入项
-        checkRegInfo(model);
-
-        //查询能唯一标识信息
-        EmpiVO empi = queryEmpiByCard(model);
-        if(empi!=null) {
-            return updateEmpiHisRelation(empi, model);
-        }
-        //查询能唯一标识信息(根据扩展卡进行获取)
-        empi = queryEmpiByCardExt(model);
-        if(empi!=null) {
-            return updateEmpiHisRelation(empi, model);
-        }
-
-        //查询能唯一标识信息(patientId，inpatientId患者)
-        empi = queryEmpiByPatientId(model);
-        if(empi!=null) {
-            return empi;
-        }
-
-        //查询能唯一标识信息(patientId，inpatientId患者)
-        empi = queryEmpiByInpatientId(model);
-        if(empi!=null) {
-            return empi;
-        }
-        //不存在，入库新数据，则生成新的，提供给调用方
-        return createEmpi(model);
-    }
-
-    //获取empi信息
-    public List<EmpiVO> getEmpiSimilar(EmpiVO model) throws CoBusinessException {
-
-
-        return null;
-    }
-
     /**
-     * 获取empi信息(根据patient_id)
-     */
-    public EmpiVO getEmpiByPatientId(EmpiVO model) throws CoBusinessException {
-        if(StringUtils.isBlank(model.getPatientId()) && StringUtils.isBlank(model.getInpatientId())) {
-            throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "患者patient_id、inpatient_id为空!");
-        }
-        //查询empi信息
-        EmpiVO result = queryEmpiByPatientId(model);
-        if(result!=null && !StringUtils.isBlank(result.getEmpi())) {
-            return result;
-        }
-
-        result = queryEmpiByInpatientId(model);
-        if(result!=null && !StringUtils.isBlank(result.getEmpi())) {
-            return result;
-        }
-
-        //创建empi信息, 如果是
-        if(model.getChannelId()!=null && model.getChannelId().equalsIgnoreCase(CHANNEL_EMR)) {
-            result = createEmpi(model);
-        }
-        return result;
-    }
-
-
-    /**
-     * 更新患者信息
      *
-     * @param model
-     * @return
-     * @throws CoBusinessException
-     */
-    public EmpiVO updateEmpiByPatientInfo(EmpiVO model) throws CoBusinessException {
-        if(StringUtils.isBlank(model.getIdCard()) ) {
-            throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "患者patient_id为空!");
-        }
-        return queryEmpiByPatientId(model);
-    }
-
-    /**
-     * 更新empi与his对应关联关系(patientId\inpatientId\)
+     * 创建或者更新empi与his对应关联关系(patientId\inpatientId\)
+     *
      * @return
      */
-    public EmpiVO updateEmpiHisRelation(EmpiVO empi, EmpiVO model) throws CoBusinessException {
-       //首先查询是否存在，如果存在，则更新
+    public EmpiVO createEmpiHisRelation(EmpiVO empi, EmpiVO model) throws CoBusinessException {
+        //首先查询是否存在，如果存在，则更新
         model.setEmpi(empi.getEmpi());
         model.setRegCorpId(empi.getRegCorpId());
         model.setRegCorpName(empi.getRegCorpName());
@@ -390,5 +306,91 @@ public class EmpiServiceImpl implements IEmpiService {
         return model;
     }
 
+
+    //获取empi信息
+    @Override
+    public EmpiVO getEmpi(EmpiVO model) throws CoBusinessException {
+        //检查必须输入项
+        checkRegInfo(model);
+
+        //根据身份证、就诊卡、护照（ 唯一标识 ）
+        EmpiVO empi = queryEmpiByCard(model);
+        if(empi!=null) {
+            return createEmpiHisRelation(empi, model);
+        }
+        //根据扩展卡进行获取（ 唯一标识卡 ）
+        empi = queryEmpiByCardExt(model);
+        if(empi!=null) {
+            return createEmpiHisRelation(empi, model);
+        }
+
+        //根据 patientId，inpatientId （ 患者唯一标识 ）
+        empi = queryEmpiByPatientId(model);
+        if(empi!=null) {
+            return empi;
+        }
+
+        //根据 patientId，inpatientId （ 患者唯一标识 ）
+        empi = queryEmpiByInpatientId(model);
+        if(empi!=null) {
+            return empi;
+        }
+        //根据住院号 inHospitalId （ 患者唯一标识 ）
+
+        //根据门诊号 inHospitalId （ 患者唯一标识 ）
+
+        //不存在，入库新数据，则生成新的，提供给调用方
+        return createEmpi(model);
+    }
+
+    /**
+     * 根据 患者patient_id或者inpatient_id查询患者empi信息
+     * @return
+     * @throws CoBusinessException
+     */
+    public EmpiVO queryEmpiByPatientInfo(EmpiVO model) throws CoBusinessException {
+        if(StringUtils.isBlank(model.getPatientId()) && StringUtils.isBlank(model.getInpatientId())) {
+            throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "患者patient_id、inpatient_id为空!");
+        }
+        //查询empi信息
+        EmpiVO result = queryEmpiByPatientId(model);
+        if(result!=null && !StringUtils.isBlank(result.getEmpi())) {
+            return result;
+        }
+
+        result = queryEmpiByInpatientId(model);
+        if(result!=null && !StringUtils.isBlank(result.getEmpi())) {
+            return result;
+        }
+
+        //创建empi信息, 电子病历接口
+        if(model.getChannelId()!=null && model.getChannelId().equalsIgnoreCase(CHANNEL_EMR)) {
+            result = createEmpi(model);
+        }
+        return result;
+    }
+
+    // =========================================================================================
+
+    //获取empi信息
+    public List<EmpiVO> getEmpiSimilar(EmpiVO model) throws CoBusinessException {
+
+
+        return null;
+    }
+
+    /**
+     * 更新患者信息
+     *
+     * @param model
+     * @return
+     * @throws CoBusinessException
+     */
+    public EmpiVO updateEmpiByPatientInfo(EmpiVO model) throws CoBusinessException {
+        if(StringUtils.isBlank(model.getIdCard()) ) {
+            throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "患者patient_id为空!");
+        }
+        return queryEmpiByPatientId(model);
+    }
 
 }

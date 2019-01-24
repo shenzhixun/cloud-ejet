@@ -10,9 +10,9 @@
 
 	ejet-starter-parent        | 父POM（管理公共资源版本号）
 	ejet-starter-web           | 启动主项目
-	ejet-generator-project 	   | 项目骨架生成工具
-	ejet-core-ui			   | UI依赖（h+、jquery等等第三方UI依赖）
-    ejet-biz-helloworld        | 第一个插件例子
+	ejet-starter-web-db        | 启动主项目
+	khsh-empi                  | 基于基础工程例子，患者主索引
+
 
 	
 #### 架构说明

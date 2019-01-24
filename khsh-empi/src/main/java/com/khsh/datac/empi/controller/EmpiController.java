@@ -49,6 +49,31 @@ public class EmpiController extends ControllerBase {
         return rs;
     }
 
+
+    /**
+     * 根据住院号，门诊号，姓名，查找patient信息
+     *  或者patientid获取empi及所有住院、门诊信息
+     */
+    @ResponseBody
+    @RequestMapping(value="/find-patient-info")
+    public Result findPatientInfo(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
+        Result rs = new Result();
+        try{
+            checkBindResult(bindResult);
+            EmpiVO result = mService.updateEmpiByPatientInfo(param);
+            rs = new Result(result);
+        }catch (CoBusinessException e) {
+            log.error("", e);
+            rs = new Result(e.getCode(), e);
+        }catch (Exception e) {
+            log.error("", e);
+            rs = new Result(SYS_ERROR, e);
+        }
+        return rs;
+    }
+
+
+
     /**
      * 获取empi号码（根据patientId）
      */
@@ -58,7 +83,7 @@ public class EmpiController extends ControllerBase {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);
-            EmpiVO result = mService.getEmpiByPatientId(param);
+            EmpiVO result = mService.queryEmpiByPatientInfo(param);
             if(result==null || StringUtils.isBlank(result.getEmpi())) {
                 throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "查询EMPI信息为空!");
             }
@@ -114,6 +139,10 @@ public class EmpiController extends ControllerBase {
         }
         return rs;
     }
+
+
+
+
 
 
 
