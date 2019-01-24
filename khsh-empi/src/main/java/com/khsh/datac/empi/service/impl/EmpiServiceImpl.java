@@ -10,6 +10,7 @@ import com.ejet.core.global.CoConstant;
 import com.khsh.datac.empi.comm.CardTypeEnum;
 import com.khsh.datac.empi.comm.Constant;
 import com.khsh.datac.empi.mapper.EmpiDao;
+import com.khsh.datac.empi.model.PixEmpiHisRModel;
 import com.khsh.datac.empi.service.IEmpiService;
 import com.khsh.datac.empi.utils.IDCardUtils;
 import com.khsh.datac.empi.vo.*;
@@ -44,6 +45,9 @@ public class EmpiServiceImpl implements IEmpiService {
     PixEmpiIdentityServiceImpl empiIdentityService;
     @Autowired
     PixEmpiIdentityContactServiceImpl empiIdentityContactService;
+
+    @Autowired
+    PixEmpiHisRServiceImpl empiHisRService;
 
     @Autowired
     private EmpiDao mDao;
@@ -255,6 +259,12 @@ public class EmpiServiceImpl implements IEmpiService {
         model.setRegTime(TimeUtils.getCurrentTime());
         empiRegisterService.insertAutoKey(model);
 
+        //插入his关联信息表
+        model.setRegTime(TimeUtils.getCurrentTime());
+        PixEmpiHisRModel hisRVO = new PixEmpiHisRModel();
+        BeanUtils.copyProperties(model, hisRVO);
+        empiHisRService.insertAutoKey(hisRVO);
+
         //插入注册信息扩展表(婚姻、学历等信息)
         PixEmpiRegisterExtVO empiRegisterExtVO = new PixEmpiRegisterExtVO();
         BeanUtils.copyProperties(model, empiRegisterExtVO);
@@ -287,7 +297,12 @@ public class EmpiServiceImpl implements IEmpiService {
         //查询能唯一标识信息
         EmpiVO empi = queryEmpiByCard(model);
         if(empi!=null) {
-            return empi;
+            return updateEmpiHisRelation(empi, model);
+        }
+        //查询能唯一标识信息(根据扩展卡进行获取)
+        empi = queryEmpiByCardExt(model);
+        if(empi!=null) {
+            return updateEmpiHisRelation(empi, model);
         }
 
         //查询能唯一标识信息(patientId，inpatientId患者)
@@ -301,13 +316,6 @@ public class EmpiServiceImpl implements IEmpiService {
         if(empi!=null) {
             return empi;
         }
-
-        //查询能唯一标识信息(根据扩展卡进行获取)
-        empi = queryEmpiByCardExt(model);
-        if(empi!=null) {
-            return empi;
-        }
-
         //不存在，入库新数据，则生成新的，提供给调用方
         return createEmpi(model);
     }
@@ -357,6 +365,29 @@ public class EmpiServiceImpl implements IEmpiService {
             throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "患者patient_id为空!");
         }
         return queryEmpiByPatientId(model);
+    }
+
+    /**
+     * 更新empi与his对应关联关系(patientId\inpatientId\)
+     * @return
+     */
+    public EmpiVO updateEmpiHisRelation(EmpiVO empi, EmpiVO model) throws CoBusinessException {
+       //首先查询是否存在，如果存在，则更新
+        model.setEmpi(empi.getEmpi());
+        model.setRegCorpId(empi.getRegCorpId());
+        model.setRegCorpName(empi.getRegCorpName());
+        model.setRegSysId(empi.getRegSysId());
+        if(!StringUtils.isBlank(model.getInpatientId()) && !StringUtils.isBlank(model.getPatientId())) { //非空才更新
+            PixEmpiHisRModel query = new PixEmpiHisRModel();
+            query.setPatientId(model.getPatientId());
+            query.setInpatientId(model.getInpatientId());
+            List<PixEmpiHisRModel> result = empiHisRService.queryByCond(query);
+            if(result==null || result.size()==0) { //无记录，则需要插入
+                BeanUtils.copyProperties(model, query);
+                empiHisRService.insertAutoKey(query);
+            }
+        }
+        return model;
     }
 
 

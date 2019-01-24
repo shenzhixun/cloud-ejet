@@ -22,7 +22,6 @@
 			<if test="yibaoCard!=null and yibaoCard!='' ">and yibao_card=#{yibaoCard} </if>
 			<if test="jiuzhenCard!=null and jiuzhenCard!='' ">and jiuzhen_card=#{jiuzhenCard} </if>
 			<if test="patientId!=null and patientId!='' ">and patient_id=#{patientId} </if>
-			<if test="inpatientId!=null and inpatientId!='' ">and inpatient_id=#{inpatientId} </if>
 			<if test="huzhaoCard!=null and huzhaoCard!='' ">and huzhao_card=#{huzhaoCard} </if>
 			<if test="empiFlag!=null and empiFlag!='' ">and empi_flag=#{empiFlag} </if>
 			<if test="status!=null and status!='' ">and status=#{status} </if>
@@ -57,7 +56,6 @@
 			<if test="yibaoCard!=null and yibaoCard!='' "> yibao_card=#{yibaoCard}, </if>
 			<if test="jiuzhenCard!=null and jiuzhenCard!='' "> jiuzhen_card=#{jiuzhenCard}, </if>
 			<if test="patientId!=null and patientId!='' "> patient_id=#{patientId}, </if>
-			<if test="inpatientId!=null and inpatientId!='' "> inpatient_id=#{inpatientId}, </if>
 			<if test="huzhaoCard!=null and huzhaoCard!='' "> huzhao_card=#{huzhaoCard}, </if>
 			<if test="empiFlag!=null and empiFlag!='' "> empi_flag=#{empiFlag}, </if>
 			<if test="status!=null and status!='' "> status=#{status}, </if>
@@ -75,15 +73,13 @@
  			uuid, empi, reg_corp_id, reg_corp_name, 
  			reg_sys_id, reg_time, name, name_pin, sex, 
  			age, birthday, id_card, yibao_card, jiuzhen_card, 
- 			patient_id, inpatient_id, huzhao_card, empi_flag, status, 
- 			remark, create_by, create_time, update_time, ext ) 
- 				 VALUES ( 
+ 			patient_id, huzhao_card, empi_flag, status, remark, 
+ 			create_by, create_time, update_time, ext ) 	 VALUES ( 
  			#{uuid}, #{empi}, #{regCorpId}, #{regCorpName}, 
  			#{regSysId}, #{regTime}, #{name}, #{namePin}, #{sex}, 
  			#{age}, #{birthday}, #{idCard}, #{yibaoCard}, #{jiuzhenCard}, 
- 			#{patientId}, #{inpatientId}, #{huzhaoCard}, #{empiFlag}, #{status}, 
- 			#{remark}, #{createBy}, #{createTime}, #{updateTime}, #{ext} ) 
- 			
+ 			#{patientId}, #{huzhaoCard}, #{empiFlag}, #{status}, #{remark}, 
+ 			#{createBy}, #{createTime}, #{updateTime}, #{ext} ) 
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterModel" useGeneratedKeys="true" keyProperty="id" >
@@ -91,16 +87,14 @@
  			uuid, empi, reg_corp_id, reg_corp_name, 
  			reg_sys_id, reg_time, name, name_pin, sex, 
  			age, birthday, id_card, yibao_card, jiuzhen_card, 
- 			patient_id, inpatient_id, huzhao_card, empi_flag, status, 
- 			remark, create_by, create_time, update_time, ext, 
- 			 id ) 
+ 			patient_id, huzhao_card, empi_flag, status, remark, 
+ 			create_by, create_time, update_time, ext,  id ) 
 		 VALUES( 
  			#{uuid}, #{empi}, #{regCorpId}, #{regCorpName}, 
  			#{regSysId}, #{regTime}, #{name}, #{namePin}, #{sex}, 
  			#{age}, #{birthday}, #{idCard}, #{yibaoCard}, #{jiuzhenCard}, 
- 			#{patientId}, #{inpatientId}, #{huzhaoCard}, #{empiFlag}, #{status}, 
- 			#{remark}, #{createBy}, #{createTime}, #{updateTime}, #{ext}, 
- 			 #{id} ) 
+ 			#{patientId}, #{huzhaoCard}, #{empiFlag}, #{status}, #{remark}, 
+ 			#{createBy}, #{createTime}, #{updateTime}, #{ext},  #{id} ) 
 	</insert>
 
 	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiRegisterModel" >

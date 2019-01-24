@@ -21,7 +21,6 @@ CREATE TABLE `pix_empi_register` (
   `jiuzhen_card`        varchar(100)      DEFAULT NULL COMMENT  '就诊卡',
 
   `patient_id`          varchar(100)      DEFAULT NULL COMMENT  '患者id',
-  `inpatient_id`        varchar(100)      DEFAULT NULL COMMENT  '患者住院id',
 
   `huzhao_card`         varchar(100)      DEFAULT NULL COMMENT  '护照',
 
@@ -36,8 +35,7 @@ CREATE TABLE `pix_empi_register` (
    PRIMARY KEY (`id`),
    UNIQUE INDEX `empi` (`empi`) USING BTREE,
    UNIQUE INDEX `id_card_flag`  (`id_card`,`empi_flag`) USING BTREE,
-   KEY `patient` (`reg_corp_id`,`patient_id`) USING BTREE,
-   KEY `inpatient_id` (`reg_corp_id`,`inpatient_id`) USING BTREE
+   KEY `patient` (`reg_corp_id`,`patient_id`) USING BTREE
 ) comment='empi注册信息表'
  ENGINE=InnoDB
  DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
@@ -79,7 +77,8 @@ CREATE TABLE `pix_empi_register_ext` (
   `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
   `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
   `gson_ext`             longtext        COMMENT '扩展',
-   PRIMARY KEY (`id`)
+   PRIMARY KEY (`id`),
+   UNIQUE INDEX `empi` (`empi`) USING BTREE
 ) comment='注册扩展信息表'
  ENGINE=InnoDB
  DEFAULT CHARACTER SET=utf8 COLLATE=utf8_general_ci;
@@ -235,4 +234,32 @@ CREATE TABLE `pix_empi_r` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `empi` (`empi`) USING BTREE,
   UNIQUE INDEX `rel_empi` (`rel_empi`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='日志表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='empi交叉索引关联关系表';
+
+-- -----------------------------------------------
+-- empi与HIS关联信息表，患者住院、床位、patientId、inpatientId关联 `pix_empi_r`
+-- -----------------------------------------------
+DROP TABLE IF EXISTS `pix_empi_his_r`;
+CREATE TABLE `pix_empi_his_r` (
+  `id`                  bigint(20) NOT NULL AUTO_INCREMENT,
+  `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
+  `reg_corp_id`         varchar(200)      DEFAULT NULL COMMENT  '注册机构id',
+  `patient_id`          varchar(100)      NOT NULL COMMENT  '患者id',
+  `inpatient_id`        varchar(100)      NOT NULL COMMENT  '患者住院id',
+  `in_hospital_id`      varchar(100)      DEFAULT NULL COMMENT  '住院号',
+  `in_hospital_date`    varchar(100)      DEFAULT NULL COMMENT  '住院日期',
+  `bed_id`              varchar(100)      DEFAULT NULL COMMENT  '床位号',
+  `in_dept_name`        varchar(100)      DEFAULT NULL COMMENT  '入院科室',
+  `out_dept_name`       varchar(100)      DEFAULT NULL COMMENT  '转出科室',
+
+  `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
+  `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
+  `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',
+  `create_time`         varchar(32)       DEFAULT NULL COMMENT '创建时间',
+  `update_time`         varchar(32)       DEFAULT NULL COMMENT '修改时间',
+  `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
+  PRIMARY KEY (`id`),
+  INDEX `empi` (`empi`) USING BTREE,
+  UNIQUE INDEX `patient_id` (`patient_id`, `reg_corp_id`) USING BTREE,
+  UNIQUE INDEX `inpatient_id` (`inpatient_id`, `reg_corp_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='empi与HIS关联信息表';

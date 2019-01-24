@@ -93,22 +93,24 @@ public class EmpiVO extends PixEmpiRegisterVO implements Serializable {
     /**  邮政编码  */
     private String relZipCode;
 
-    //======== 获取接口渠道标识channelId
-    /**  渠道id  */
-    private String channelId;
-
+    //======== HIS关联信息 ======
+    /**  患者住院id  */
+    private String inpatientId;
     /** 入院日期  */
     private String inHospitalDate;
+    /**  住院号 */
+    private String inHospitalId;
     /**  床位号  */
     private String bedId;
     /** 入院科室 */
     private String inDeptName;
-    /**  住院号 */
-    private String inHospitalId;
+    /**  转出科室  */
+    private String outDeptName;
+
+    //======== 获取接口渠道标识channelId
+    /**  渠道id  */
+    private String channelId;
     /**  性别名称    */
     private String sexName;
-
-
-
 
 }

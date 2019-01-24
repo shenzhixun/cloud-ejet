@@ -35,7 +35,7 @@ public class EMPIApplication extends SpringBootServletInitializer {
     }
 
     static {
-        logger.info("======== [ejet-comm-web-db] init ======");
+        logger.info("======== [ejet-comm-web-db] init ======a63b9f1d-1ec5-4bab-b114-a95b00b86d31");
     }
 
     public static void main(String[] args) {

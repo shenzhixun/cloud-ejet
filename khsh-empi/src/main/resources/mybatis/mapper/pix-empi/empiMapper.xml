@@ -162,34 +162,88 @@
 
     <!-- 根据患者id查询 -->
     <select  id="queryEmpiByPatientId" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT R.*, case when R.sex = '1' then '男'
-        when R.sex = '2' then '女' else null end as sexName,
+        SELECT R.id,
+        R.uuid,
+        R.empi,
+        R.reg_corp_id,
+        R.reg_corp_name,
+        R.reg_sys_id,
+        R.reg_time,
+        R.name,
+        R.name_pin,
+        R.sex,
+        R.age,
+        R.birthday,
+        R.id_card,
+        R.yibao_card,
+        R.jiuzhen_card,
+        R.huzhao_card,
+        R.empi_flag,
+        R.status,
+        R.remark,
+        R.create_by,
+        R.create_time,
+        R.update_time,
+        R.ext,
+        case when R.sex = '1' then '男' when R.sex = '2' then '女' else null end as sexName,
         E.country,E.country_name,
         E.nation, E.nation_name,
         E.edu_degree,
         E.job, E.job_name,
         E.phone,
         E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
-        E.marriage_state, E.marriage_state_name
-        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi
-        WHERE 1 = 1
-        <if test="patientId!=null and patientId!='' "> AND R.patient_id=#{patientId} AND R.reg_corp_id=#{regCorpId} </if>
+        E.marriage_state, E.marriage_state_name,
+        H.in_hospital_id,
+        H.in_hospital_date,
+        H.bed_id,
+        H.in_dept_name,
+        H.out_dept_name
+        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi, pix_empi_his_r H
+        WHERE R.empi=H.empi
+        <if test="patientId!=null and patientId!='' "> AND H.patient_id=#{patientId} AND H.reg_corp_id=#{regCorpId} </if>
     </select>
 
     <!-- 根据inpatientId查询 -->
     <select  id="queryEmpiByInpatientId" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT R.*, case when R.sex = '1' then '男'
-        when R.sex = '2' then '女' else null end as sexName,
+        SELECT R.id,
+        R.uuid,
+        R.empi,
+        R.reg_corp_id,
+        R.reg_corp_name,
+        R.reg_sys_id,
+        R.reg_time,
+        R.name,
+        R.name_pin,
+        R.sex,
+        R.age,
+        R.birthday,
+        R.id_card,
+        R.yibao_card,
+        R.jiuzhen_card,
+        R.huzhao_card,
+        R.empi_flag,
+        R.status,
+        R.remark,
+        R.create_by,
+        R.create_time,
+        R.update_time,
+        R.ext,
+        case when R.sex = '1' then '男' when R.sex = '2' then '女' else null end as sexName,
         E.country,E.country_name,
         E.nation, E.nation_name,
         E.edu_degree,
         E.job, E.job_name,
         E.phone,
         E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
-        E.marriage_state, E.marriage_state_name
-        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi
-        WHERE 1 = 1
-        <if test="inpatientId!=null and inpatientId!='' "> AND R.inpatient_id=#{inpatientId} AND R.reg_corp_id=#{regCorpId} </if>
+        E.marriage_state, E.marriage_state_name,
+        H.in_hospital_id,
+        H.in_hospital_date,
+        H.bed_id,
+        H.in_dept_name,
+        H.out_dept_name
+        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi, pix_empi_his_r H
+        WHERE R.empi=H.empi
+        <if test="inpatientId!=null and inpatientId!='' "> AND H.inpatient_id=#{inpatientId} AND H.reg_corp_id=#{regCorpId} </if>
     </select>
 
     <!-- 更新患者注册信息 -->

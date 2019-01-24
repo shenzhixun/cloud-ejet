@@ -35,10 +35,13 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <!--<modules>-->
-        <!--<module>../ejet-comm-web</module>-->
-        <!--<module>../ejet-comm-web-db</module>-->
-    <!--</modules>-->
+    <modules>
+        <module>../ejet-comm-utils</module>
+        <module>../ejet-comm-result</module>
+        <module>../ejet-comm-web</module>
+        <module>../ejet-comm-web-db</module>
+        <module>../khsh-empi</module>
+    </modules>
 
     <dependencies>
         <!-- servlet-api -->
@@ -96,26 +99,38 @@
             <version>${gson.version}</version>
         </dependency>
 
-        <!-- 自定义lib包 -->
-        <dependency>
+        <!--&lt;!&ndash; 自定义lib包 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.ejet</groupId>-->
+            <!--<artifactId>comm-utils</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/../libs/comm-utils_main.jar-->
+            <!--</systemPath>-->
+        <!--</dependency>-->
+
+        <!--&lt;!&ndash; 自定义lib包 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>com.ejet</groupId>-->
+            <!--<artifactId>comm-result</artifactId>-->
+            <!--<version>1.0-SNAPSHOT</version>-->
+            <!--<scope>system</scope>-->
+            <!--<systemPath>${project.basedir}/../libs/comm-result_main.jar-->
+            <!--</systemPath>-->
+        <!--</dependency>-->
+
+        <!--<dependency>
             <groupId>com.ejet</groupId>
-            <artifactId>comm-utils</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../libs/comm-utils_main.jar
-            </systemPath>
+            <artifactId>ejet-comm-utils</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
-        <!-- 自定义lib包 -->
         <dependency>
             <groupId>com.ejet</groupId>
-            <artifactId>comm-result</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/../libs/comm-result_main.jar
-            </systemPath>
+            <artifactId>ejet-comm-result</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
         </dependency>
-
+-->
 
     </dependencies>
 
