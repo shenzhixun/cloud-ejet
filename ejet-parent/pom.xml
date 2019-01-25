@@ -41,6 +41,7 @@
         <module>../ejet-comm-web</module>
         <module>../ejet-comm-web-db</module>
         <module>../khsh-empi</module>
+        <module>../khsh-patient-view</module>
     </modules>
 
     <dependencies>
