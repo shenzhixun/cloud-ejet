@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * @date 2018/12/14
  */
 @Configuration
-@MapperScan(basePackages = "com.cxkh.datac.*.mapper.mysql",sqlSessionTemplateRef = "mysqlSqlSessionTemplate")
+@MapperScan(basePackages = "com.khsh.datac.patientview.mapper.mysql",sqlSessionTemplateRef = "mysqlSqlSessionTemplate")
 public class MySqlConfiguration {
 
     @Bean(name = "mysqlDataSource")
@@ -37,8 +37,8 @@ public class MySqlConfiguration {
         sqlSessionFactoryBean.setDataSource(mysqlDataSource);
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:/mybatis/mybatis-config.xml"));
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/mapper/mysql/*.xml"));
+        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mybatis/mybatis-config.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/patientview/mysql/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 

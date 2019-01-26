@@ -7,7 +7,6 @@ import org.apache.ibatis.session.RowBounds;
 import java.util.List;
 
 public interface BaseDictionaryDatasMapper {
-
     /**
      * 保存数据
      * @param baseDictionaryDatas

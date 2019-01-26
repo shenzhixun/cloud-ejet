@@ -38,6 +38,10 @@
             <artifactId>mysql-connector-java</artifactId>
             <!--<scope>runtime</scope>-->
         </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+        </dependency>
         <!-- Druid 数据连接池依赖 -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -68,8 +72,13 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
+        <dependency>
+            <groupId>redis.clients</groupId>
+            <artifactId>jedis</artifactId>
+            <version>2.9.0</version>
+        </dependency>
 
-        <!-- redis -->
+        <!-- j2cache -->
         <dependency>
             <groupId>net.oschina.j2cache</groupId>
             <artifactId>j2cache</artifactId>
@@ -83,9 +92,11 @@
             </exclusions>
         </dependency>
 
-
-
-
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.8.1</version>
+        </dependency>
 
         <dependency>
             <groupId>com.ejet</groupId>

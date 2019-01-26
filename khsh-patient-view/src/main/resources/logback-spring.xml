@@ -21,7 +21,7 @@
     <!--输出到文件-->
     <appender name="file_all" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--大小和时间满足后都会重新生成文件 -->
-       <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">  
+       <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
 	        <fileNamePattern>${LOG_HOME}/ETL.%d{yyyy-MM-dd}.%i.log</fileNamePattern>
 	        <maxHistory>${maxHistory}</maxHistory>
             <maxFileSize>${maxFileSize}</maxFileSize>
@@ -52,7 +52,7 @@
 
 
     <!-- 总日志级别配置，包括日志输出文件引用 -->
-    <root level="info">
+    <root level="debug">
         <appender-ref ref="console" />
         <appender-ref ref="file_all" />
         <appender-ref ref="FILE_ERROR" />

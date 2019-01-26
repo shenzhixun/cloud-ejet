@@ -1,3 +1,4 @@
+/*
 package com.khsh.datac.patientview.service.impl;
 
 import com.chz.apps.common.j2cache.J2CacheUtil;
@@ -165,10 +166,12 @@ public class BaseDictionaryDatasService implements IBaseDictionaryDatasService {
         return result;
     }
 
-    /**
+    */
+/**
      * 按照Map格式缓存字典表数据，方便后续取值
      * @param dics
-     */
+     *//*
+
     public void cacheLocal(DicVo... dics){
         if(dics == null || dics.length == 0)
             return;
@@ -312,3 +315,4 @@ public class BaseDictionaryDatasService implements IBaseDictionaryDatasService {
         return result;
     }
 }
+*/

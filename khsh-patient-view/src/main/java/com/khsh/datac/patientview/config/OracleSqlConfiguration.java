@@ -18,29 +18,29 @@ import javax.sql.DataSource;
  * @date 2018/12/14
  */
 @Configuration
-@MapperScan(basePackages = "com.cxkh.dataserver.mapper.postgresql",sqlSessionTemplateRef = "postgresqlSqlSessionTemplate")
-public class PostgreSqlConfiguration {
+@MapperScan(basePackages = "com.khsh.datac.patientview.mapper.oracle",sqlSessionTemplateRef = "oracleSqlSessionTemplate")
+public class OracleSqlConfiguration {
 
-    @Bean(name = "postgresqlDataSource")
-    @ConfigurationProperties(prefix = "spring.datasource.postgresql")
+    @Bean(name = "oracleDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource.oracle")
     public DataSource dataSource() {
         DruidDataSource datasource = new DruidDataSource();
         return datasource;
     }
 
-    @Bean(name = "postgresqlSqlSessionFactory")
-    public SqlSessionFactory sqlSessionFactory(@Qualifier("postgresqlDataSource") DataSource postgresqlDataSource) throws Exception {
+    @Bean(name = "oracleSqlSessionFactory")
+    public SqlSessionFactory sqlSessionFactory(@Qualifier("oracleDataSource") DataSource postgresqlDataSource) throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(postgresqlDataSource);
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:/mybatis/mybatis-config.xml"));
-        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:/mybatis/mapper/postgresql/*.xml"));
+        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mybatis/mybatis-config.xml"));
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/patientview/oracle/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }
 
-    @Bean(name = "postgresqlSqlSessionTemplate")
-    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("postgresqlSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
+    @Bean(name = "oracleSqlSessionTemplate")
+    public SqlSessionTemplate sqlSessionTemplate(@Qualifier("oracleSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
 
