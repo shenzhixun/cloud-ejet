@@ -36,7 +36,7 @@ spring:
       url: jdbc:mysql://192.168.20.41/bi_db?useSSL=false&serverTimezone=UTC
       username: root
       password: 1234567890
-      driver-class-name: com.mysql.cj.jdbc.Driver
+      driver-class-name: com.mysql.jdbc.Driver
       # 初始化大小，最小，最大
       initialSize: 3
       minIdle: 2
@@ -63,8 +63,8 @@ spring:
 
     oracle:
       url: jdbc:oracle:thin:@192.168.20.41:1521:orcl
-      username: cdrUser
-      password: cdrUser
+      username: allUser
+      password: allUser
       driver-class-name: oracle.jdbc.OracleDriver
       # 初始化大小，最小，最大
       initialSize: 3
@@ -99,8 +99,8 @@ spring:
       max-request-size: 100MB
 
 # mybatis配置
-mybatis:
-  config-location: classpath:mybatis/mybatis-config.xml
+#mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml
  # mapper-locations: classpath*:mybatis/mapper/**/*Mapper.xml
 
 # 易接平台基础的ejet-comm-web包配置信息

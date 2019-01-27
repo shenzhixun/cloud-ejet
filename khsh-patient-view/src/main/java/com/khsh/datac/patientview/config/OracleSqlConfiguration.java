@@ -34,7 +34,7 @@ public class OracleSqlConfiguration {
         sqlSessionFactoryBean.setDataSource(postgresqlDataSource);
 
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mybatis/mybatis-config.xml"));
+        sqlSessionFactoryBean.setConfigLocation(resolver.getResource("classpath:mybatis/mybatis-config-oracle.xml"));
         sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath:mybatis/mapper/patientview/oracle/*.xml"));
         return sqlSessionFactoryBean.getObject();
     }

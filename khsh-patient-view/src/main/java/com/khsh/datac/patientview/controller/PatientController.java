@@ -6,6 +6,7 @@ import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.core.base.ControllerBase;
 import com.ejet.core.comm.PageBean;
 import com.khsh.datac.patientview.service.impl.PatientServiceImpl;
+import com.khsh.datac.patientview.vo.PatientVO;
 import com.khsh.datac.patientview.vo.PatientVisitReqVO;
 import com.khsh.datac.patientview.vo.PatientVisitVO;
 import org.slf4j.Logger;
@@ -37,19 +38,19 @@ public class PatientController extends ControllerBase{
     private PatientServiceImpl mService;
 
     /**
-     * 获取患者信息及就诊信息
+     * 检索患者
      * @param param
      * @param bindResult
      * @return
      */
     @ResponseBody
-    @RequestMapping(value="/query-visit-by-page")
-    public Result queryByPage(@RequestBody(required=true) Param<PatientVisitReqVO> param, BindingResult bindResult) {
+    @RequestMapping(value="/query-patient-by-page")
+    public Result queryPatientByPage(@RequestBody(required=true) Param<PatientVisitReqVO> param, BindingResult bindResult) {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);
             checkParam(param);
-            PageBean<PatientVisitVO> pageBean = mService.queryPatientVisitInfo(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
+            PageBean<PatientVisitVO> pageBean = mService.queryPatientByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
             rs = new Result(pageBean.getPage(), pageBean.getResult());
         }catch (CoBusinessException e) {
             log.error("", e);
@@ -60,6 +61,58 @@ public class PatientController extends ControllerBase{
         }
         return rs;
     }
+
+    /**
+     *
+     *  获取患者就诊信息
+     *
+     * @param param
+     * @param bindResult
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/query-patient-visit-by-page")
+    public Result queryPatientVisitByPage(@RequestBody(required=true) Param<PatientVisitReqVO> param, BindingResult bindResult) {
+        Result rs = new Result();
+        try{
+            checkBindResult(bindResult);
+            checkParam(param);
+            PageBean<PatientVisitVO> pageBean = mService.queryPatientVisitByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
+            rs = new Result(pageBean.getPage(), pageBean.getResult());
+        }catch (CoBusinessException e) {
+            log.error("", e);
+            rs = new Result(e.getCode(), e);
+        }catch (Exception e) {
+            log.error("", e);
+            rs = new Result(SYS_ERROR, e);
+        }
+        return rs;
+    }
+
+    /**
+     * 检索患者信息
+     * @param model
+     * @param bindResult
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/query-patient-info")
+    public Result queryPatientInfo(@RequestBody(required=true) PatientVisitReqVO model, BindingResult bindResult) {
+        Result rs = new Result();
+        try{
+            checkBindResult(bindResult);
+            PatientVO rsModel = mService.queryPatientInfo(model);
+            rs = new Result(rsModel);
+        }catch (CoBusinessException e) {
+            log.error("", e);
+            rs = new Result(e.getCode(), e);
+        }catch (Exception e) {
+            log.error("", e);
+            rs = new Result(SYS_ERROR, e);
+        }
+        return rs;
+    }
+
 
 
 }

@@ -4,6 +4,7 @@ import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.core.comm.PageBean;
 import com.github.pagehelper.PageHelper;
 import com.khsh.datac.patientview.mapper.oracle.PatientMapper;
+import com.khsh.datac.patientview.vo.PatientVO;
 import com.khsh.datac.patientview.vo.PatientVisitReqVO;
 import com.khsh.datac.patientview.vo.PatientVisitVO;
 import org.slf4j.Logger;
@@ -28,12 +29,53 @@ public class PatientServiceImpl {
     @Autowired
     private PatientMapper mDao;
 
-    public PageBean<PatientVisitVO> queryPatientVisitInfo(PatientVisitReqVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
+
+    /**
+     * 检索患者信息
+     *
+     * @param model
+     * @param pageNum
+     * @param pageSize
+     * @return
+     * @throws CoBusinessException
+     */
+    public PageBean<PatientVisitVO> queryPatientByPage(PatientVisitReqVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
         PageHelper.startPage(pageNum, pageSize);
-        List<PatientVisitVO> list = mDao.queryPatientVisitInfo(model);
+        List<PatientVisitVO> list = mDao.queryPatientByPage(model);
         PageBean<PatientVisitVO> page = new PageBean<>(list);
         return page;
     }
+
+    /**
+     * 查询患者所有就诊信息
+     *
+     * @param model
+     * @param pageNum
+     * @param pageSize
+     * @return
+     * @throws CoBusinessException
+     */
+    public PageBean<PatientVisitVO> queryPatientVisitByPage(PatientVisitReqVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
+        //首先查询关联empi信息
+
+
+        PageHelper.startPage(pageNum, pageSize);
+        List<PatientVisitVO> list = mDao.queryPatientVisitByPage(model);
+        PageBean<PatientVisitVO> page = new PageBean<>(list);
+        return page;
+    }
+
+    /**
+     * 查询患者所有就诊信息
+     *
+     * @param model
+     * @return
+     * @throws CoBusinessException
+     */
+    public PatientVO queryPatientInfo(PatientVisitReqVO model) throws CoBusinessException {
+        return mDao.queryPatientInfo(model);
+    }
+
 
 
 

@@ -1,4 +1,4 @@
-package com.khsh.datac.patientview.mapper.oracle;
+package com.khsh.datac.patientview.mapper.mysql;
 
 import com.ejet.comm.exception.CoBusinessException;
 import com.khsh.datac.patientview.vo.PatientVO;
@@ -18,7 +18,7 @@ import java.util.List;
  * Version: 1.0
  */
 @Mapper
-public interface PatientMapper {
+public interface EmpiMapper {
 
     public List<PatientVisitVO> queryPatientByPage(PatientVisitReqVO req) throws CoBusinessException;
 

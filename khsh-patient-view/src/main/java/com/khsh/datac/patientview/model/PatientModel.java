@@ -1,26 +1,26 @@
-package com.khsh.datac.patientview.vo;
+package com.khsh.datac.patientview.model;
 
-import com.khsh.datac.patientview.model.PatientVisitModel;
+import com.ejet.comm.base.CoBaseVO;
 import lombok.Data;
 
 /**
  * Copyright (C), 2016-2019, 武汉康华数海有限公司
- * FileName: PatientVisitVO
+ * FileName: PatientVisitModel
  * Author:   ShenYijie
- * CreateDate:     2019-01-26 16:29
- * Description: 患者就诊、住院信息
+ * CreateDate:     2019-01-27 14:13
+ * Description:
  * History:
  * Version: 1.0
  */
 @Data
-public class PatientVisitVO extends PatientVisitModel {
+public class PatientModel extends CoBaseVO {
 
     private String empi;
     /** 姓名 */
     private String name;
     //性别
     //@DicData(DicUserConstant.SEX)
-    private String sexName;
+    private String sex;
     /**  出生日期yyyy.MM.dd  */
     private String birthday;
     /**  身份证  */

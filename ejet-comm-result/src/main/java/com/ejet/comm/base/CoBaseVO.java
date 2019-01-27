@@ -13,9 +13,13 @@ import java.io.Serializable;
  */
 public class CoBaseVO implements Serializable {
     /**  修改时间  */
-    private String modifyTime;
+    private String updateTime;
+    /**  创建时间  */
+    private String createTime;
     /**  修改人  */
-    private String modifyUser;
+    private String modifyBy;
+    /**  创建人  */
+    private String createBy;
     /**
      * 扩展排序
      */
@@ -25,20 +29,36 @@ public class CoBaseVO implements Serializable {
      */
     private String extSQL;
 
-    public String getModifyTime() {
-        return modifyTime;
+    public String getUpdateTime() {
+        return updateTime;
     }
 
-    public void setModifyTime(String modifyTime) {
-        this.modifyTime = modifyTime;
+    public void setUpdateTime(String updateTime) {
+        this.updateTime = updateTime;
     }
 
-    public String getModifyUser() {
-        return modifyUser;
+    public String getCreateTime() {
+        return createTime;
     }
 
-    public void setModifyUser(String modifyUser) {
-        this.modifyUser = modifyUser;
+    public void setCreateTime(String createTime) {
+        this.createTime = createTime;
+    }
+
+    public String getModifyBy() {
+        return modifyBy;
+    }
+
+    public void setModifyBy(String modifyBy) {
+        this.modifyBy = modifyBy;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
     }
 
     public String getOrderCond() {

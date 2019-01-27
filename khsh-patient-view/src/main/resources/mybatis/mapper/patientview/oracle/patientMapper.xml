@@ -3,57 +3,92 @@
 <mapper namespace="com.khsh.datac.patientview.mapper.oracle.PatientMapper">
 
 
-    <select id="queryPatientVisitInfo"  parameterType="com.khsh.datac.patientview.vo.PatientVisitReqVO"
+    <select id="queryPatientByPage"  parameterType="com.khsh.datac.patientview.vo.PatientVisitReqVO"
             resultType="com.khsh.datac.patientview.vo.PatientVisitVO">
-
-        select empi,name,sex,birthday,address,visitType,inHospitalTime,outHospitalTime,visitCorp,visitOrg,visitOrgName,diagnosis,hospitalNum from (
-        select distinct p.personid as  empi, p.xm as name,p.xb as sex,p.csrq as birthday, p.gzdwdz as address,
-        '住院' as visitType, to_char(zy.rysj,'yyyymmdd') as inHospitalTime , to_char(zy.cysj,'yyyymmdd') as outHospitalTime ,
-        zy.yljgdm as visitCorp, zy.jzksbm as visitOrg,zy.jzksmc as visitOrgName, zy.zdmc as diagnosis, zy.cisid as hospitalNum
+      select empi,name,sexName,birthday,addrDetail,visitType,inHospitalDate,outHospitalDate,visitCorp,inDeptName,outDeptName,diagName,inHospitalId from (
+        select distinct p.personid as  empi, p.xm as name,p.xb as sexName,p.csrq as birthday, p.gzdwdz as addrDetail,
+        '住院' as visitType, zy.rysj as inHospitalDate , zy.cysj as outHospitalDate ,zy.zzysxm as visitDoctorName,
+        zy.yljgdm as visitCorp, zy.jzksmc as inDeptName, zy.cyksmc as outDeptName, zy.zdmc as diagName, zy.cisid as inHospitalId
         from TB_YL_Patient_Information p
         left join TB_YL_ZY_Medical_Record zy on p.personid = zy.personid
         where zy.rysj is not null
-        <if test = "queryKeywords != null ">
-            and (p.xm like concat('%',#{queryKeywords},'%') or
-            zy.cisid like concat('%',#{queryKeywords},'%'))
+        <if test = "queryKeywords!=null and queryKeywords!=''">
+            and (p.xm like concat(concat('%',#{queryKeywords}),'%') or
+            zy.cisid like concat(concat('%',#{queryKeywords}),'%') )
         </if>
-        <if test = "inHospitalStartTime != null and inHospitalEndTime != null">
+        <if test = "inHospitalStartTime != null and inHospitalStartTime!='' and inHospitalEndTime != null and inHospitalEndTime!=''">
             and zy.rysj between #{inHospitalStartTime} and #{inHospitalEndTime}
         </if>
-        <!--<if test = "depts != null and depts.size() != 0">
-            and zy.jzksbm IN
-            <foreach collection="depts" index="index" item="org" open="(" separator="," close=")">
-                #{org}
-            </foreach>
-        </if>-->
-        union
-        select distinct p.personid as  empi, p.xm as name ,p.xb as sex,p.csrq as birthday, p.gzdwdz as address,
-        '门诊' as visitType, mz.jzksrq as inHospitalTime,'',
-        mz.yljgdm as visitCorp, mz.jzksbm as visitOrg,mz.jzksmc as visitOrgName, mz.mzzdmc as diagnosis, mz.jzlsh as hospitalNum
+        UNION ALL
+        select distinct p.personid as  empi, p.xm as name ,p.xb as sexName,p.csrq as birthday, p.gzdwdz as addrDetail,
+        '门诊' as visitType, mz.jzksrq as inHospitalDate,'', mz.zzysxm as visitDoctorName,
+        mz.yljgdm as visitCorp, mz.jzksmc as inDeptName,mz.jzksmc as outDeptName, mz.mzzdmc as diagName, mz.jzlsh as inHospitalId
         from TB_YL_Patient_Information p
         left join TB_YL_MZ_Medical_Record mz on p.personid = mz.personid
         where mz.jzksrq is not null
-        <if test = "queryKeywords != null ">
-            and (p.xm like concat('%',#{queryKeywords},'%') or
-            mz.jzlsh like concat('%',#{queryKeywords},'%'))
+        <if test = "queryKeywords != null and queryKeywords!='' ">
+            and (p.xm like concat(concat('%',#{queryKeywords}),'%') or
+            mz.jzlsh like concat(concat('%',#{queryKeywords}),'%') )
         </if>
-        <if test = "inHospitalStartTime != null and inHospitalEndTime != null">
-            and to_date(mz.jzksrq, 'YYYYMMDD') between #{inHospitalStartTime} and #{inHospitalEndTime}
+        <if test = "inHospitalStartTime != null and inHospitalStartTime!='' and inHospitalEndTime != null and inHospitalEndTime!=''">
+            and mz.jzksrq between #{inHospitalStartTime} and #{inHospitalEndTime}
         </if>
-       <!-- <if test = "depts != null and depts.size() != 0">
+        <if test = "depts != null and depts.size() != 0">
             and mz.jzksbm IN
             <foreach collection="depts" index="index" item="org" open="(" separator="," close=")">
                 #{org}
             </foreach>
-        </if>-->
-        ) foo
-        <if test = "visitTypes != null and visitTypes.size() != 0">
-        where visitType in
-        <foreach collection="visitTypes" index="index" item="visitType" open="(" separator="," close=")">
-            #{visitType}
-        </foreach>
         </if>
-        order by empi
+        ORDER BY name
+        ) FOO
+    </select>
+
+
+    <select id="queryPatientVisitByPage"  parameterType="com.khsh.datac.patientview.vo.PatientVisitReqVO"
+            resultType="com.khsh.datac.patientview.vo.PatientVisitVO">
+        select empi,visitType,inHospitalDate,outHospitalDate,visitCorp,inDeptName,outDeptName,diagName,inHospitalId,visitDoctorName from (
+        select distinct p.personid as  empi,
+        '住院' as visitType, zy.rysj as inHospitalDate , zy.cysj as outHospitalDate , zy.zzysxm as visitDoctorName,
+        zy.yljgdm as visitCorp, zy.jzksmc as inDeptName, zy.cyksmc as outDeptName, zy.zdmc as diagName, zy.cisid as inHospitalId
+        from TB_YL_Patient_Information p
+        left join TB_YL_ZY_Medical_Record zy on p.personid = zy.personid
+        where zy.rysj is not null
+        <if test = "epmiRel != null and epmiRel.size() != 0">
+            AND zy.personid IN
+            <foreach collection="epmiRel" index="index" item="empi" open="(" separator="," close=")">
+                #{empi}
+            </foreach>
+        </if>
+        <if test = "inHospitalStartTime != null and inHospitalStartTime!='' and inHospitalEndTime != null and inHospitalEndTime!=''">
+            and zy.rysj between #{inHospitalStartTime} and #{inHospitalEndTime}
+        </if>
+        UNION ALL
+        select distinct p.personid as  empi,
+        '门诊' as visitType, mz.jzksrq as inHospitalDate,'', mz.zzysxm as visitDoctorName,
+        mz.yljgdm as visitCorp, mz.jzksmc as inDeptName,mz.jzksmc as outDeptName, mz.mzzdmc as diagName, mz.jzlsh as inHospitalId
+        from TB_YL_Patient_Information p
+        left join TB_YL_MZ_Medical_Record mz on p.personid = mz.personid
+        where mz.jzksrq is not null
+        <if test = "epmiRel != null and epmiRel.size() != 0">
+            AND mz.personid IN
+            <foreach collection="epmiRel" index="index" item="empi" open="(" separator="," close=")">
+                #{empi}
+            </foreach>
+        </if>
+        <if test = "inHospitalStartTime != null and inHospitalStartTime!='' and inHospitalEndTime != null and inHospitalEndTime!=''">
+            and mz.jzksrq between #{inHospitalStartTime} and #{inHospitalEndTime}
+        </if>
+        ) FOO
+        ORDER BY inHospitalDate desc
+    </select>
+
+    <select id="queryPatientInfo"  parameterType="com.khsh.datac.patientview.vo.PatientVisitReqVO"
+            resultType="com.khsh.datac.patientview.vo.PatientVisitVO">
+        /*select empi,name,sex,birthday,address,visitType,inHospitalTime,outHospitalTime,visitCorp,visitOrg,visitOrgName,diagnosis,hospitalNum from (
+        select distinct p.personid as  empi, p.xm as name,p.xb as sex,p.csrq as birthday, p.gzdwdz as address,
+        '住院' as visitType, to_char(zy.rysj,'yyyymmdd') as inHospitalTime , to_char(zy.cysj,'yyyymmdd') as outHospitalTime ,
+        zy.yljgdm as visitCorp, zy.jzksbm as visitOrg,zy.jzksmc as visitOrgName, zy.zdmc as diagnosis, zy.cisid as hospitalNum
+        from TB_YL_Patient_Information p*/
     </select>
 
 
