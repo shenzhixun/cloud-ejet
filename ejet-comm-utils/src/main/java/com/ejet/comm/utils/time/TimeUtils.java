@@ -527,12 +527,15 @@ public class TimeUtils {
 	 * 格式化yyyy-MM-dd日期
 	 *
 	 */
-	public static String formatDate3(String srcTimeSDF, String destSDF, String date) {
+	public static String formatDate3(String srcSDF, String destSDF, String dateStr) {
 		String r = destSDF;
 		try {
-			SimpleDateFormat sdf = new SimpleDateFormat(srcTimeSDF);
-			SimpleDateFormat sdf2 = new SimpleDateFormat(destSDF);
-			r = sdf2.format(sdf.parse(date));
+		    if(srcSDF==null || destSDF==null || dateStr==null || srcSDF.length()!=dateStr.length()) {
+		        return dateStr;
+            }
+			SimpleDateFormat src = new SimpleDateFormat(srcSDF);
+			SimpleDateFormat dest = new SimpleDateFormat(destSDF);
+			r = dest.format(src.parse(dateStr));
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
@@ -547,7 +550,9 @@ public class TimeUtils {
 		try {
 			day = day.replace(".", "-");
 			day = day.replace("/", "-");
-			return yyyy_MM_dd.format(yyyy_MM_dd.parse(day));
+            SimpleDateFormat sdf = new SimpleDateFormat(destSDF);
+            Date date = yyyy_MM_dd.parse(day);
+			return sdf.format(date);
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}

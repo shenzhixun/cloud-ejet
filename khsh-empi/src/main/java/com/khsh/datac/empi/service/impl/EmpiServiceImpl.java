@@ -64,6 +64,10 @@ public class EmpiServiceImpl implements IEmpiService {
         if(StringUtils.isBlank(model.getBirthday())) {//出生年月不能为空
             throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "出生年月不能为空");
         }
+        //格式化出生年月
+        model.setExt(model.getBirthday());
+        model.setBirthday(TimeUtils.formatDate3("yyyy/MM/dd HH:mm:ss.000000000", "yyyy/MM/dd HH:mm:ss", model.getBirthday()));
+
         if(model.getSex()==null) {//性别不能为空
             throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "性别不能为空");
         }
@@ -392,5 +396,34 @@ public class EmpiServiceImpl implements IEmpiService {
         }
         return queryEmpiByPatientId(model);
     }
+
+
+    /**
+     * 合并empi
+     */
+    public void mergeEmpi(EmpiMergeVO model) throws CoBusinessException {
+
+        if(model.getMergeList()==null || model.getMergeList().size()<2) {
+            return;
+        }
+        //执行合并操作
+
+
+
+
+    }
+
+    /**
+     * 拆分empi
+     */
+    public void divideEmpi(EmpiMergeVO model) throws CoBusinessException {
+        if(model.getMergeList()==null || model.getMergeList().size()<2) {
+            return;
+        }
+
+
+    }
+
+
 
 }

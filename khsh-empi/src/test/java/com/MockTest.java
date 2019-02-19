@@ -4,10 +4,7 @@ package com;
 import com.ejet.comm.utils.time.TimeUtils;
 import com.google.gson.Gson;
 import com.khsh.datac.empi.comm.CardTypeEnum;
-import com.khsh.datac.empi.utils.IDCardUtils;
 import com.khsh.datac.empi.vo.EmpiVO;
-
-import java.util.Date;
 
 /**
  * Copyright (C), 2016-2018, 武汉康华数海有限公司
@@ -80,16 +77,19 @@ public class MockTest {
         //String idCard = "430426198303216696";
         //System.out.println(IDCardUtils.validateIDCard(idCard, "/"));
         //String time = "2018/11/14 23:02:00.000000000";
-        String time = "1968/01/10 18:21:30.000000000";
-        Date birth = TimeUtils.format2Date(time, "yyyy/MM/dd");
-        int age = IDCardUtils.getAgeByBirth(birth);
-        System.out.println(age);
+        String time = "1990/07/20 18:21:30.000000000";
+        //Date birth = TimeUtils.formatDate3("yyyy/MM/dd HH:mm:ss.000000000", "yyyy/MM/dd HH:mm:ss", time);
+        //int age = IDCardUtils.getAgeByBirth(birth);
+        System.out.println(TimeUtils.formatDate3("yyyy/MM/dd HH:mm:ss.000000000", "yyyy/MM/dd HH:mm:ss", time));
+        System.out.println(TimeUtils.formatDate3("yyyy/MM/dd HH:mm:ss.000000000", "yyyy/MM/dd HH:mm:ss", "1990/07/20 18:21:30.00"));
 
         //System.out.println(IDCardUtils.validateIDCard(idCard, "-")[0] + "|" + IDCardUtils.validateIDCard(idCard,"-")[1]);
 
         //mock();
 
         //testJson();
+
+
 
 
     }

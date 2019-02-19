@@ -6,6 +6,7 @@ import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.core.base.ControllerBase;
 import com.ejet.core.comm.PageBean;
 import com.khsh.datac.patientview.service.impl.PatientServiceImpl;
+import com.khsh.datac.patientview.vo.OMOrdersDetailVO;
 import com.khsh.datac.patientview.vo.PatientVO;
 import com.khsh.datac.patientview.vo.PatientVisitReqVO;
 import com.khsh.datac.patientview.vo.PatientVisitVO;
@@ -103,6 +104,30 @@ public class PatientController extends ControllerBase{
             checkBindResult(bindResult);
             PatientVO rsModel = mService.queryPatientInfo(model);
             rs = new Result(rsModel);
+        }catch (CoBusinessException e) {
+            log.error("", e);
+            rs = new Result(e.getCode(), e);
+        }catch (Exception e) {
+            log.error("", e);
+            rs = new Result(SYS_ERROR, e);
+        }
+        return rs;
+    }
+
+
+    /**
+     * 查询患者医嘱信息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value="/omorders-by-page/")
+    public Result queryPatientOmOrdersByPage(@RequestBody(required=true) Param<OMOrdersDetailVO> param, BindingResult bindResult) {
+        Result rs = new Result();
+        try{
+            checkBindResult(bindResult);
+            checkParam(param);
+            PageBean<OMOrdersDetailVO> pageBean = mService.queryPatientOmOrdersByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
+            rs = new Result(pageBean.getPage(), pageBean.getResult());
         }catch (CoBusinessException e) {
             log.error("", e);
             rs = new Result(e.getCode(), e);

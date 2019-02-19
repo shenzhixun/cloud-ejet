@@ -1,6 +1,8 @@
 import com.ejet.comm.Page;
 import com.ejet.comm.Param;
+import com.ejet.comm.Result;
 import com.google.gson.Gson;
+import com.khsh.datac.patientview.model.OMOrdersDetailModel;
 import com.khsh.datac.patientview.vo.PatientVisitReqVO;
 import com.khsh.datac.patientview.vo.PatientVisitVO;
 
@@ -73,6 +75,11 @@ public class TestJson {
     }
 
 
+
+
+
+
+
     public static void main(String[] args) {
 
         Param<PatientVisitReqVO> param = new Param<>();
@@ -87,13 +94,55 @@ public class TestJson {
         Page page = new Page();
         param.setData(req);
         param.setPage(page);
+        //System.out.println(new Gson().toJson(param));
+
+
+        //System.out.println(new Gson().toJson(queryPatientByPage()));
+
+        queryOrders();
+    }
+
+
+    public static List<OMOrdersDetailModel> queryOrders() {
+
+        OMOrdersDetailModel req = new OMOrdersDetailModel();
+        req.setInHospitalId("10223323");
+        req.setVisitType("住院");
+        req.setEmpiID("0000000000");
+        req.setOrdersCategCode("长期医嘱");
+
+        Param<OMOrdersDetailModel> param = new Param<>();
+        param.setData(req);
+        Page page = new Page();
+        param.setPage(page);
+
         System.out.println(new Gson().toJson(param));
 
 
-        System.out.println(new Gson().toJson(queryPatientByPage()));
+        List<OMOrdersDetailModel> list = new ArrayList<>();
+        OMOrdersDetailModel vo = new OMOrdersDetailModel();
+        vo.setEmpiID("0000000000");
+        vo.setVisitType("住院");
+        vo.setOrdersCategCode("长期医嘱");
+        vo.setOrdersContent("医嘱内容：112223223");
+        vo.setOrdersStopDrName("张三");
+        vo.setOrdersOpenDrName("李四");
+        vo.setOrdersBeginDate("2018-03-01 12:01:00");
+        vo.setOrdersExecutStatusCode("确认");//医嘱执行状态代码	varchar(20)	Y	确认、作废、执行、停止
+        vo.setOrdersStopDate("2018-03-02 12:01:00");
 
 
+        list.add(vo);
+
+        Result rs = new Result();
+        rs.setPage(page);
+        rs.setData(list);
+        System.out.println(new Gson().toJson(list));
+        System.out.println(new Gson().toJson(rs));
+        return list;
     }
+
+
 
 
 

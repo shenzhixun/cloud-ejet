@@ -62,9 +62,9 @@ spring:
       useGlobalDataSourceStat: true
 
     oracle:
-      url: jdbc:oracle:thin:@192.168.20.41:1521:orcl
-      username: allUser
-      password: allUser
+      url: jdbc:oracle:thin:@192.168.0.187:1521:test
+      username: test
+      password: test
       driver-class-name: oracle.jdbc.OracleDriver
       # 初始化大小，最小，最大
       initialSize: 3

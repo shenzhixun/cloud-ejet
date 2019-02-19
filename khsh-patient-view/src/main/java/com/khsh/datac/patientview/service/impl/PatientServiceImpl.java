@@ -4,6 +4,7 @@ import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.core.comm.PageBean;
 import com.github.pagehelper.PageHelper;
 import com.khsh.datac.patientview.mapper.oracle.PatientMapper;
+import com.khsh.datac.patientview.vo.OMOrdersDetailVO;
 import com.khsh.datac.patientview.vo.PatientVO;
 import com.khsh.datac.patientview.vo.PatientVisitReqVO;
 import com.khsh.datac.patientview.vo.PatientVisitVO;
@@ -74,6 +75,15 @@ public class PatientServiceImpl {
      */
     public PatientVO queryPatientInfo(PatientVisitReqVO model) throws CoBusinessException {
         return mDao.queryPatientInfo(model);
+    }
+    /**
+     * 查询患者医嘱信息
+     */
+    public PageBean<OMOrdersDetailVO>  queryPatientOmOrdersByPage(OMOrdersDetailVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
+        PageHelper.startPage(pageNum, pageSize);
+        List<OMOrdersDetailVO> list = mDao.queryPatientOmOrdersByPage(model);
+        PageBean<OMOrdersDetailVO> page = new PageBean<>(list);
+        return page;
     }
 
 

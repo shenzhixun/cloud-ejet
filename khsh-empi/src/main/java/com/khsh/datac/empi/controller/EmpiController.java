@@ -6,6 +6,7 @@ import com.ejet.comm.exception.ExceptionCode;
 import com.ejet.comm.utils.StringUtils;
 import com.ejet.core.base.ControllerBase;
 import com.khsh.datac.empi.service.impl.EmpiServiceImpl;
+import com.khsh.datac.empi.vo.EmpiMergeVO;
 import com.khsh.datac.empi.vo.EmpiVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -98,26 +99,7 @@ public class EmpiController extends ControllerBase {
         return rs;
     }
 
-    /**
-     * 获取empi号码(相似的信息)
-     */
-    @ResponseBody
-    @RequestMapping(value="/get-empi-similar")
-    public Result getSimilarEmpi(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
-        Result rs = new Result();
-        try{
-            checkBindResult(bindResult);
-            List<EmpiVO> result = mService.getEmpiSimilar(param);
-            rs = new Result(result);
-        }catch (CoBusinessException e) {
-            log.error("", e);
-            rs = new Result(e.getCode(), e);
-        }catch (Exception e) {
-            log.error("", e);
-            rs = new Result(SYS_ERROR, e);
-        }
-        return rs;
-    }
+
 
     /**
      * 获取根据patient更新empi等注册信息（根据patientId）
@@ -140,10 +122,65 @@ public class EmpiController extends ControllerBase {
         return rs;
     }
 
+    /**
+     * 获取empi号码(相似的信息)
+     */
+    @ResponseBody
+    @RequestMapping(value="/get-empi-similar")
+    public Result getSimilarEmpi(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
+        Result rs = new Result();
+        try{
+            checkBindResult(bindResult);
+            List<EmpiVO> result = mService.getEmpiSimilar(param);
+            rs = new Result(result);
+        }catch (CoBusinessException e) {
+            log.error("", e);
+            rs = new Result(e.getCode(), e);
+        }catch (Exception e) {
+            log.error("", e);
+            rs = new Result(SYS_ERROR, e);
+        }
+        return rs;
+    }
+    /**
+     * 合并empi
+     */
+    @ResponseBody
+    @RequestMapping(value="/merge-empi")
+    public Result mergeEmpi(@RequestBody(required=true) EmpiMergeVO param, BindingResult bindResult) {
+        Result rs = new Result();
+        try{
+            checkBindResult(bindResult);
+            mService.mergeEmpi(param);
+        }catch (CoBusinessException e) {
+            log.error("", e);
+            rs = new Result(e.getCode(), e);
+        }catch (Exception e) {
+            log.error("", e);
+            rs = new Result(SYS_ERROR, e);
+        }
+        return rs;
+    }
 
 
-
-
-
+    /**
+     * 拆分empi
+     */
+    @ResponseBody
+    @RequestMapping(value="/divide-empi")
+    public Result divideEmpi(@RequestBody(required=true) EmpiMergeVO param, BindingResult bindResult) {
+        Result rs = new Result();
+        try{
+            checkBindResult(bindResult);
+            mService.divideEmpi(param);
+        }catch (CoBusinessException e) {
+            log.error("", e);
+            rs = new Result(e.getCode(), e);
+        }catch (Exception e) {
+            log.error("", e);
+            rs = new Result(SYS_ERROR, e);
+        }
+        return rs;
+    }
 
 }

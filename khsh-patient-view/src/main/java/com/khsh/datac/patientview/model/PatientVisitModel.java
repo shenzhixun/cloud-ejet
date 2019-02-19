@@ -20,6 +20,8 @@ public class PatientVisitModel extends CoBaseVO {
     private String visitCorpName;
     /**  就诊类型  */
     private String visitType;
+    /**  就诊类型标识  */
+    private String visitTypeCode;
     /** 就诊时间or入院时间  */
     private String inHospitalDate;
     /**  门诊号or住院号 */
