@@ -1,0 +1,148 @@
+############################################################
+#
+# Server 服务端相关配置
+#
+############################################################
+server:
+  # 配置api端口号
+  port: 8099
+  servlet:
+    context-path: /pview
+    session:
+      cookie:
+        max-age: 60000s
+
+      # session最大超时时间(分钟)，默认为30分钟
+      timeout: 60m
+
+  tomcat:
+    # accept-count:
+    max-connections: 500
+    # tomcat最大线程数, 默认为200
+    max-threads: 1000
+    basedir:
+
+management:
+  security:
+    #是否启用安全
+    enabled: false
+  server:
+    port: 8088
+    servlet:
+      context-path: /monitor
+endpoints:
+  shutdown:
+    #开启shutdown端点
+    enabled: true
+
+spring:
+  session:
+    ## store-type redis     -----redis缓存session，
+    #  store-type: none     -----表示不用缓存sesion数据信息
+    store-type: none
+  #数据源配置
+  datasource:
+    mysql:
+      url: jdbc:mysql://192.168.20.41/bi_db?useSSL=false&serverTimezone=UTC
+      username: root
+      password: 1234567890
+      driver-class-name: com.mysql.jdbc.Driver
+      # 初始化大小，最小，最大
+      initialSize: 3
+      minIdle: 2
+      maxActive: 5
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+      # 配置一个连接在池中最小生存的时间，单位是毫秒
+      minEvictableIdleTimeMillis: 1800000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      # 打开PSCache，并且指定每个连接上PSCache的大小
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 100
+      # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall,slf4j
+      # 通过connectProperties属性来打开mergeSql功能；慢SQL记录
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      # 合并多个DruidDataSource的监控数据
+      useGlobalDataSourceStat: true
+
+    oracle:
+      url: jdbc:oracle:thin:@192.168.0.187:1521:test
+      username: test
+      password: test
+      driver-class-name: oracle.jdbc.OracleDriver
+      # 初始化大小，最小，最大
+      initialSize: 3
+      minIdle: 2
+      maxActive: 5
+      # 配置获取连接等待超时的时间
+      maxWait: 60000
+      # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
+      timeBetweenEvictionRunsMillis: 60000
+
+
+  ### ===========================   redis   ===============================
+  redis:
+    cluster:
+      # （普通集群，不使用则不用开启）在群集中执行命令时要遵循的最大重定向数目。
+      #max-redirects:
+      #nodes: 192.168.0.127:7000,192.168.0.127:7001,192.168.0.127:7002
+      nodes: 127.0.0.1:7000,127.0.0.1:7001,127.0.0.1:7002
+
+    password:
+    lettuce:
+      pool:
+        max-idle: 8
+        max-active: 8
+        min-idle: 0
+        max-wait: -1ms
+
+  ## 上传文件大小设置
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+
+# mybatis配置
+#mybatis:
+#  config-location: classpath:mybatis/mybatis-config.xml
+ # mapper-locations: classpath*:mybatis/mapper/**/*Mapper.xml
+
+# 易接平台基础的ejet-comm-web包配置信息
+### ===========================   ejet-comm-web   ===============================
+ejet-comm-web:
+  # 开启token认证，true：采用token认证
+  openTokenAuth: true
+  # 开启session过滤器  true：session认证， false：忽略session认证
+  openSessionAuth: true
+  # 认证忽略的拦截url地址信息,用‘,’分割
+  authIgnoreURLs: /login,/logout,.*/comm-web/version
+
+  ### ===========================  上传文件路径设置   ===============================
+  # 存储物理路径
+  storagePhysicalPath: C:\\upload\\
+  ## 访问相对路径（外部程序）
+  relativeURL: /
+  # 是否分类存储(image: 图片 video: 视频 audio: 音频 html: 网页 file:其他所有)
+  storageType: false
+  #  存储按天日期
+  storageByDate: false
+  # 是否更改文件名称(适用唯一)
+  changeFilename: true
+
+
+# 用户登录模块
+### ===========================   user-info   ===============================
+bss-user-info:
+  authTokenKey: Authorization
+  # token 超时时间
+  authTokenTimeout: 18000
+  # 单账号多用户可登录
+  authTokenSingle: false
+  # token 忽略地址
+  authTokenIgnoreURL: /sys-account/login,/sys-account/logout

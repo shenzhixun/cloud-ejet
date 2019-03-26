@@ -7,30 +7,40 @@ import lombok.Data;
 public class PixEmpiHisRModel extends CoBaseVO {
 
 	/**    */
- 	private Long id;
+	private java.lang.Long id;
 	/**  患者empi  */
- 	private String empi;
+	private java.lang.String empi;
 	/**  注册机构id  */
- 	private String regCorpId;
+	private java.lang.String regCorpId;
 	/**  患者id  */
- 	private String patientId;
+	private java.lang.String patientId;
+	/**    */
+	private java.lang.String visitType;
+	/**    */
+	private java.lang.String visitTypeCode;
 	/**  患者住院id  */
- 	private String inpatientId;
+	private java.lang.String inpatientId;
 	/**  住院号  */
- 	private String inHospitalId;
+	private java.lang.String inHospitalId;
 	/**  住院日期  */
- 	private String inHospitalDate;
+	private java.lang.String inHospitalDate;
 	/**  床位号  */
- 	private String bedId;
+	private java.lang.String bedId;
 	/**  入院科室  */
- 	private String inDeptName;
+	private java.lang.String inDeptName;
 	/**  转出科室  */
- 	private String outDeptName;
+	private java.lang.String outDeptName;
 	/**  状态标识 1：正常 0：禁用  */
- 	private Integer status;
+	private java.lang.Integer status;
 	/**  备注  */
- 	private String remark;
+	private java.lang.String remark;
+	/**  创建人  */
+	private java.lang.String createBy;
+	/**  创建时间  */
+	private java.lang.String createTime;
+	/**  修改时间  */
+	private java.lang.String updateTime;
 	/**  扩展  */
- 	private String ext;
+	private java.lang.String ext;
 
 }

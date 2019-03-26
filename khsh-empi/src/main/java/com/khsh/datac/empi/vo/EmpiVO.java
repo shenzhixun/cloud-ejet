@@ -107,6 +107,11 @@ public class EmpiVO extends PixEmpiRegisterVO implements Serializable {
     /**  转出科室  */
     private String outDeptName;
 
+    /** 就诊类型   */
+    private java.lang.String visitType;
+    /** 就诊类型标志   */
+    private java.lang.String visitTypeCode;
+
     //======== 获取接口渠道标识channelId
     /**  渠道id  */
     private String channelId;
