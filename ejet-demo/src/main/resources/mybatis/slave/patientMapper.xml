@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ejet.mapper.slave.SlaverPatientMapper">
+
+    <select id="queryPatientByPage"  parameterType="com.ejet.model.PatientVisitModel"
+            resultType="com.ejet.model.PatientVisitModel">
+      select empi, username as name FROM pix_empi
+      where 1=1
+      <if test = "empi != null and empi != ''">
+        AND empi=#{empi}
+      </if>
+
+    </select>
+
+
+</mapper>
