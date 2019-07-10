@@ -245,7 +245,7 @@ CREATE TABLE `pix_empi_his_r` (
   `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
   `reg_corp_id`         varchar(200)      DEFAULT NULL COMMENT  '注册机构id',
   `patient_id`          varchar(100)      NOT NULL COMMENT  '患者id',
-  `visit_type`          varchar(100)      NOT NULL COMMENT  '就诊类型',
+  `visit_type`          tinyint(2)        NOT NULL COMMENT  '就诊类型 1：门诊 2：住院',
   `visit_type_code`     varchar(100)      DEFAULT NULL COMMENT  '就诊类型标志',
   `inpatient_id`        varchar(100)      NOT NULL COMMENT  '患者住院id',
   `in_hospital_id`      varchar(100)      DEFAULT NULL COMMENT  '住院号',

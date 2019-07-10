@@ -6,9 +6,7 @@ import com.ejet.comm.Page;
 import com.ejet.comm.Param;
 import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.comm.exception.ExceptionCode;
-import com.ejet.core.global.CoGlobal;
 import com.google.gson.Gson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,8 +33,8 @@ public abstract class ControllerBase {
      */
 	private final Integer DEFAULT_PAGE_SIZE = 20;
 
-	@Autowired
-    CoGlobal global;
+	//@Autowired
+    //CoGlobal global;
     /**
      * 获取客户端IP地址
      *

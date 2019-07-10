@@ -26,6 +26,10 @@ public class CoGlobal {
      */
     private boolean openSessionAuth;
     /**
+     * 认证超时时间s
+     */
+    private int authTimeout;
+    /**
      * 忽略的url地址信息
      */
     private List<String> authIgnoreURLs;
@@ -52,5 +56,13 @@ public class CoGlobal {
 
     public void setAuthIgnoreURLs(List<String> authIgnoreURLs) {
         this.authIgnoreURLs = authIgnoreURLs;
+    }
+
+    public int getAuthTimeout() {
+        return authTimeout;
+    }
+
+    public void setAuthTimeout(int authTimeout) {
+        this.authTimeout = authTimeout;
     }
 }

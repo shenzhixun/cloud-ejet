@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.khsh.datacent.patientview.mapper.slave.PatientMapper">
+
+
+    <!-- to_char(zy.rysj,'yyyymmdd') as inHospitalTime , to_char(zy.cysj,'yyyymmdd') -->
+    <select id="queryPatientVisitByPage"  parameterType="com.khsh.datacent.patientview.vo.PatientVisitReqVO"
+            resultType="com.khsh.datacent.patientview.vo.PatientVisitVO">
+
+        select empi,name,sex,birthday,address,visitType,inHospitalTime,outHospitalTime,visitCorp,visitOrg,visitOrgName,diagnosis,hospitalNum from (
+        select distinct p.personid as  empi, p.xm as name,p.xb as sex,p.csrq as birthday, p.gzdwdz as address,
+        '2' as visitType, zy.rysj as inHospitalTime, zy.cysj as outHospitalTime,
+        zy.yljgdm as visitCorp, zy.jzksbm as visitOrg,zy.jzksmc as visitOrgName, zy.zdmc as diagnosis, zy.cisid as hospitalNum
+        from TB_YL_Patient_Information p
+        left join TB_YL_ZY_Medical_Record zy on p.personid = zy.personid
+        where zy.rysj is not null
+        <if test = "queryKeywords != null ">
+            and (p.xm like concat(concat('%',#{queryKeywords}),'%') or
+            zy.cisid like concat(concat('%',#{queryKeywords}),'%'))
+        </if>
+        <if test = "inHospitalStartTime != null and inHospitalStartTime!='' and inHospitalEndTime != null and inHospitalEndTime!=''">
+            and zy.rysj between #{inHospitalStartTime} and #{inHospitalEndTime}
+        </if>
+        <if test = "depts != null and depts.size() != 0">
+            and zy.jzksbm IN
+            <foreach collection="depts" index="index" item="dept" open="(" separator="," close=")">
+                #{dept}
+            </foreach>
+        </if>
+        union all
+        select distinct p.personid as  empi, p.xm as name ,p.xb as sex,p.csrq as birthday, p.gzdwdz as address,
+        '1' as visitType, mz.jzksrq as inHospitalTime,'' as outHospitalTime ,
+        mz.yljgdm as visitCorp, mz.jzksbm as visitOrg,mz.jzksmc as visitOrgName, mz.mzzdmc as diagnosis, mz.jzlsh as hospitalNum
+        from TB_YL_Patient_Information p
+        left join TB_YL_MZ_Medical_Record mz on p.personid = mz.personid
+        where mz.jzksrq is not null
+        <if test = "queryKeywords != null ">
+            and (p.xm like concat(concat('%',#{queryKeywords}),'%') or
+            mz.jzlsh like concat(concat('%',#{queryKeywords}),'%'))
+        </if>
+        <if test = "inHospitalStartTime != null and inHospitalStartTime!='' and inHospitalEndTime != null and inHospitalEndTime!=''">
+            and to_date(mz.jzksrq, 'YYYYMMDD') between #{inHospitalStartTime} and #{inHospitalEndTime}
+        </if>
+        <if test = "depts != null and depts.size() != 0">
+            and mz.jzksbm IN
+            <foreach collection="depts" index="index" item="dept" open="(" separator="," close=")">
+                #{dept}
+            </foreach>
+        </if>
+        ) foo
+        <if test = "visitTypes != null and visitTypes.size() != 0">
+        where visitType in
+        <foreach collection="visitTypes" index="index" item="visitType" open="(" separator="," close=")">
+            #{visitType}
+        </foreach>
+        </if>
+        order by empi
+    </select>
+
+
+</mapper>

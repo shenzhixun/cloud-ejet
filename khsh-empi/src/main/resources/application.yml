@@ -1,5 +1,5 @@
 server:
-  port: 8099
+  port: 8199
   servlet:
     context-path: /empi
     session:
@@ -36,10 +36,10 @@ spring:
     url: jdbc:mysql://192.168.20.41:3306/empi?useSSL=false&serverTimezone=UTC
     username: root
     password: 1234567890
-#    url: jdbc:mysql://127.0.0.1:3306/empi?useSSL=false&serverTimezone=UTC
+#    url: jdbc:master://127.0.0.1:3306/empi?useSSL=false&serverTimezone=UTC
 #    username: root
 #    password: 123456
-    #driver-class-name: com.mysql.cj.jdbc.Driver
+    #driver-class-name: com.master.cj.jdbc.Driver
     driver-class-name: com.mysql.jdbc.Driver
     # 下面为连接池的补充设置，应用到上面所有数据源中
     # 初始化大小，最小，最大
@@ -98,9 +98,9 @@ mybatis:
 ### ===========================   ejet-comm-web   ===============================
 ejet-comm-web:
   # 开启token认证，true：采用token认证
-  openTokenAuth: true
+  openTokenAuth: false
   # 开启session过滤器  true：session认证， false：忽略session认证
-  openSessionAuth: true
+  openSessionAuth: false
   # 认证忽略的拦截url地址信息,用‘,’分割
   authIgnoreURLs: /login,/logout,.*/comm-web/version
 

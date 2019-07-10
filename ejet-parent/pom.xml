@@ -6,12 +6,14 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.ejet</groupId>
     <artifactId>ejet-parent</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>2.0.0</version>
 
     <packaging>pom</packaging>
 
     <!-- 版本等信息 -->
     <properties>
+        <ejet-module.version>2.0.0</ejet-module.version>
+
         <gson.version>2.8.2</gson.version>
         <fastjson-lib.version>1.2.47</fastjson-lib.version>
         <netsfjson-lib.version>2.4</netsfjson-lib.version>
@@ -23,8 +25,19 @@
         <druid.version>1.1.10</druid.version>
         <mysql.version>5.1.4</mysql.version>
         <oracle.version>10.2.0.2.0</oracle.version>
+        <pinyin.version>2.5.0</pinyin.version>
+
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <skipTests>true</skipTests>
+
+
+        <maven-compiler-plugin-version>3.8.0</maven-compiler-plugin-version>
+        <maven-jar-plugin-version>3.1.0</maven-jar-plugin-version>
+        <maven-source-plugin-version>3.0.1</maven-source-plugin-version>
+        <maven-assembly-plugin-version>3.1.0</maven-assembly-plugin-version>
+        <maven-dependency-plugin-version>3.1.0</maven-dependency-plugin-version>
+        <maven-resources-plugin-version>3.1.0</maven-resources-plugin-version>
 
     </properties>
 
@@ -42,8 +55,8 @@
         <module>../ejet-comm-web</module>
         <module>../ejet-comm-web-db</module>
         <module>../khsh-empi</module>
-        <module>../khsh-patient-view</module>
         <module>../ejet-dynamic-db</module>
+        <module>../ejet-comm-web-uploadfile</module>
     </modules>
 
     <dependencies>
@@ -121,7 +134,7 @@
 
             <!--Apache Commons -->
 
-            <!--mysql -->
+            <!--master -->
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>

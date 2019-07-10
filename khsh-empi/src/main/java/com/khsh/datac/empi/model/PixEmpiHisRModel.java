@@ -15,7 +15,7 @@ public class PixEmpiHisRModel extends CoBaseVO {
 	/**  患者id  */
 	private java.lang.String patientId;
 	/**    */
-	private java.lang.String visitType;
+	private java.lang.Integer visitType;
 	/**    */
 	private java.lang.String visitTypeCode;
 	/**  患者住院id  */

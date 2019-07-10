@@ -239,6 +239,7 @@ public class EmpiServiceImpl implements IEmpiService {
                     model.setEmpiFlag(Constant.EMPI_FLAG_ENABLE);
                 }
             } catch (CoBusinessException e) {
+
             }
         }
         model.setAge(IDCardUtils.getAgeByBirth(TimeUtils.format2Date(model.getBirthday(), "yyyy/MM/dd")));
@@ -316,18 +317,19 @@ public class EmpiServiceImpl implements IEmpiService {
     public EmpiVO getEmpi(EmpiVO model) throws CoBusinessException {
         //检查必须输入项
         checkRegInfo(model);
+        EmpiVO empi = null;
 
-        //根据身份证、就诊卡、护照（ 唯一标识 ）
-        EmpiVO empi = queryEmpiByCard(model);
-        if(empi!=null) {
-            return createEmpiHisRelation(empi, model);
-        }
-        //根据扩展卡进行获取（ 唯一标识卡 ）
-        empi = queryEmpiByCardExt(model);
-        if(empi!=null) {
-            return createEmpiHisRelation(empi, model);
-        }
-
+//        //根据身份证、就诊卡、护照（ 唯一标识 ）
+//        empi = queryEmpiByCard(model);
+//        if(empi!=null) {
+//            return createEmpiHisRelation(empi, model);
+//        }
+//        //根据扩展卡进行获取（ 唯一标识卡 ）
+//        empi = queryEmpiByCardExt(model);
+//        if(empi!=null) {
+//            return createEmpiHisRelation(empi, model);
+//        }
+//
         //根据 patientId，inpatientId （ 患者唯一标识 ）
         empi = queryEmpiByPatientId(model);
         if(empi!=null) {
@@ -376,8 +378,11 @@ public class EmpiServiceImpl implements IEmpiService {
 
     // =========================================================================================
 
-    //获取empi信息
+    /**
+     * 获取相似empi信息
+     */
     public List<EmpiVO> getEmpiSimilar(EmpiVO model) throws CoBusinessException {
+
 
 
         return null;

@@ -5,12 +5,13 @@
     <parent>
         <artifactId>ejet-parent</artifactId>
         <groupId>com.ejet</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>2.0.0</version>
         <relativePath>../ejet-parent/pom.xml</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>khsh-empi</artifactId>
+    <version>${ejet-module.version}</version>
 
     <!-- 项目属性 -->
     <properties>
@@ -32,7 +33,7 @@
             <classifier>jdk15</classifier>
         </dependency>
 
-        <!--mysql -->
+        <!--master -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -65,14 +66,27 @@
         <dependency>
             <groupId>com.ejet</groupId>
             <artifactId>ejet-comm-web-db</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${ejet-module.version}</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.ejet</groupId>
+            <artifactId>ejet-comm-web</artifactId>
+            <version>${ejet-module.version}</version>
             <scope>compile</scope>
         </dependency>
 
     </dependencies>
 
 
+
+
     <build>
+        <!-- 生成的项目jar包的名字-->
+        <finalName>empi-service</finalName>
+        <!--源代码路径-->
+        <sourceDirectory>src/main/java</sourceDirectory>
+
         <plugins>
             <!-- 打JAR包 -->
             <plugin>
@@ -88,18 +102,18 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <!-- MANIFEST.MF 中 Class-Path 加入前缀 -->
-                            <classpathPrefix>lib/</classpathPrefix>
+                            <classpathPrefix>libs/</classpathPrefix>
                             <!-- jar包不包含唯一版本标识 -->
                             <useUniqueVersions>false</useUniqueVersions>
                             <!--指定入口类 -->
                             <mainClass>com.khsh.datac.empi.EMPIApplication</mainClass>
                         </manifest>
+                        <!--将资源文件目录添加到classpath中，打包后运行项目时则会在该目录下加载配置文件-->
                         <manifestEntries>
-                            <!--MANIFEST.MF 中 Class-Path 加入资源文件目录 -->
-                            <Class-Path>./resources/</Class-Path>
+                            <Class-Path>./resources/ libs/ejet-comm-utils-2.0.0.jar </Class-Path>
                         </manifestEntries>
                     </archive>
-                    <outputDirectory>${project.build.directory}</outputDirectory>
+                    <outputDirectory>${project.build.directory}/install/</outputDirectory>
                 </configuration>
             </plugin>
 
@@ -115,7 +129,7 @@
                             <goal>copy-dependencies</goal>
                         </goals>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/lib/</outputDirectory>
+                            <outputDirectory>${project.build.directory}/install/libs/</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
@@ -134,52 +148,30 @@
                         <configuration>
                             <resources>
                                 <resource>
-                                    <directory>src/main/resources</directory>
+                                    <directory>src/main/resourcAuthServiceImples</directory>
                                     <!--<excludes>
                                         <include>src/main/resources/mybatis/*</include>
                                     </excludes>-->
                                     <includes>
-                                         <include>application.yml</include>
-                                         <include>logback-spring.xml</include>
+                                        <include>application.yml</include>
+                                        <include>logback-spring.xml</include>
                                     </includes>
                                 </resource>
                             </resources>
-                            <outputDirectory>${project.build.directory}/resources</outputDirectory>
+                            <outputDirectory>${project.build.directory}/install/</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
-            <!-- SpringBoot 打包插件，把 maven-jar-plugin 打成的jar包重新打成可运行jar包 -->
+            <!-- 用于拷贝resource的plugin -->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <!--重写包含依赖，包含不存在的依赖，jar里没有pom里的依赖 -->
-                    <includes>
-                        <include>
-                            <groupId>null</groupId>
-                            <artifactId>null</artifactId>
-                        </include>
-                    </includes>
-                    <layout>ZIP</layout>
-                    <!--使用外部配置文件，jar包里没有资源文件 -->
-                    <addResources>true</addResources>
-                    <outputDirectory>${project.build.directory}/resources</outputDirectory>
-                </configuration>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                        <configuration>
-                            <!--配置jar包特殊标识 配置后，保留原文件，生成新文件 *-run.jar -->
-                            <!--配置jar包特殊标识 不配置，原文件命名为 *.jar.original，生成新文件 *.jar -->
-                            <!--<classifier>run</classifier> -->
-                        </configuration>
-                    </execution>
-                </executions>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin-version}</version>
             </plugin>
+
+
         </plugins>
     </build>
 

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>ejet-parent</artifactId>
+        <groupId>com.ejet</groupId>
+        <version>2.0.0</version>
+        <relativePath>../ejet-parent/pom.xml</relativePath>
+    </parent>
+    
+    <groupId>com.ejet</groupId>
+    <artifactId>khsh-patientview</artifactId>
+    <version>${ejet-module.version}</version>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- gson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <classifier>jdk15</classifier>
+        </dependency>
+
+        <!--master -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!--<scope>runtime</scope>-->
+        </dependency>
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc14</artifactId>
+        </dependency>
+        <!-- Druid 数据连接池依赖 -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <!--<version>${druid.version}</version>-->
+        </dependency>
+
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.ejet</groupId>
+            <artifactId>ejet-comm-web</artifactId>
+            <version>${ejet-module.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!--<dependency>-->
+        <!--<groupId>com.ejet</groupId>-->
+        <!--<artifactId>ejet-comm-web-db</artifactId>-->
+        <!--<version>1.0.0-SNAPSHOT</version>-->
+        <!--<scope>compile</scope>-->
+        <!--</dependency>-->
+
+
+    </dependencies>
+
+
+    <build>
+        <!-- 生成的项目jar包的名字-->
+        <finalName>ejet-demo</finalName>
+        <!--源代码路径-->
+        <sourceDirectory>src/main/java</sourceDirectory>
+
+        <!--<resources>
+            &lt;!&ndash;这两个resource节点负责把配置文件拷贝到classes目录下，保证运行时可以找到配置文件&ndash;&gt;
+            <resource>
+                &lt;!&ndash;开启filter功能，将路径中的属性名替换为对应的属性值&ndash;&gt;
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/application*.yml</include>
+                    <include>**/application*.yaml</include>
+                    <include>**/application*.properties</include>
+                    <include>**/logback-spring.xml</include>
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/application*.yml</exclude>
+                    <exclude>**/application*.yaml</exclude>
+                    <exclude>**/application*.properties</exclude>
+                    <exclude>**/logback-spring.xml</exclude>
+                </excludes>
+            </resource>
+
+            &lt;!&ndash;compile 和 package 时都会使用resource节点的配置&ndash;&gt;
+            &lt;!&ndash;resource 节点可通过配置将制定目录的文件在打包后拷贝到制定目录&ndash;&gt;
+            &lt;!&ndash;如果只有这一个resource节点，或者如果把这个resource节点配置在最前面，则会直接把配置文件打包到conf目录classes目录下不会有配置文件，导致IDEA运行时找不到配置文件&ndash;&gt;
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.directory}/install/conf</targetPath>
+            </resource>
+        </resources>-->
+
+        <plugins>
+            <!-- 打JAR包 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <!-- 不打包资源文件（配置文件和依赖包分开） -->
+                    <excludes>
+                        <exclude>*.**</exclude>
+                        <exclude>*/*.xml</exclude>
+                    </excludes>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <!-- MANIFEST.MF 中 Class-Path 加入前缀 -->
+                            <classpathPrefix>libs/</classpathPrefix>
+                            <!-- jar包不包含唯一版本标识 -->
+                            <useUniqueVersions>false</useUniqueVersions>
+                            <!--指定入口类 -->
+                            <mainClass>com.whlyy.yyt.Application</mainClass>
+                        </manifest>
+                        <!--将资源文件目录添加到classpath中，打包后运行项目时则会在该目录下加载配置文件-->
+                        <manifestEntries>
+                            <Class-Path>./resources/ libs/ejet-comm-utils-1.0-SNAPSHOT.jar libs/ejet-comm-result-1.0-SNAPSHOT.jar libs/ejet-comm-web-1.0-SNAPSHOT.jar libs/ejet-comm-web-db-1.0-SNAPSHOT.jar </Class-Path>
+                        </manifestEntries>
+                    </archive>
+                    <outputDirectory>${project.build.directory}/install/</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <!-- 该插件的作用是用于复制依赖的jar包到指定的文件夹里 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/install/libs/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 该插件的作用是用于复制指定的文件 -->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution> <!-- 复制配置文件 -->
+                        <id>copy-resources</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <resources>
+                                <resource>
+                                    <directory>src/main/resources</directory>
+                                    <!--<excludes>
+                                        <include>src/main/resources/mybatis/*</include>
+                                    </excludes>-->
+                                    <includes>
+                                        <include>application.yml</include>
+                                        <include>logback-spring.xml</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                            <outputDirectory>${project.build.directory}/install/</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 用于拷贝resource的plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven-resources-plugin-version}</version>
+            </plugin>
+
+
+        </plugins>
+    </build>
+
+
+</project>

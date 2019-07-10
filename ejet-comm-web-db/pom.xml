@@ -4,15 +4,16 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>ejet-comm-web</artifactId>
+        <artifactId>ejet-parent</artifactId>
         <groupId>com.ejet</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>2.0.0</version>
         <relativePath>../ejet-parent/pom.xml</relativePath>
     </parent>
 
     <description>带DB启动入口</description>
     <artifactId>ejet-comm-web-db</artifactId>
-    <!--<packaging>pom</packaging>-->
+    <version>${ejet-module.version}</version>
+    <packaging>jar</packaging>
 
     <!-- 项目属性 -->
     <properties>
@@ -23,7 +24,7 @@
 
     <dependencies>
 
-        <!--mysql -->
+        <!--master -->
         <dependency>
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
@@ -37,7 +38,7 @@
         <dependency>
             <groupId>com.ejet</groupId>
             <artifactId>ejet-comm-web</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>${ejet-module.version}</version>
             <scope>compile</scope>
         </dependency>
 

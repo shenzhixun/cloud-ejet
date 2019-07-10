@@ -32,9 +32,9 @@ public class CoSessionFilter implements Filter {
      */
 	private static boolean hasLoad = false;
 	/**
-     * 是否忽略该过滤器
+     * 是否开启该过滤器
      */
-    private boolean ignore = false;
+    private boolean openAuth = false;
     /**
      * 被忽略的url
      */
@@ -44,18 +44,16 @@ public class CoSessionFilter implements Filter {
      */
     @Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		String ignoreValue = filterConfig.getInitParameter(CoSessionManager.OPEN_SESSION_AUTH);
-        //只有当 ignoreValue 为"true"时，设置 ignore = true，为其他时 ignore = false;
-        this.ignore = ignoreValue != null && ignoreValue.equalsIgnoreCase("true");
+		String openSessionAuth = filterConfig.getInitParameter(CoSessionManager.OPEN_SESSION_AUTH);
+        boolean auth = (openSessionAuth != null && openSessionAuth.equalsIgnoreCase("true"));
+        this.openAuth = auth;
         loadConfig();
-        //urlExclude.add(".*sys_user/login$".toLowerCase() );
-        //urlExclude.add(".*sys_user/logout$".toLowerCase() );
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		if (!ignore) {
+		if (openAuth) {
 			HttpServletRequest httpRequest = (HttpServletRequest) request;
 	        HttpServletResponse httpResponse = (HttpServletResponse) response;
 	        String url = httpRequest.getRequestURI();

@@ -76,7 +76,7 @@ public class CoWebMvcConfigurerImpl  implements WebMvcConfigurer {
         FilterRegistrationBean<CoSessionFilter> registration = new FilterRegistrationBean<CoSessionFilter>();
         registration.setFilter(new CoSessionFilter());
         registration.addUrlPatterns("/*");
-        registration.addInitParameter(CoSessionManager.OPEN_SESSION_AUTH, String.valueOf(coGlobal.isOpenSessionAuth()));//是否开启session过滤
+        registration.addInitParameter(CoSessionManager.OPEN_SESSION_AUTH, coGlobal.isOpenSessionAuth() ? "true" : "false");//是否开启session过滤
         registration.setOrder(CoConstant.FILTER_ORDER_SESSION); //spring boot 会按照order值的大小，从小到大的顺序来依次过滤。
         registration.setName(CoConstant.FILTER_NAME_SESSION);
         return registration;

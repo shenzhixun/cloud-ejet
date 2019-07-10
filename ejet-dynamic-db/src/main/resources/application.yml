@@ -32,12 +32,14 @@ spring:
     store-type: none
   #数据源配置
   datasource:
+    # 设置dataSource数据库连接池类型
+    type: com.alibaba.druid.pool.DruidDataSource
 
-    default-dds:
-      url: jdbc:mysql://192.168.0.244/bi_db?useSSL=false&serverTimezone=UTC
+    master-dds:
+      url: jdbc:master://192.168.0.244/bi_db?useSSL=false&serverTimezone=UTC
       username: root
       password: 123456
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.master.jdbc.Driver
       # 初始化大小，最小，最大
       initialSize: 3
       minIdle: 2
@@ -62,11 +64,11 @@ spring:
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
 
-    dds-mysql:
-      url: jdbc:mysql://192.168.0.244/bi_db?useSSL=false&serverTimezone=UTC
+    slave-dds:
+      url: jdbc:master://192.168.0.244/bi_db?useSSL=false&serverTimezone=UTC
       username: root
       password: 123456
-      driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: com.master.jdbc.Driver
       # 初始化大小，最小，最大
       initialSize: 3
       minIdle: 2
@@ -91,11 +93,11 @@ spring:
       # 合并多个DruidDataSource的监控数据
       useGlobalDataSourceStat: true
 
-    dds-oracle:
-      url: jdbc:oracle:thin:@192.168.0.187:1521:test
+    slave-dds2:
+      url: jdbc:slave:thin:@192.168.0.187:1521:test
       username: test
       password: test
-      driver-class-name: oracle.jdbc.OracleDriver
+      driver-class-name: slave.jdbc.OracleDriver
       # 初始化大小，最小，最大
       initialSize: 3
       minIdle: 2
@@ -104,6 +106,7 @@ spring:
       maxWait: 60000
       # 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒
       timeBetweenEvictionRunsMillis: 60000
+
 
 
   ### ===========================   redis   ===============================

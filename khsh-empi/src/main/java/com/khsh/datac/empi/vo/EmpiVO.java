@@ -108,7 +108,7 @@ public class EmpiVO extends PixEmpiRegisterVO implements Serializable {
     private String outDeptName;
 
     /** 就诊类型   */
-    private java.lang.String visitType;
+    private Integer visitType;
     /** 就诊类型标志   */
     private java.lang.String visitTypeCode;
 
