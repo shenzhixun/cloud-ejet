@@ -3,8 +3,10 @@ package com.khsh.datac.empi.service.impl;
 import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.comm.utils.StringUtils;
 import com.ejet.comm.utils.collect.BeanUtils;
+import com.ejet.comm.utils.time.TimeUtils;
 import com.khsh.datac.empi.mapper.EmpiDao;
 import com.khsh.datac.empi.model.PixEmpiHisRModel;
+import com.khsh.datac.empi.model.PixEmpiRModel;
 import com.khsh.datac.empi.vo.EmpiMergeVO;
 import com.khsh.datac.empi.vo.EmpiVO;
 import org.slf4j.Logger;
@@ -12,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("empiExtServiceImpl")
@@ -19,20 +22,11 @@ public class EmpiExtServiceImpl {
 
 	private final Logger log = LoggerFactory.getLogger(EmpiExtServiceImpl.class);
 
-	@Autowired
-	PixEmpiServiceImpl empiService;
-    @Autowired
-	PixEmpiRegisterServiceImpl empiRegisterService;
-    @Autowired
-    PixEmpiRegisterExtServiceImpl empiRegisterExtService;
-
-    @Autowired
-    PixEmpiIdentityServiceImpl empiIdentityService;
-    @Autowired
-    PixEmpiIdentityContactServiceImpl empiIdentityContactService;
-
     @Autowired
     PixEmpiHisRServiceImpl empiHisRService;
+
+    @Autowired
+    PixEmpiRServiceImpl empiRService;
 
     @Autowired
     private EmpiDao mDao;
@@ -146,12 +140,24 @@ public class EmpiExtServiceImpl {
     public void mergeEmpiAuto(EmpiVO model) throws CoBusinessException {
         // 首先查询 唯一号码标示信息
         List<EmpiVO> result = queryEMPIByCard(model);
-        if(result!=null && result.size()>0) {
-            //执行合并操作
-            for(EmpiVO item : result) {
-
-            }
+        if(result==null || result.size()==0) {
+            return;
         }
+
+        List<PixEmpiRModel> list = new ArrayList<>();
+        //执行合并操作
+        for(EmpiVO item : result) {
+            //去掉自有
+            if(item.getEmpi().equalsIgnoreCase(model.getEmpi())) {
+                continue;
+            }
+            PixEmpiRModel  r = new PixEmpiRModel();
+            r.setEmpi(model.getEmpi());
+            r.setRelEmpi(item.getEmpi());
+            r.setCreateTime(TimeUtils.getCurrentTime());
+            list.add(r);
+        }
+        empiRService.queryAndInsert(list);
     }
 
     /**

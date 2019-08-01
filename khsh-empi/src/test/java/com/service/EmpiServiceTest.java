@@ -90,13 +90,13 @@ public class EmpiServiceTest {
 
 
     @Test
-    public void getEmpi(){
+    public void generateEmpi(){
         try {
             EmpiVO query = new EmpiVO();
             //setHasIdentityCard(query);
             setHasIdentityCardExt(query);
 
-            EmpiVO result = mService.getEmpi(query);
+            EmpiVO result = mService.generateEmpi(query);
 
         } catch (Exception e) {
             e.printStackTrace();

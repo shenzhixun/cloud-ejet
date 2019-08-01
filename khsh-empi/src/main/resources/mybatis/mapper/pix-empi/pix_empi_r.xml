@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.khsh.datac.empi.mapper.PixEmpiRDao">
+
+	<sql id="SqlWhere">
+		<where>
+			1=1
+			<if test="id!=null and id!='' ">and id=#{id} </if>
+			<if test="empi!=null and empi!='' ">and empi=#{empi} </if>
+			<if test="relEmpi!=null and relEmpi!='' ">and rel_empi=#{relEmpi} </if>
+			<if test="relFlag!=null and relFlag!='' ">and rel_flag=#{relFlag} </if>
+			<if test="remark!=null and remark!='' ">and remark=#{remark} </if>
+			<if test="createBy!=null and createBy!='' ">and create_by=#{createBy} </if>
+			<if test="createTime!=null and createTime!='' ">and create_time=#{createTime} </if>
+			<if test="updateTime!=null and updateTime!='' ">and update_time=#{updateTime} </if>
+			<if test="ext!=null and ext!='' ">and ext=#{ext} </if>
+		</where>
+	</sql>
+	<sql id="SqlWherePK">
+		<where>
+			1=1
+			<if test="id!=null and id!='' ">and id=#{id} </if>
+		</where>
+	</sql>
+	<sql id="SqlSet">
+		<set>
+			<if test="id!=null and id!='' "> id=#{id}, </if>
+			<if test="empi!=null and empi!='' "> empi=#{empi}, </if>
+			<if test="relEmpi!=null and relEmpi!='' "> rel_empi=#{relEmpi}, </if>
+			<if test="relFlag!=null and relFlag!='' "> rel_flag=#{relFlag}, </if>
+			<if test="remark!=null and remark!='' "> remark=#{remark}, </if>
+			<if test="createBy!=null and createBy!='' "> create_by=#{createBy}, </if>
+			<if test="createTime!=null and createTime!='' "> create_time=#{createTime}, </if>
+			<if test="updateTime!=null and updateTime!='' "> update_time=#{updateTime}, </if>
+			<if test="ext!=null and ext!='' "> ext=#{ext}, </if>
+		</set>
+	</sql>
+
+
+	<insert  id="insertAutoKey" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" useGeneratedKeys="true" keyProperty="id" >
+		 INSERT INTO pix_empi_r (
+ 			empi, rel_empi, rel_flag, remark, 
+ 			create_by, create_time, update_time, ext ) 	 VALUES ( 
+ 			#{empi}, #{relEmpi}, #{relFlag}, #{remark}, 
+ 			#{createBy}, #{createTime}, #{updateTime}, #{ext} ) 
+	</insert>
+
+	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" useGeneratedKeys="true" keyProperty="id" >
+		 INSERT INTO pix_empi_r (
+ 			empi, rel_empi, rel_flag, remark, 
+ 			create_by, create_time, update_time, ext,  id ) 
+		 VALUES( 
+ 			#{empi}, #{relEmpi}, #{relFlag}, #{remark}, 
+ 			#{createBy}, #{createTime}, #{updateTime}, #{ext},  #{id} ) 
+	</insert>
+
+	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" >
+		 DELETE FROM pix_empi_r
+		 <include refid="SqlWhere"></include> 
+	</delete>
+
+	<update  id="update" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" >
+		 UPDATE pix_empi_r
+		 <include refid="SqlSet"></include> 
+		 <include refid="SqlWherePK"></include> 
+	</update>
+
+	<select  id="findByPK" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" resultType="com.khsh.datac.empi.model.PixEmpiRModel" >
+		 SELECT * FROM pix_empi_r
+		 <include refid="SqlWherePK"></include> 
+		 <if test=" orderCond !=null ">  order by ${orderCond} </if> 
+	</select>
+
+	<select  id="queryByCond" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" resultType="com.khsh.datac.empi.model.PixEmpiRModel" >
+		 SELECT * FROM pix_empi_r
+		 <include refid="SqlWhere"></include> 
+		 <if test=" extSQL !=null "> ${extSQL} </if> 
+		 <if test=" orderCond !=null ">  order by ${orderCond} </if> 
+	</select>
+
+	<select  id="queryByPage" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" resultType="com.khsh.datac.empi.model.PixEmpiRModel" >
+		 SELECT * FROM pix_empi_r
+		 <include refid="SqlWhere"></include> 
+		 <if test="extSQL!=null "> ${extSQL} </if> 
+	</select>
+
+	<select  id="findMaxId" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" resultType="int" >
+		 SELECT max(id) FROM pix_empi_r
+		 <include refid="SqlWhere"></include> 
+	</select>
+
+
+	<select  id="queryRelation" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" resultType="com.khsh.datac.empi.model.PixEmpiRModel" >
+		SELECT * FROM pix_empi_r
+		where ( empi=#{empi} AND rel_empi=#{relEmpi} ) OR ( empi=#{relEmpi} AND rel_empi=#{empi} )
+	</select>
+
+</mapper>

@@ -3,6 +3,7 @@ package com.khsh.datac.empi.api;
 import com.ejet.comm.Result;
 import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.core.base.ControllerBase;
+import com.khsh.datac.empi.service.impl.EmpiExtServiceImpl;
 import com.khsh.datac.empi.service.impl.EmpiServiceImpl;
 import com.khsh.datac.empi.vo.EmpiMergeVO;
 import com.khsh.datac.empi.vo.EmpiVO;
@@ -26,6 +27,8 @@ public class EmpiController extends ControllerBase {
 	private final Logger log = LoggerFactory.getLogger(EmpiController.class);
 	@Autowired
 	private EmpiServiceImpl mService;
+    @Autowired
+    private EmpiExtServiceImpl extService;
     /**
      * 生成EMPI，根据获取的HIS门诊、住院记录
      */
@@ -56,7 +59,7 @@ public class EmpiController extends ControllerBase {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);
-            List<EmpiVO> result = mService.getEmpiSimilar(param);
+            List<EmpiVO> result = extService.getEmpiSimilar(param);
             rs = new Result(result);
         }catch (CoBusinessException e) {
             log.error("", e);
@@ -67,25 +70,25 @@ public class EmpiController extends ControllerBase {
         }
         return rs;
     }
-    /**
-     * 合并empi
-     */
-    @ResponseBody
-    @RequestMapping(value="/merge-empi")
-    public Result mergeEmpi(@RequestBody(required=true) EmpiMergeVO param, BindingResult bindResult) {
-        Result rs = new Result();
-        try{
-            checkBindResult(bindResult);
-            mService.mergeEmpi(param);
-        }catch (CoBusinessException e) {
-            log.error("", e);
-            rs = new Result(e.getCode(), e);
-        }catch (Exception e) {
-            log.error("", e);
-            rs = new Result(SYS_ERROR, e);
-        }
-        return rs;
-    }
+//    /**
+//     * 合并empi
+//     */
+//    @ResponseBody
+//    @RequestMapping(value="/merge-empi")
+//    public Result mergeEmpi(@RequestBody(required=true) EmpiMergeVO param, BindingResult bindResult) {
+//        Result rs = new Result();
+//        try{
+//            checkBindResult(bindResult);
+//            extService.mergeEmpi(param);
+//        }catch (CoBusinessException e) {
+//            log.error("", e);
+//            rs = new Result(e.getCode(), e);
+//        }catch (Exception e) {
+//            log.error("", e);
+//            rs = new Result(SYS_ERROR, e);
+//        }
+//        return rs;
+//    }
 
 
     /**
@@ -97,7 +100,7 @@ public class EmpiController extends ControllerBase {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);
-            mService.divideEmpi(param);
+            extService.divideEmpi(param);
         }catch (CoBusinessException e) {
             log.error("", e);
             rs = new Result(e.getCode(), e);
