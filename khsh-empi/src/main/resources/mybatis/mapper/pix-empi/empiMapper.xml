@@ -64,11 +64,19 @@
 	</select>
 
 
-
     <!-- 根据卡信息唯一获取empi号码 -->
     <select  id="queryEmpiByCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT * FROM pix_empi_register R
-        WHERE (
+        SELECT R.*, case when R.sex = '1' then '男'
+        when R.sex = '2' then '女' else null end as sexName,
+        E.country,E.country_name,
+        E.nation, E.nation_name,
+        E.edu_degree,
+        E.job, E.job_name,
+        E.phone,
+        E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
+        E.marriage_state, E.marriage_state_name
+        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi AND R.uuid=E.reg_uuid
+        AND (
         <trim prefix="(" prefixOverrides="AND|OR" suffix=")">
             <if test="idCard!=null and idCard!='' "> OR R.id_card=#{idCard}</if>
             <if test="yibaoCard!=null and yibaoCard!='' "> OR R.yibao_card=#{yibaoCard}</if>
@@ -79,22 +87,7 @@
         AND R.empi_flag = 1
     </select>
 
-    <!-- 根据扩展卡等信息唯一获取empi号码
-    <select  id="queryEmpiByCardExt" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT R.*, I.id_name, I.id_no
-        FROM pix_empi_register R, pix_empi_identity I
-        WHERE R.empi = I.empi
-        AND R.empi_flag=1 AND (
-            <foreach collection="identityList" item="itemVO" separator=" OR " open="" close="" index="">
-                <trim prefix="(" prefixOverrides="AND" suffix=")">
-                    <if test="itemVO.idType!=null and itemVO.idType!='' ">AND I.id_type=#{itemVO.idType} </if>
-                    <if test="itemVO.idName!=null and itemVO.idName!='' ">AND I.id_name=#{itemVO.idName} </if>
-                    <if test="itemVO.idCode!=null and itemVO.idCode!='' ">AND I.id_code=#{itemVO.idCode} </if>
-                    <if test="itemVO.idNo!=null and itemVO.idNo!='' ">AND I.id_no=#{itemVO.idNo}         </if>
-                </trim>
-            </foreach>
-        )
-    </select>-->
+
     <!-- 根据扩展卡等信息唯一获取empi号码 -->
     <select  id="queryEmpiByExtCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
         <foreach collection="identityList" item="itemVO" separator=" UNION ALL " open="" close="" index="">
@@ -109,83 +102,61 @@
         </foreach>
     </select>
 
-    <!-- 根据身份证查询 -->
-    <select  id="queryEmpiByIdCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT R.*, case when R.sex = '1' then '男'
-        when R.sex = '2' then '女' else null end as sexName,
-        E.country,E.country_name,
-        E.nation, E.nation_name,
-        E.edu_degree,
-        E.job, E.job_name,
-        E.phone,
-        E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
-        E.marriage_state, E.marriage_state_name
-        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi
-        WHERE 1 = 1
-        <if test="idCard!=null and idCard!='' "> AND R.id_card=#{idCard}</if>
-        AND R.empi_flag = 1
-    </select>
+    <!--&lt;!&ndash; 根据身份证查询 &ndash;&gt;-->
+    <!--<select  id="queryEmpiByIdCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >-->
+        <!--SELECT R.*, case when R.sex = '1' then '男'-->
+        <!--when R.sex = '2' then '女' else null end as sexName,-->
+        <!--E.country,E.country_name,-->
+        <!--E.nation, E.nation_name,-->
+        <!--E.edu_degree,-->
+        <!--E.job, E.job_name,-->
+        <!--E.phone,-->
+        <!--E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,-->
+        <!--E.marriage_state, E.marriage_state_name-->
+        <!--FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi-->
+        <!--WHERE 1 = 1-->
+        <!--<if test="idCard!=null and idCard!='' "> AND R.id_card=#{idCard}</if>-->
+        <!--AND R.empi_flag = 1-->
+    <!--</select>-->
 
-    <!-- 根据医保卡查询 -->
-    <select  id="queryEmpiByYibaoCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT R.*, case when R.sex = '1' then '男'
-        when R.sex = '2' then '女' else null end as sexName,
-        E.country,E.country_name,
-        E.nation, E.nation_name,
-        E.edu_degree,
-        E.job, E.job_name,
-        E.phone,
-        E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
-        E.marriage_state, E.marriage_state_name
-        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi
-        WHERE 1 = 1
-        <if test="yibaoCard!=null and yibaoCard!='' "> AND R.yibao_card=#{yibaoCard}</if>
-        AND R.empi_flag = 1
-    </select>
+    <!--&lt;!&ndash; 根据医保卡查询 &ndash;&gt;-->
+    <!--<select  id="queryEmpiByYibaoCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >-->
+        <!--SELECT R.*, case when R.sex = '1' then '男'-->
+        <!--when R.sex = '2' then '女' else null end as sexName,-->
+        <!--E.country,E.country_name,-->
+        <!--E.nation, E.nation_name,-->
+        <!--E.edu_degree,-->
+        <!--E.job, E.job_name,-->
+        <!--E.phone,-->
+        <!--E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,-->
+        <!--E.marriage_state, E.marriage_state_name-->
+        <!--FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi-->
+        <!--WHERE 1 = 1-->
+        <!--<if test="yibaoCard!=null and yibaoCard!='' "> AND R.yibao_card=#{yibaoCard}</if>-->
+        <!--AND R.empi_flag = 1-->
+    <!--</select>-->
 
-    <!-- 根据就诊卡查询 -->
-    <select  id="queryEmpiByJiuzhenCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT R.*, case when R.sex = '1' then '男'
-        when R.sex = '2' then '女' else null end as sexName,
-        E.country,E.country_name,
-        E.nation, E.nation_name,
-        E.edu_degree,
-        E.job, E.job_name,
-        E.phone,
-        E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
-        E.marriage_state, E.marriage_state_name
-        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi
-        WHERE 1 = 1
-        <if test="jiuzhenCard!=null and jiuzhenCard!='' "> AND R.jiuzhen_card=#{jiuzhenCard} AND R.reg_corp_id=#{regCorpId} </if>
-        AND R.empi_flag = 1
-    </select>
+    <!--&lt;!&ndash; 根据就诊卡查询 &ndash;&gt;-->
+    <!--<select  id="queryEmpiByJiuzhenCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >-->
+        <!--SELECT R.*, case when R.sex = '1' then '男'-->
+        <!--when R.sex = '2' then '女' else null end as sexName,-->
+        <!--E.country,E.country_name,-->
+        <!--E.nation, E.nation_name,-->
+        <!--E.edu_degree,-->
+        <!--E.job, E.job_name,-->
+        <!--E.phone,-->
+        <!--E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,-->
+        <!--E.marriage_state, E.marriage_state_name-->
+        <!--FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi-->
+        <!--WHERE 1 = 1-->
+        <!--<if test="jiuzhenCard!=null and jiuzhenCard!='' "> AND R.jiuzhen_card=#{jiuzhenCard} AND R.reg_corp_id=#{regCorpId} </if>-->
+        <!--AND R.empi_flag = 1-->
+    <!--</select>-->
 
     <!-- 根据患者id查询 -->
     <select  id="queryEmpiByPatientId" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT R.id,
-        R.uuid,
-        R.empi,
-        R.reg_corp_id,
-        R.reg_corp_name,
-        R.reg_sys_id,
-        R.reg_time,
-        R.name,
-        R.name_pin,
-        R.sex,
-        R.age,
-        R.birthday,
-        R.id_card,
-        R.yibao_card,
-        R.jiuzhen_card,
-        R.huzhao_card,
-        R.empi_flag,
-        R.status,
-        R.remark,
-        R.create_by,
-        R.create_time,
-        R.update_time,
-        R.ext,
-        case when R.sex = '1' then '男' when R.sex = '2' then '女' else null end as sexName,
+        SELECT
+        R.name, R.name_pin, R.age, R.sex, R.birthday, R.id_card, R.jiuzhen_card, R.huzhao_card, R.yibao_card, R.yibao_card_name,
         E.country,E.country_name,
         E.nation, E.nation_name,
         E.edu_degree,
@@ -193,58 +164,16 @@
         E.phone,
         E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
         E.marriage_state, E.marriage_state_name,
-        H.in_hospital_id,
-        H.in_hospital_date,
-        H.bed_id,
-        H.in_dept_name,
-        H.out_dept_name
-        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi, pix_empi_his_r H
-        WHERE R.empi=H.empi
-        <if test="patientId!=null and patientId!='' "> AND H.patient_id=#{patientId} AND H.reg_corp_id=#{regCorpId} </if>
+        case when R.sex = '1' then '男' when R.sex = '2' then '女' else null end as sexName,
+        B.*
+        FROM pix_empi_his_r B INNER JOIN pix_empi_register R ON B.empi=R.empi
+        LEFT JOIN pix_empi_register_ext E ON E.empi=R.empi AND E.reg_uuid=R.uuid
+        <if test="patientId!=null and patientId!='' "> AND B.patient_id=#{patientId} AND B.reg_corp_id=#{regCorpId} </if>
+        <if test="inpatientId!=null and inpatientId!='' "> AND B.inpatient_id=#{inpatientId} AND B.reg_corp_id=#{regCorpId} </if>
+        AND R.empi_flag=1
+        -- order by R.create_time
     </select>
 
-    <!-- 根据inpatientId查询 -->
-    <select  id="queryEmpiByInpatientId" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
-        SELECT R.id,
-        R.uuid,
-        R.empi,
-        R.reg_corp_id,
-        R.reg_corp_name,
-        R.reg_sys_id,
-        R.reg_time,
-        R.name,
-        R.name_pin,
-        R.sex,
-        R.age,
-        R.birthday,
-        R.id_card,
-        R.yibao_card,
-        R.jiuzhen_card,
-        R.huzhao_card,
-        R.empi_flag,
-        R.status,
-        R.remark,
-        R.create_by,
-        R.create_time,
-        R.update_time,
-        R.ext,
-        case when R.sex = '1' then '男' when R.sex = '2' then '女' else null end as sexName,
-        E.country,E.country_name,
-        E.nation, E.nation_name,
-        E.edu_degree,
-        E.job, E.job_name,
-        E.phone,
-        E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
-        E.marriage_state, E.marriage_state_name,
-        H.in_hospital_id,
-        H.in_hospital_date,
-        H.bed_id,
-        H.in_dept_name,
-        H.out_dept_name
-        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi, pix_empi_his_r H
-        WHERE R.empi=H.empi
-        <if test="inpatientId!=null and inpatientId!='' "> AND H.inpatient_id=#{inpatientId} AND H.reg_corp_id=#{regCorpId} </if>
-    </select>
 
     <!-- 更新患者注册信息 -->
     <update  id="updateEmpi" parameterType="com.khsh.datac.empi.vo.EmpiVO" >

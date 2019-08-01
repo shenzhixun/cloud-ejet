@@ -5,7 +5,6 @@ import com.khsh.datac.empi.vo.EmpiVO;
 
 public interface IEmpiService {
 
-	public EmpiVO getEmpi(EmpiVO model) throws CoBusinessException;
-
+	public EmpiVO generateEmpi(EmpiVO model) throws CoBusinessException;
 
 }

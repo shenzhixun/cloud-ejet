@@ -15,13 +15,12 @@ CREATE TABLE `pix_empi_register` (
   `sex`                 tinyint(2)        DEFAULT NULL COMMENT  '性别 1：男 2：女',
   `age`                 int(3)            DEFAULT NULL COMMENT  '年龄',
   `birthday`            varchar(50)       DEFAULT NULL COMMENT  '出生日期yyyy.MM.dd',
-
-  `id_card`             varchar(20)      DEFAULT NULL COMMENT  '身份证',
-  `yibao_card`          varchar(100)      DEFAULT NULL COMMENT  '医保卡',
-  `jiuzhen_card`        varchar(100)      DEFAULT NULL COMMENT  '就诊卡',
-
   `patient_id`          varchar(100)      DEFAULT NULL COMMENT  '患者id',
 
+  `id_card`             varchar(20)      DEFAULT NULL COMMENT   '身份证',
+  `yibao_card`          varchar(100)      DEFAULT NULL COMMENT  '医保卡',
+  `yibao_card_name`     varchar(100)      DEFAULT NULL COMMENT  '医保卡类型名称',
+  `jiuzhen_card`        varchar(100)      DEFAULT NULL COMMENT  '就诊卡',
   `huzhao_card`         varchar(100)      DEFAULT NULL COMMENT  '护照',
 
   `empi_flag`           tinyint(2)        DEFAULT NULL COMMENT  '是否主索引标志 1：是 2：否',
@@ -147,7 +146,7 @@ CREATE TABLE `pix_empi_identity_contact` (
   `rel_name`            varchar(100)      DEFAULT NULL COMMENT  '联系人 姓名',
   `rel_name_pin`        varchar(100)      DEFAULT NULL COMMENT  '联系人 名字拼音',
   `rel_sex`             tinyint(2)        DEFAULT NULL COMMENT  '联系人 性别 1：男 2：女',
-  `rel_phone`           varchar(50)      DEFAULT NULL COMMENT  '联系人 电话',
+  `rel_phone`           varchar(50)       DEFAULT NULL COMMENT  '联系人 电话',
   `rel_addr_province`   varchar(100)      DEFAULT NULL COMMENT  '联系人 省',
   `rel_addr_city`       varchar(100)      DEFAULT NULL COMMENT  '联系人 地市',
   `rel_addr_area`       varchar(100)      DEFAULT NULL COMMENT  '联系人 区域（县）',
@@ -243,16 +242,30 @@ DROP TABLE IF EXISTS `pix_empi_his_r`;
 CREATE TABLE `pix_empi_his_r` (
   `id`                  bigint(20) NOT NULL AUTO_INCREMENT,
   `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
-  `reg_corp_id`         varchar(200)      DEFAULT NULL COMMENT  '注册机构id',
+  `reg_corp_id`         varchar(200)      DEFAULT NULL COMMENT  '注册机构id(就诊医疗机构代码)',
+  `reg_corp_name`       varchar(200)      DEFAULT NULL COMMENT  '就诊医疗机构名称',
   `patient_id`          varchar(100)      NOT NULL COMMENT  '患者id',
+   `inpatient_id`        varchar(100)      NOT NULL COMMENT  '患者id',
+
   `visit_type`          tinyint(2)        NOT NULL COMMENT  '就诊类型 1：门诊 2：住院',
   `visit_type_code`     varchar(100)      DEFAULT NULL COMMENT  '就诊类型标志',
-  `inpatient_id`        varchar(100)      NOT NULL COMMENT  '患者住院id',
-  `in_hospital_id`      varchar(100)      DEFAULT NULL COMMENT  '住院号',
-  `in_hospital_date`    varchar(100)      DEFAULT NULL COMMENT  '住院日期',
-  `bed_id`              varchar(100)      DEFAULT NULL COMMENT  '床位号',
+  `in_hospital_id`      varchar(100)      DEFAULT NULL COMMENT  '住院号、门诊号',
+  `in_hospital_date`    datetime          DEFAULT NULL COMMENT  '入院时间',
+  `out_hospital_date`   datetime          DEFAULT NULL COMMENT  '出院时间',
+  `hospital_num`        int(11)           DEFAULT NULL COMMENT  '入院次数',
+
   `in_dept_name`        varchar(100)      DEFAULT NULL COMMENT  '入院科室',
   `out_dept_name`       varchar(100)      DEFAULT NULL COMMENT  '转出科室',
+  `bed_id`              varchar(100)      DEFAULT NULL COMMENT  '床位号',
+
+  `diag_categ_code`     varchar(20)      DEFAULT NULL COMMENT  '诊断类别代码:门诊诊断、入院诊断、主要诊断、次要诊断等',
+  `diag_code`           varchar(20)      DEFAULT NULL COMMENT  '诊断代码',
+  `diag_name`           varchar(100)     DEFAULT NULL COMMENT  '诊断名称',
+  `diag_basic`          varchar(100)     DEFAULT NULL COMMENT  '诊断依据',
+  `diag_desc`           text             DEFAULT NULL COMMENT  '诊断描述',
+  `visit_doctor_name`   varchar(50)      DEFAULT NULL COMMENT  '诊断医生姓名',
+  `diag_date`           datetime         DEFAULT NULL COMMENT  '诊断日期',
+  `diag_result`         text             DEFAULT NULL COMMENT  '诊断结果',
 
   `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
   `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
@@ -262,6 +275,6 @@ CREATE TABLE `pix_empi_his_r` (
   `ext`                 varchar(100)      DEFAULT NULL COMMENT '扩展',
   PRIMARY KEY (`id`),
   INDEX `empi` (`empi`) USING BTREE,
-  UNIQUE INDEX `patient_id` (`patient_id`, `reg_corp_id`) USING BTREE,
-  UNIQUE INDEX `inpatient_id` (`inpatient_id`, `reg_corp_id`) USING BTREE
+  UNIQUE INDEX `patient_id` (`patient_id`) USING BTREE,
+  UNIQUE INDEX `inpatient_id` (`inpatient_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='empi与HIS关联信息表';

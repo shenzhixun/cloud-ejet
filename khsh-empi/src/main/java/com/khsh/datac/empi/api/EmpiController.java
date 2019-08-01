@@ -1,9 +1,7 @@
-package com.khsh.datac.empi.controller;
+package com.khsh.datac.empi.api;
 
 import com.ejet.comm.Result;
 import com.ejet.comm.exception.CoBusinessException;
-import com.ejet.comm.exception.ExceptionCode;
-import com.ejet.comm.utils.StringUtils;
 import com.ejet.core.base.ControllerBase;
 import com.khsh.datac.empi.service.impl.EmpiServiceImpl;
 import com.khsh.datac.empi.vo.EmpiMergeVO;
@@ -28,89 +26,16 @@ public class EmpiController extends ControllerBase {
 	private final Logger log = LoggerFactory.getLogger(EmpiController.class);
 	@Autowired
 	private EmpiServiceImpl mService;
-
     /**
-     * 获取empi号码
+     * 生成EMPI，根据获取的HIS门诊、住院记录
      */
     @ResponseBody
-    @RequestMapping(value="/get-empi")
-    public Result getEmpi(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
+    @RequestMapping(value="/gen-empi")
+    public Result generateEmpi(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);
-            EmpiVO result = mService.getEmpi(param);
-            rs = new Result(result);
-        }catch (CoBusinessException e) {
-            log.error("", e);
-            rs = new Result(e.getCode(), e);
-        }catch (Exception e) {
-            log.error("", e);
-            rs = new Result(SYS_ERROR, e);
-        }
-        return rs;
-    }
-
-
-    /**
-     * 根据住院号，门诊号，姓名，查找patient信息
-     *  或者patientid获取empi及所有住院、门诊信息
-     */
-    @ResponseBody
-    @RequestMapping(value="/find-patient-info")
-    public Result findPatientInfo(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
-        Result rs = new Result();
-        try{
-            checkBindResult(bindResult);
-            EmpiVO result = mService.updateEmpiByPatientInfo(param);
-            rs = new Result(result);
-        }catch (CoBusinessException e) {
-            log.error("", e);
-            rs = new Result(e.getCode(), e);
-        }catch (Exception e) {
-            log.error("", e);
-            rs = new Result(SYS_ERROR, e);
-        }
-        return rs;
-    }
-
-
-
-    /**
-     * 获取empi号码（根据patientId）
-     */
-    @ResponseBody
-    @RequestMapping(value="/get-empi-by-patientid")
-    public Result getEmpiByPatientId(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
-        Result rs = new Result();
-        try{
-            checkBindResult(bindResult);
-            EmpiVO result = mService.queryEmpiByPatientInfo(param);
-            if(result==null || StringUtils.isBlank(result.getEmpi())) {
-                throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "查询EMPI信息为空!");
-            }
-            rs = new Result(result);
-        }catch (CoBusinessException e) {
-            log.error("", e);
-            rs = new Result(e.getCode(), e);
-        }catch (Exception e) {
-            log.error("", e);
-            rs = new Result(SYS_ERROR, e);
-        }
-        return rs;
-    }
-
-
-
-    /**
-     * 获取根据patient更新empi等注册信息（根据patientId）
-     */
-    @ResponseBody
-    @RequestMapping(value="/update-empi")
-    public Result updateEmpiByPatientInfo(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
-        Result rs = new Result();
-        try{
-            checkBindResult(bindResult);
-            EmpiVO result = mService.updateEmpiByPatientInfo(param);
+            EmpiVO result = mService.generateEmpi(param);
             rs = new Result(result);
         }catch (CoBusinessException e) {
             log.error("", e);
@@ -182,5 +107,29 @@ public class EmpiController extends ControllerBase {
         }
         return rs;
     }
+
+
+//
+//    /**
+//     * 获取根据patient更新empi等注册信息（根据patientId）
+//     */
+//    @ResponseBody
+//    @RequestMapping(value="/update-empi")
+//    public Result updateEmpiByPatientInfo(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
+//        Result rs = new Result();
+//        try{
+//            checkBindResult(bindResult);
+//            EmpiVO result = mService.updateEmpiByPatientInfo(param);
+//            rs = new Result(result);
+//        }catch (CoBusinessException e) {
+//            log.error("", e);
+//            rs = new Result(e.getCode(), e);
+//        }catch (Exception e) {
+//            log.error("", e);
+//            rs = new Result(SYS_ERROR, e);
+//        }
+//        return rs;
+//    }
+
 
 }

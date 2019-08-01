@@ -7,6 +7,7 @@ import com.github.pagehelper.PageHelper;
 import com.khsh.datac.empi.mapper.PixEmpiIdentityContactDao;
 import com.khsh.datac.empi.model.PixEmpiIdentityContactModel;
 import com.khsh.datac.empi.service.IPixEmpiIdentityContactService;
+import com.khsh.datac.empi.vo.PixEmpiIdentityContactVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,6 +65,24 @@ public class PixEmpiIdentityContactServiceImpl implements IPixEmpiIdentityContac
  		mDao.insertSingle(model);
  		return maxId;
  	}
+
+
+	/**
+	 * 批量插入认证信息
+	 * @param list
+	 * @return
+	 * @throws CoBusinessException
+	 */
+	public void insertBatch(List<PixEmpiIdentityContactVO> list) throws CoBusinessException {
+		// TODO  此处可改批量
+		if(list!=null) {
+			for (PixEmpiIdentityContactVO item : list) {
+				insertAutoKey(item);
+			}
+		}
+
+	}
+
 
 
 }

@@ -10,26 +10,44 @@ public class PixEmpiHisRModel extends CoBaseVO {
 	private java.lang.Long id;
 	/**  患者empi  */
 	private java.lang.String empi;
-	/**  注册机构id  */
+	/**  注册机构id(就诊医疗机构代码)  */
 	private java.lang.String regCorpId;
+	/**  就诊医疗机构名称  */
+	private java.lang.String regCorpName;
 	/**  患者id  */
 	private java.lang.String patientId;
-	/**    */
-	private java.lang.Integer visitType;
-	/**    */
-	private java.lang.String visitTypeCode;
-	/**  患者住院id  */
+	/**  患者id  */
 	private java.lang.String inpatientId;
-	/**  住院号  */
+	/**  就诊类型 1：门诊 2：住院  */
+	private java.lang.Integer visitType;
+	/**  就诊类型标志  */
+	private java.lang.String visitTypeCode;
+	/**  住院号、门诊号  */
 	private java.lang.String inHospitalId;
-	/**  住院日期  */
-	private java.lang.String inHospitalDate;
-	/**  床位号  */
-	private java.lang.String bedId;
+	/**  入院时间  */
+	private java.util.Date inHospitalDate;
+	/**  出院时间  */
+	private java.util.Date outHospitalDate;
+	/**  入院次数  */
+	private java.lang.Integer hospitalNum;
 	/**  入院科室  */
 	private java.lang.String inDeptName;
 	/**  转出科室  */
 	private java.lang.String outDeptName;
+	/**  床位号  */
+	private java.lang.String bedId;
+	/**  诊断类别代码:门诊诊断、入院诊断、主要诊断、次要诊断等  */
+	private java.lang.String diagCategCode;
+	/**  诊断代码  */
+	private java.lang.String diagCode;
+	/**  诊断名称  */
+	private java.lang.String diagName;
+	/**  诊断依据  */
+	private java.lang.String diagBasic;
+	/**  诊断医生姓名  */
+	private java.lang.String visitDoctorName;
+	/**  诊断日期  */
+	private java.util.Date diagDate;
 	/**  状态标识 1：正常 0：禁用  */
 	private java.lang.Integer status;
 	/**  备注  */
@@ -42,5 +60,9 @@ public class PixEmpiHisRModel extends CoBaseVO {
 	private java.lang.String updateTime;
 	/**  扩展  */
 	private java.lang.String ext;
+	/**  诊断描述  */
+	private java.lang.String diagDesc;
+	/**  诊断结果  */
+	private java.lang.String diagResult;
 
 }
