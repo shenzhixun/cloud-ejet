@@ -1,6 +1,6 @@
 package com.khsh.datac.empi.vo;
 
-import com.ejet.core.kernel.utils.DateUtil;
+import com.ejet.comm.utils.time.DateUtil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;

@@ -1,6 +1,5 @@
 package com.khsh.datacent.patientview.config;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -19,7 +18,7 @@ import java.sql.SQLException;
 @Slf4j
 @Configuration
 @MapperScan(basePackages = "com.khsh.datacent.patientview.mapper.slave", sqlSessionTemplateRef  = "slaverSqlSessionTemplate")
-public class SlaverDataSourceConfig {
+public class SlaverDataSourceConfig extends DruidBase {
 
     @Bean(name = "slaveConfig")
     @ConfigurationProperties(prefix = "spring.datasource.slave")
@@ -33,30 +32,12 @@ public class SlaverDataSourceConfig {
 
     @Bean(name = "slaverDataSource")
     public DataSource dataSource(@Qualifier("slaveConfig") IDataSourceConfig slaveConfig) {
-        DruidDataSource datasource = new DruidDataSource();
-        datasource.setDriverClassName(slaveConfig.getDriverClassName());
-        datasource.setUrl(slaveConfig.getUrl());
-        datasource.setUsername(slaveConfig.getUsername());
-        datasource.setPassword(slaveConfig.getPassword());
-        // configuration
-        datasource.setInitialSize(slaveConfig.getInitialSize());
-        datasource.setMinIdle(slaveConfig.getMinIdle());
-        datasource.setMaxActive(slaveConfig.getMaxActive());
-        datasource.setMaxWait(slaveConfig.getMaxWait());
-        datasource.setTimeBetweenEvictionRunsMillis(slaveConfig.getTimeBetweenEvictionRunsMillis());
-        datasource.setMinEvictableIdleTimeMillis(slaveConfig.getMinEvictableIdleTimeMillis());
-        datasource.setValidationQuery(slaveConfig.getValidationQuery());
-        datasource.setTestWhileIdle(slaveConfig.isTestWhileIdle());
-        datasource.setTestOnBorrow(slaveConfig.isTestOnBorrow());
-        datasource.setTestOnReturn(slaveConfig.isTestOnReturn());
-        datasource.setPoolPreparedStatements(slaveConfig.isPoolPreparedStatements());
-        datasource.setMaxPoolPreparedStatementPerConnectionSize(slaveConfig.getMaxPoolPreparedStatementPerConnectionSize());
+        DataSource datasource = null;
         try {
-            datasource.setFilters(slaveConfig.getFilters());
+            datasource = registDataSource(slaveConfig);
         } catch (SQLException e) {
             log.error("druid configuration initialization filter: ", e);
         }
-        datasource.setConnectionProperties(slaveConfig.getConnectionProperties());
         return datasource;
     }
 

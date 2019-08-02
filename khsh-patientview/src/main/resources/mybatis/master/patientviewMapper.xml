@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.khsh.datacent.patientview.mapper.slave.PatientMapper">
+<mapper namespace="com.khsh.datacent.patientview.mapper.master.PatientMapper">
 
 
     <!-- to_char(zy.rysj,'yyyymmdd') as inHospitalTime , to_char(zy.cysj,'yyyymmdd') -->
@@ -34,7 +34,7 @@
         from TB_YL_Patient_Information p
         left join TB_YL_MZ_Medical_Record mz on p.personid = mz.personid
         where mz.jzksrq is not null
-        <if test = "queryKeywords != null ">
+        <if test = "queryKeywords != null and queryKeywords!='' ">
             and (p.xm like concat(concat('%',#{queryKeywords}),'%') or
             mz.jzlsh like concat(concat('%',#{queryKeywords}),'%'))
         </if>
@@ -55,6 +55,59 @@
         </foreach>
         </if>
         order by empi
+    </select>
+
+
+    <select id="queryPatientByPage"  parameterType="com.khsh.datacent.patientview.vo.PatientRequestVO"
+            resultType="com.khsh.datacent.patientview.vo.PatientRequestVO">
+
+          SELECT
+          R.name, R.name_pin, R.age, R.sex, R.birthday, R.id_card, R.jiuzhen_card, R.huzhao_card,
+          R.yibao_card, R.yibao_card_name,
+            E.country,E.country_name,
+            E.nation, E.nation_name,
+            E.edu_degree,
+            E.job, E.job_name,
+            E.phone,
+            E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
+            E.marriage_state, E.marriage_state_name,
+            case when R.sex = '1' then '男' when R.sex = '2' then '女' else null end as sexName,
+          B.*
+        FROM pix_empi_his_r B INNER JOIN pix_empi_register R ON B.empi=R.empi
+        <if test = "queryKeywords != null and queryKeywords!='' ">
+            AND (
+              R.name like concat(concat('%',#{queryKeywords}),'%')
+              OR B.in_hospital_id like concat(concat('%',#{queryKeywords}),'%')
+              OR B.bed_id like concat(concat('%',#{queryKeywords}),'%')
+            )
+        </if>
+        <if test = "visitTypes != null and visitTypes.size() != 0">
+            AND B.visit_type in
+            <foreach collection="visitTypes" index="index" item="visitType" open="(" separator="," close=")">
+                #{visitType}
+            </foreach>
+        </if>
+        <if test=" (inHospitalStartTime!=null and inHospitalStartTime!='') or (inHospitalEndTime!=null and inHospitalEndTime!='') ">
+            <choose>
+                <when test=" (inHospitalStartTime!=null and inHospitalStartTime!='') and (inHospitalEndTime!=null and inHospitalEndTime!='') ">
+                    AND B.in_hospital_date <![CDATA[ >=#{inHospitalStartTime} ]]>
+                    AND B.in_hospital_date <![CDATA[ <=#{inHospitalEndTime} ]]>
+                </when>
+                <when test=" (inHospitalStartTime!=null and inHospitalStartTime!='') ">
+                    AND B.in_hospital_date <![CDATA[ >=#{inHospitalStartTime} ]]>
+                </when>
+                <when test=" (inHospitalEndTime!=null and inHospitalEndTime!='') ">
+                    AND B.in_hospital_date <![CDATA[ <=#{inHospitalEndTime} ]]>
+                </when>
+                <otherwise>
+
+                </otherwise>
+
+            </choose>
+        </if>
+        LEFT JOIN pix_empi_register_ext E ON E.empi=R.empi AND E.reg_uuid=R.uuid
+
+
     </select>
 
 

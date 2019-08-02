@@ -5,16 +5,16 @@
     <!-- 查询医嘱信息 -->
     <select id="queryPatientOmOrdersByPage"  parameterType="com.khsh.datacent.patientview.vo.OMOrdersDetailVO"
             resultType="com.khsh.datacent.patientview.vo.OMOrdersDetailVO">
-        select * from  OM_ORDERS_DETAIL
+        select * from  om_orders_detail
         WHERE 1=1
-        <if test = "empiID!=null  and empiID!=''">
-            and empiID=#{empiID}
+        <if test = "empi!=null  and empi!=''">
+            and empi=#{empi}
         </if>
-        <if test = "inhospNo!=null  and inhospNo!=''">
-            and inhospNo=#{inhospNo}
+        <if test = "inHospitalId!=null  and inHospitalId!=''">
+            and in_hospital_id=#{inHospitalId}
         </if>
         <if test = "ordersCategCode!=null  and ordersCategCode!=''">
-            and ordersCategCode=#{ordersCategCode}
+            and orders_categ_code=#{ordersCategCode}
         </if>
 
     </select>

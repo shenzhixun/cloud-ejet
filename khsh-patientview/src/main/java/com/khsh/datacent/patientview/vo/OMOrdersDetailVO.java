@@ -16,7 +16,7 @@ import lombok.Data;
 public class OMOrdersDetailVO extends OMOrdersDetailModel {
 
     /** 住院、门诊号 */
-    private String inhospNo;
+    //private String inHospitalId;
 
 
 

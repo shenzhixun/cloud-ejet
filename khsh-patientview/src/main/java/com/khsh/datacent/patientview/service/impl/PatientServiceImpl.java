@@ -3,11 +3,9 @@ package com.khsh.datacent.patientview.service.impl;
 import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.core.comm.PageBean;
 import com.github.pagehelper.PageHelper;
-import com.khsh.datacent.patientview.mapper.slave.PatientMapper;
+import com.khsh.datacent.patientview.mapper.master.PatientMapper;
 import com.khsh.datacent.patientview.mapper.slave.OMOdersMapper;
-import com.khsh.datacent.patientview.vo.OMOrdersDetailVO;
-import com.khsh.datacent.patientview.vo.PatientVisitReqVO;
-import com.khsh.datacent.patientview.vo.PatientVisitVO;
+import com.khsh.datacent.patientview.vo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +31,22 @@ public class PatientServiceImpl {
     @Autowired
     private OMOdersMapper omOdersMapper;
 
+//    /**
+//     * 检索患者信息
+//     *
+//     * @param model
+//     * @param pageNum
+//     * @param pageSize
+//     * @return
+//     * @throws CoBusinessException
+//     */
+//    public PageBean<PatientVisitVO> queryPatientVisitByPage(PatientVisitReqVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
+//        PageHelper.startPage(pageNum, pageSize);
+//        List<PatientVisitVO> list = mDao.queryPatientVisitByPage(model);
+//        PageBean<PatientVisitVO> page = new PageBean<>(list);
+//        return page;
+//    }
+
     /**
      * 检索患者信息
      *
@@ -42,10 +56,11 @@ public class PatientServiceImpl {
      * @return
      * @throws CoBusinessException
      */
-    public PageBean<PatientVisitVO> queryPatientByPage(PatientVisitReqVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
+    public PageBean<PatientRequestVO> queryPatientByPage(PatientRequestVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
         PageHelper.startPage(pageNum, pageSize);
-        List<PatientVisitVO> list = mDao.queryPatientVisitByPage(model);
-        PageBean<PatientVisitVO> page = new PageBean<>(list);
+        //1、首先查询患者信息
+        List<PatientRequestVO> list = mDao.queryPatientByPage(model);
+        PageBean<PatientRequestVO> page = new PageBean<>(list);
         return page;
     }
 
@@ -81,7 +96,7 @@ public class PatientServiceImpl {
     /**
      * 查询患者医嘱信息
      */
-    public PageBean<OMOrdersDetailVO>  queryPatientOmOrdersByPage(OMOrdersDetailVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
+    public PageBean<OMOrdersDetailVO> queryPatientOmOrdersByPage(OMOrdersDetailVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
         PageHelper.startPage(pageNum, pageSize);
         List<OMOrdersDetailVO> list = omOdersMapper.queryPatientOmOrdersByPage(model);
         PageBean<OMOrdersDetailVO> page = new PageBean<>(list);

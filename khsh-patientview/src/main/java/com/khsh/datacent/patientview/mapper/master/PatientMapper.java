@@ -1,6 +1,7 @@
-package com.khsh.datacent.patientview.mapper.slave;
+package com.khsh.datacent.patientview.mapper.master;
 
 import com.ejet.comm.exception.CoBusinessException;
+import com.khsh.datacent.patientview.vo.PatientRequestVO;
 import com.khsh.datacent.patientview.vo.PatientVisitReqVO;
 import com.khsh.datacent.patientview.vo.PatientVisitVO;
 import org.apache.ibatis.annotations.Mapper;
@@ -20,5 +21,7 @@ import java.util.List;
 public interface PatientMapper {
 
     public List<PatientVisitVO> queryPatientVisitByPage(PatientVisitReqVO req) throws CoBusinessException;
+
+    public List<PatientRequestVO> queryPatientByPage(PatientRequestVO req) throws CoBusinessException;
 
 }

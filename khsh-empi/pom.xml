@@ -77,12 +77,6 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.ejet</groupId>
-            <artifactId>ejet-core-kernel</artifactId>
-            <version>${ejet-module.version}</version>
-            <scope>compile</scope>
-        </dependency>
 
     </dependencies>
 
