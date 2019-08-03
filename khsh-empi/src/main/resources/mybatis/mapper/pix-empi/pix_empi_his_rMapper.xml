@@ -9,21 +9,32 @@
 			<if test="id!=null and id!='' ">and id=#{id} </if>
 			<if test="empi!=null and empi!='' ">and empi=#{empi} </if>
 			<if test="regCorpId!=null and regCorpId!='' ">and reg_corp_id=#{regCorpId} </if>
+			<if test="regCorpName!=null and regCorpName!='' ">and reg_corp_name=#{regCorpName} </if>
 			<if test="patientId!=null and patientId!='' ">and patient_id=#{patientId} </if>
-			<if test="visitType!=null ">and visit_type=#{visitType} </if>
-			<if test="visitTypeCode!=null and visitTypeCode!='' ">and visit_type_code=#{visitTypeCode} </if>
 			<if test="inpatientId!=null and inpatientId!='' ">and inpatient_id=#{inpatientId} </if>
+			<if test="visitType!=null and visitType!='' ">and visit_type=#{visitType} </if>
+			<if test="visitTypeCode!=null and visitTypeCode!='' ">and visit_type_code=#{visitTypeCode} </if>
 			<if test="inHospitalId!=null and inHospitalId!='' ">and in_hospital_id=#{inHospitalId} </if>
 			<if test="inHospitalDate!=null and inHospitalDate!='' ">and in_hospital_date=#{inHospitalDate} </if>
-			<if test="bedId!=null and bedId!='' ">and bed_id=#{bedId} </if>
+			<if test="outHospitalDate!=null and outHospitalDate!='' ">and out_hospital_date=#{outHospitalDate} </if>
+			<if test="hospitalNum!=null ">and hospital_num=#{hospitalNum} </if>
 			<if test="inDeptName!=null and inDeptName!='' ">and in_dept_name=#{inDeptName} </if>
 			<if test="outDeptName!=null and outDeptName!='' ">and out_dept_name=#{outDeptName} </if>
+			<if test="bedId!=null and bedId!='' ">and bed_id=#{bedId} </if>
+			<if test="diagCategCode!=null and diagCategCode!='' ">and diag_categ_code=#{diagCategCode} </if>
+			<if test="diagCode!=null and diagCode!='' ">and diag_code=#{diagCode} </if>
+			<if test="diagName!=null and diagName!='' ">and diag_name=#{diagName} </if>
+			<if test="diagBasic!=null and diagBasic!='' ">and diag_basic=#{diagBasic} </if>
+			<if test="visitDoctorName!=null and visitDoctorName!='' ">and visit_doctor_name=#{visitDoctorName} </if>
+			<if test="diagDate!=null and diagDate!='' ">and diag_date=#{diagDate} </if>
 			<if test="status!=null and status!='' ">and status=#{status} </if>
 			<if test="remark!=null and remark!='' ">and remark=#{remark} </if>
 			<if test="createBy!=null and createBy!='' ">and create_by=#{createBy} </if>
 			<if test="createTime!=null and createTime!='' ">and create_time=#{createTime} </if>
 			<if test="updateTime!=null and updateTime!='' ">and update_time=#{updateTime} </if>
 			<if test="ext!=null and ext!='' ">and ext=#{ext} </if>
+			<if test="diagDesc!=null and diagDesc!='' ">and diag_desc=#{diagDesc} </if>
+			<if test="diagResult!=null and diagResult!='' ">and diag_result=#{diagResult} </if>
 		</where>
 	</sql>
 	<sql id="SqlWherePK">
@@ -37,21 +48,32 @@
 			<if test="id!=null and id!='' "> id=#{id}, </if>
 			<if test="empi!=null and empi!='' "> empi=#{empi}, </if>
 			<if test="regCorpId!=null and regCorpId!='' "> reg_corp_id=#{regCorpId}, </if>
+			<if test="regCorpName!=null and regCorpName!='' "> reg_corp_name=#{regCorpName}, </if>
 			<if test="patientId!=null and patientId!='' "> patient_id=#{patientId}, </if>
-			<if test="visitType!=null "> visit_type=#{visitType}, </if>
-			<if test="visitTypeCode!=null and visitTypeCode!='' "> visit_type_code=#{visitTypeCode}, </if>
 			<if test="inpatientId!=null and inpatientId!='' "> inpatient_id=#{inpatientId}, </if>
+			<if test="visitType!=null and visitType!='' "> visit_type=#{visitType}, </if>
+			<if test="visitTypeCode!=null and visitTypeCode!='' "> visit_type_code=#{visitTypeCode}, </if>
 			<if test="inHospitalId!=null and inHospitalId!='' "> in_hospital_id=#{inHospitalId}, </if>
 			<if test="inHospitalDate!=null and inHospitalDate!='' "> in_hospital_date=#{inHospitalDate}, </if>
-			<if test="bedId!=null and bedId!='' "> bed_id=#{bedId}, </if>
+			<if test="outHospitalDate!=null and outHospitalDate!='' "> out_hospital_date=#{outHospitalDate}, </if>
+			<if test="hospitalNum!=null "> hospital_num=#{hospitalNum}, </if>
 			<if test="inDeptName!=null and inDeptName!='' "> in_dept_name=#{inDeptName}, </if>
 			<if test="outDeptName!=null and outDeptName!='' "> out_dept_name=#{outDeptName}, </if>
+			<if test="bedId!=null and bedId!='' "> bed_id=#{bedId}, </if>
+			<if test="diagCategCode!=null and diagCategCode!='' "> diag_categ_code=#{diagCategCode}, </if>
+			<if test="diagCode!=null and diagCode!='' "> diag_code=#{diagCode}, </if>
+			<if test="diagName!=null and diagName!='' "> diag_name=#{diagName}, </if>
+			<if test="diagBasic!=null and diagBasic!='' "> diag_basic=#{diagBasic}, </if>
+			<if test="visitDoctorName!=null and visitDoctorName!='' "> visit_doctor_name=#{visitDoctorName}, </if>
+			<if test="diagDate!=null and diagDate!='' "> diag_date=#{diagDate}, </if>
 			<if test="status!=null and status!='' "> status=#{status}, </if>
 			<if test="remark!=null and remark!='' "> remark=#{remark}, </if>
 			<if test="createBy!=null and createBy!='' "> create_by=#{createBy}, </if>
 			<if test="createTime!=null and createTime!='' "> create_time=#{createTime}, </if>
 			<if test="updateTime!=null and updateTime!='' "> update_time=#{updateTime}, </if>
 			<if test="ext!=null and ext!='' "> ext=#{ext}, </if>
+			<if test="diagDesc!=null and diagDesc!='' "> diag_desc=#{diagDesc}, </if>
+			<if test="diagResult!=null and diagResult!='' "> diag_result=#{diagResult}, </if>
 		</set>
 	</sql>
 

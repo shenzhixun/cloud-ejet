@@ -1,9 +1,8 @@
 package com.khsh.datacent.patientview.mapper.master;
 
 import com.ejet.comm.exception.CoBusinessException;
+import com.khsh.datacent.patientview.model.PixEmpiRModel;
 import com.khsh.datacent.patientview.vo.PatientRequestVO;
-import com.khsh.datacent.patientview.vo.PatientVisitReqVO;
-import com.khsh.datacent.patientview.vo.PatientVisitVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,8 +19,10 @@ import java.util.List;
 @Mapper
 public interface PatientMapper {
 
-    public List<PatientVisitVO> queryPatientVisitByPage(PatientVisitReqVO req) throws CoBusinessException;
+    public List<PatientRequestVO> queryPatientVisitsByPage(PatientRequestVO req) throws CoBusinessException;
 
     public List<PatientRequestVO> queryPatientByPage(PatientRequestVO req) throws CoBusinessException;
+
+    public abstract List<PixEmpiRModel> queryEmpiRelation(PixEmpiRModel obj) throws CoBusinessException;
 
 }

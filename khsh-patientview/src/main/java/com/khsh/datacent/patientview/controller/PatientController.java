@@ -73,12 +73,12 @@
 //     */
 //    @ResponseBody
 //    @RequestMapping(value="/query-patient-visit-by-page")
-//    public Result queryPatientVisitByPage(@RequestBody(required=true) Param<PatientVisitReqVO> param, BindingResult bindResult) {
+//    public Result queryPatientVisitsByPage(@RequestBody(required=true) Param<PatientVisitReqVO> param, BindingResult bindResult) {
 //        Result rs = new Result();
 //        try{
 //            checkBindResult(bindResult);
 //            checkParam(param);
-//            PageBean<PatientVisitVO> pageBean = mService.queryPatientVisitByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
+//            PageBean<PatientVisitVO> pageBean = mService.queryPatientVisitsByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
 //            rs = new Result(pageBean.getPage(), pageBean.getResult());
 //        }catch (CoBusinessException e) {
 //            log.error("", e);

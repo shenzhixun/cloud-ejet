@@ -14,8 +14,6 @@ import lombok.Data;
  */
 @Data
 public class OMOrdersDetailModel extends CoBaseVO {
-    /**  患者主索引号  */
-    private String empiID;
     /** 就诊医疗机构代码 */
     private String visitCorp;
     /** 就诊医疗机构名称 */
@@ -33,7 +31,7 @@ public class OMOrdersDetailModel extends CoBaseVO {
     /**  门诊号or住院号 */
     private String inHospitalId;
     /**  住院次数  */
-    private String inhospNum;
+    private String hospitalNum;
     /**  床位号  */
     private String bedId;
     /** 入院科室 */

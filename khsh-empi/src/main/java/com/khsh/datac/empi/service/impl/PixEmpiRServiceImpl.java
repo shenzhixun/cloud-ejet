@@ -71,7 +71,7 @@ public class PixEmpiRServiceImpl implements IPixEmpiRService {
 		if(list!=null && list.size()>0) {
 			for (PixEmpiRModel item : list) {
 				try {
-					List<PixEmpiRModel> result = mDao.queryRelation(item);
+					List<PixEmpiRModel> result = mDao.queryEmpiRelation(item);
 					if (result==null || result.size()==0) {
 						insertAutoKey(item);
 					}

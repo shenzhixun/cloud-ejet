@@ -91,7 +91,7 @@
 	</select>
 
 
-	<select  id="queryRelation" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" resultType="com.khsh.datac.empi.model.PixEmpiRModel" >
+	<select id="queryEmpiRelation" parameterType="com.khsh.datac.empi.model.PixEmpiRModel" resultType="com.khsh.datac.empi.model.PixEmpiRModel" >
 		SELECT * FROM pix_empi_r
 		where ( empi=#{empi} AND rel_empi=#{relEmpi} ) OR ( empi=#{relEmpi} AND rel_empi=#{empi} )
 	</select>

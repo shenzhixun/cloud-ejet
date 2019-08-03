@@ -26,6 +26,6 @@ public interface PixEmpiRDao {
 
 	public abstract Integer  findMaxId(PixEmpiRModel obj) throws CoBusinessException;
 
-	public abstract List<PixEmpiRModel> queryRelation(PixEmpiRModel obj) throws CoBusinessException;
+	public abstract List<PixEmpiRModel> queryEmpiRelation(PixEmpiRModel obj) throws CoBusinessException;
 
 }

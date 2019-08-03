@@ -42,9 +42,8 @@ public class ValidateUtils {
         if(StringUtils.isBlank(model.getRegSysId())) {//注册系统
             throw new CoBusinessException(ExceptionCode.PARAM_MISSING, "注册系统为空");
         }
-        model.setEmpiFlag(null);
-        model.setEmpi(null);
-        model.setUuid(null);
+        model.setEmpiFlag(Constant.EMPI_FLAG_DISABLE);
+
     }
 
 

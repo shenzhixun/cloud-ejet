@@ -7,6 +7,7 @@ import com.ejet.comm.utils.UuidUtils;
 import com.ejet.comm.utils.collect.BeanUtils;
 import com.ejet.comm.utils.time.TimeUtils;
 import com.ejet.core.global.CoConstant;
+import com.khsh.datac.empi.comm.Constant;
 import com.khsh.datac.empi.mapper.EmpiDao;
 import com.khsh.datac.empi.model.PixEmpiHisRModel;
 import com.khsh.datac.empi.model.PixEmpiModel;
@@ -20,6 +21,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 import static com.khsh.datac.empi.comm.Constant.DEFAULT_PASSWORD;
 import static com.khsh.datac.empi.utils.ValidateUtils.*;
@@ -79,8 +82,22 @@ public class EmpiServiceImpl implements IEmpiService {
      * @throws CoBusinessException
      */
     public EmpiVO generateEmpi(EmpiVO model) throws CoBusinessException {
+
+        //生成注册uuid和患者主索引
+        String regUuid = UuidUtils.getUUID();
+        model.setUuid(regUuid);
+        model.setRegUuid(regUuid);
+        //生成主索引
+        String empiNo = model.getRegCorpId() + "-" + UuidUtils.getUUID();
+        model.setEmpi(empiNo);
+
+        String time = TimeUtils.getCurrentTime();
+        model.setRegTime(time);
+        model.setCreateTime(time);
+
         /**   校验患者基本信息是否完整   */
         checkPatientBaseInfo(model);
+
         EmpiVO empi = null;
         /**
           1、首先pix_empi_his_r表中查询是否存在记录（每条记录生成一个empi）
@@ -91,6 +108,18 @@ public class EmpiServiceImpl implements IEmpiService {
         empi = extService.queryEmpiByPatient(model);
         if(empi!=null) {
             return empi;
+        }
+
+        // 防止 身份证、医保卡、就诊卡、护照等唯一标识信息都为空，无法生成主索引查询，设置医保为empiNo
+        if(StringUtils.isBlank(model.getIdCard()) && StringUtils.isBlank(model.getYibaoCard()) &&
+                StringUtils.isBlank(model.getJiuzhenCard()) && StringUtils.isBlank(model.getHuzhaoCard()) ) {
+            model.setHuzhaoCard(model.getEmpi());
+        }
+
+        /** 查询患者唯一标识是否存在 */
+        List<EmpiVO> result = extService.queryEMPIByCard(model);
+        if(result==null || result.size()==0) {
+            model.setEmpiFlag(Constant.EMPI_FLAG_ENABLE); //设置主索引
         }
 
         empi = createEmpi(model);
@@ -115,18 +144,6 @@ public class EmpiServiceImpl implements IEmpiService {
 
         /** 身份证校验及设置 */
         validateIdCardAndSet(model);
-
-        //生成注册uuid和患者主索引
-        String regUuid = UuidUtils.getUUID();
-        model.setUuid(regUuid);
-        model.setRegUuid(regUuid);
-        //生成主索引
-        String empiNo = model.getRegCorpId() + "-" + UuidUtils.getUUID();
-        model.setEmpi(empiNo);
-
-        String time = TimeUtils.getCurrentTime();
-        model.setRegTime(time);
-        model.setCreateTime(time);
 
         //插入到主索引表
         PixEmpiModel empi = new PixEmpiModel();

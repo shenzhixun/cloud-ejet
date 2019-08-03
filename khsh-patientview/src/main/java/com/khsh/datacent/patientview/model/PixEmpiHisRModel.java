@@ -51,7 +51,7 @@ public class PixEmpiHisRModel extends CoBaseVO {
 	/**  诊断名称  */ 
  	private java.lang.String diagName; 
 	/**  诊断依据  */ 
- 	private java.lang.String diagBasic;
+ 	private java.lang.String diagBasis;
 	/**  诊断描述  */
 	private java.lang.String diagDesc;
 	/**  诊断结果  */
