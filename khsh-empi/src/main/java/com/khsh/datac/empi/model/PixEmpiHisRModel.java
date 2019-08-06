@@ -1,13 +1,16 @@
 package com.khsh.datac.empi.model;
 
 import com.ejet.comm.base.CoBaseVO;
+import com.ejet.comm.utils.time.DateUtil;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 public class PixEmpiHisRModel extends CoBaseVO {
 
 	/**    */
-	private java.lang.Long id;
+	private java.lang.Integer id;
 	/**  患者empi  */
 	private java.lang.String empi;
 	/**  注册机构id(就诊医疗机构代码)  */
@@ -25,9 +28,13 @@ public class PixEmpiHisRModel extends CoBaseVO {
 	/**  住院号、门诊号  */
 	private java.lang.String inHospitalId;
 	/**  入院时间  */
-	private java.util.Date inHospitalDate;
+	@JsonFormat(pattern = DateUtil.PATTERN_DATETIME)
+	@DateTimeFormat(pattern = DateUtil.PATTERN_DATETIME)
+	private java.time.LocalDateTime inHospitalDate;
 	/**  出院时间  */
-	private java.util.Date outHospitalDate;
+	@JsonFormat(pattern = DateUtil.PATTERN_DATETIME)
+	@DateTimeFormat(pattern = DateUtil.PATTERN_DATETIME)
+	private java.time.LocalDateTime outHospitalDate;
 	/**  入院次数  */
 	private java.lang.Integer hospitalNum;
 	/**  入院科室  */

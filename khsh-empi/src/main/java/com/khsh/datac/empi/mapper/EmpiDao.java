@@ -12,7 +12,7 @@ public interface EmpiDao {
 
 	public abstract List<PixEmpiIdentityVO> queryIdentity(List<PixEmpiIdentityVO> list) throws CoBusinessException;
 	//唯一性标识empi信息的接口
-	public abstract List<EmpiVO> queryEmpiByCard(EmpiVO query) throws CoBusinessException;
+	public abstract List<EmpiVO> queryEmpiMainByCard(EmpiVO query) throws CoBusinessException;
 	// 其他唯一标识卡
 	public abstract EmpiVO queryEmpiByExtCard(EmpiVO query) throws CoBusinessException;
 	//患者PatientId\InpatientId查询

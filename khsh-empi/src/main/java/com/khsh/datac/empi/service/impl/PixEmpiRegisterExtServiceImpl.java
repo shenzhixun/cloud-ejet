@@ -60,7 +60,7 @@ public class PixEmpiRegisterExtServiceImpl implements IPixEmpiRegisterExtService
  		// 获取最大id。保证连续性
  		Integer maxId = mDao.findMaxId(null);
  		maxId = maxId==null? 1 : maxId+1;
- 		model.setId(Long.valueOf(maxId));
+ 		model.setId(maxId);
  		mDao.insertSingle(model);
  		return maxId;
  	}

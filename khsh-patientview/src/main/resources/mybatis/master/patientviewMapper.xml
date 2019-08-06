@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.khsh.datacent.patientview.mapper.master.PatientMapper">
 
+
     <!--&lt;!&ndash; to_char(zy.rysj,'yyyymmdd') as inHospitalTime , to_char(zy.cysj,'yyyymmdd') &ndash;&gt;-->
     <!--<select id="queryPatientVisitsByPage"  parameterType="com.khsh.datacent.patientview.vo.PatientVisitReqVO"-->
             <!--resultType="com.khsh.datacent.patientview.vo.PatientVisitVO">-->

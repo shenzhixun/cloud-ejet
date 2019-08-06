@@ -9,7 +9,7 @@
 			<if test="id!=null and id!='' ">and id=#{id} </if>
 			<if test="empi!=null and empi!='' ">and empi=#{empi} </if>
 			<if test="relEmpi!=null and relEmpi!='' ">and rel_empi=#{relEmpi} </if>
-			<if test="relFlag!=null and relFlag!='' ">and rel_flag=#{relFlag} </if>
+			<if test="relFlag!=null ">and rel_flag=#{relFlag} </if>
 			<if test="remark!=null and remark!='' ">and remark=#{remark} </if>
 			<if test="createBy!=null and createBy!='' ">and create_by=#{createBy} </if>
 			<if test="createTime!=null and createTime!='' ">and create_time=#{createTime} </if>
@@ -28,7 +28,7 @@
 			<if test="id!=null and id!='' "> id=#{id}, </if>
 			<if test="empi!=null and empi!='' "> empi=#{empi}, </if>
 			<if test="relEmpi!=null and relEmpi!='' "> rel_empi=#{relEmpi}, </if>
-			<if test="relFlag!=null and relFlag!='' "> rel_flag=#{relFlag}, </if>
+			<if test="relFlag!=null "> rel_flag=#{relFlag}, </if>
 			<if test="remark!=null and remark!='' "> remark=#{remark}, </if>
 			<if test="createBy!=null and createBy!='' "> create_by=#{createBy}, </if>
 			<if test="createTime!=null and createTime!='' "> create_time=#{createTime}, </if>

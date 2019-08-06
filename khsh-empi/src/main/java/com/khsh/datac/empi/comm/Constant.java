@@ -28,4 +28,10 @@ public class Constant {
     /** 渠道ID (电子病历)    */
     public static final String CHANNEL_EMR = "emr";
 
+
+    public static final Integer REL_FLAG_MAIN = 1;
+
+    public static final Integer REL_FLAG_NOTMAIN = 2;
+
+
 }

@@ -23,7 +23,7 @@ CREATE TABLE `pix_empi_register` (
   `jiuzhen_card`        varchar(100)      DEFAULT NULL COMMENT  '就诊卡',
   `huzhao_card`         varchar(100)      DEFAULT NULL COMMENT  '护照',
 
-  `empi_flag`           tinyint(2)        DEFAULT NULL COMMENT  '是否主索引标志 1：是 2：否',
+  `empi_flag`           tinyint(2)        DEFAULT '0' COMMENT '是否主索引标志 1：是 0：否',
 
   `status`              tinyint(2)        DEFAULT NULL COMMENT  '状态标识 1：正常 0：禁用',
   `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
@@ -59,6 +59,7 @@ CREATE TABLE `pix_empi_register_ext` (
   `marriage_state`      varchar(10)      DEFAULT NULL COMMENT  '婚姻状况',
   `marriage_state_name` varchar(100)      DEFAULT NULL COMMENT  '婚姻状况',
   `phone`               varchar(50)      DEFAULT NULL COMMENT  '联系电话',
+  `birth_address`       varchar(400)      DEFAULT NULL COMMENT  '出生地',
   `addr_province`       varchar(100)      DEFAULT NULL COMMENT  '联系人 省',
   `addr_city`           varchar(100)      DEFAULT NULL COMMENT  '联系人 地市',
   `addr_area`           varchar(100)      DEFAULT NULL COMMENT  '联系人 区域（县）',
@@ -223,7 +224,7 @@ CREATE TABLE `pix_empi_r` (
   `id`                  bigint(20) NOT NULL AUTO_INCREMENT,
   `empi`                varchar(100)      NOT NULL COMMENT      '患者empi',
   `rel_empi`            varchar(100)      NOT NULL COMMENT      '关联患者empi',
-  `rel_flag`            varchar(100)      NOT NULL COMMENT      '关联关系 1： 被关联 2：',
+  `rel_flag`            tinyint(1)        NOT NULL COMMENT      '关联关系 1： 被关联 2：',
 
   `remark`              varchar(200)      DEFAULT NULL COMMENT  '备注',
   `create_by`           varchar(32)       DEFAULT NULL COMMENT '创建人',

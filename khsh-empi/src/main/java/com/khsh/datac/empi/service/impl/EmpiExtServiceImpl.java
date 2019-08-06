@@ -45,7 +45,12 @@ public class EmpiExtServiceImpl {
                 !StringUtils.isBlank(model.getYibaoCard()) || !StringUtils.isBlank(model.getJiuzhenCard()) ||
                 !StringUtils.isBlank(model.getHuzhaoCard())
         ) {
-            list = mDao.queryEmpiByCard(model);
+//            EmpiVO query = new EmpiVO();
+//            query.setIdCard(model.getIdCard());
+//            query.setYibaoCard(model.getYibaoCard());
+//            query.setJiuzhenCard(model.getJiuzhenCard());
+//            query.setHuzhaoCard(model.getHuzhaoCard());
+            list = mDao.queryEmpiMainByCard(model);
         }
 
         if(list!=null && list.size()>0)
@@ -152,8 +157,8 @@ public class EmpiExtServiceImpl {
                 continue;
             }
             PixEmpiRModel  r = new PixEmpiRModel();
-            r.setEmpi(model.getEmpi());
-            r.setRelEmpi(item.getEmpi());
+            r.setEmpi(item.getEmpi());
+            r.setRelEmpi(model.getEmpi());
             r.setCreateTime(TimeUtils.getCurrentTime());
             list.add(r);
         }

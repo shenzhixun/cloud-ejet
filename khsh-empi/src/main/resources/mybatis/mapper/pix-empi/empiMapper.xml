@@ -65,7 +65,7 @@
 
 
     <!-- 根据卡信息唯一获取empi号码 -->
-    <select  id="queryEmpiByCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
+    <select id="queryEmpiMainByCard" parameterType="com.khsh.datac.empi.vo.EmpiVO" resultType="com.khsh.datac.empi.vo.EmpiVO" >
         SELECT R.*, case when R.sex = '1' then '男'
         when R.sex = '2' then '女' else null end as sexName,
         E.country,E.country_name,
@@ -75,7 +75,7 @@
         E.phone,
         E.email, E.addr_detail, E.addr_province, E.addr_city, E.addr_area,
         E.marriage_state, E.marriage_state_name
-        FROM pix_empi_register R LEFT JOIN pix_empi_register_ext E ON R.empi=E.empi AND R.uuid=E.reg_uuid
+        FROM pix_empi_register R INNER JOIN pix_empi_register_ext E ON R.empi=E.empi AND R.uuid=E.reg_uuid
         AND (
         <trim prefix="(" prefixOverrides="AND|OR" suffix=")">
             <if test="idCard!=null and idCard!='' "> OR R.id_card=#{idCard}</if>
@@ -167,11 +167,10 @@
         case when R.sex = '1' then '男' when R.sex = '2' then '女' else null end as sexName,
         B.*
         FROM pix_empi_his_r B INNER JOIN pix_empi_register R ON B.empi=R.empi
-        LEFT JOIN pix_empi_register_ext E ON E.empi=R.empi AND E.reg_uuid=R.uuid
         <if test="patientId!=null and patientId!='' "> AND B.patient_id=#{patientId} AND B.reg_corp_id=#{regCorpId} </if>
         <if test="inpatientId!=null and inpatientId!='' "> AND B.inpatient_id=#{inpatientId} AND B.reg_corp_id=#{regCorpId} </if>
+        LEFT JOIN pix_empi_register_ext E ON E.empi=R.empi AND E.reg_uuid=R.uuid
         AND R.empi_flag=1
-        -- order by R.create_time
     </select>
 
 

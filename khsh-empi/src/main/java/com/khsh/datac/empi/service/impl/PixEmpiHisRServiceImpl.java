@@ -65,7 +65,7 @@ public class PixEmpiHisRServiceImpl implements IPixEmpiHisRService {
  		// 获取最大id。保证连续性
  		Integer maxId = mDao.findMaxId(null);
  		maxId = maxId==null? 1 : maxId+1;
- 		model.setId(maxId.longValue());
+ 		model.setId(maxId);
  		mDao.insertSingle(model);
  		return maxId;
  	}

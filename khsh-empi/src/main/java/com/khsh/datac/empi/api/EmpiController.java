@@ -29,12 +29,13 @@ public class EmpiController extends ControllerBase {
 	private EmpiServiceImpl mService;
     @Autowired
     private EmpiExtServiceImpl extService;
+
     /**
-     * 生成EMPI，根据获取的HIS门诊、住院记录
+     * 获取empi号码
      */
     @ResponseBody
-    @RequestMapping(value="/gen-empi")
-    public Result generateEmpi(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
+    @RequestMapping(value="/get-empi")
+    public Result getEmpi(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);

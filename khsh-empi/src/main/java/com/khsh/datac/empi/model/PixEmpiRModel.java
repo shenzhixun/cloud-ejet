@@ -12,7 +12,7 @@ public class PixEmpiRModel extends CoBaseVO {
     /**  关联患者empi  */
     private java.lang.String relEmpi;
     /**  关联关系 1： 被关联 2：  */
-    private java.lang.String relFlag;
+    private java.lang.Integer relFlag;
     /**  备注  */
     private java.lang.String remark;
     /**  创建人  */

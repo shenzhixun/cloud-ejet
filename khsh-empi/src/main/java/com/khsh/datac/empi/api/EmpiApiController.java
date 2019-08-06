@@ -33,6 +33,27 @@ public class EmpiApiController extends ControllerBase {
     private EmpiServiceImpl mService;
 
     /**
+     * 生成EMPI，根据获取的HIS门诊、住院记录
+     */
+    @ResponseBody
+    @RequestMapping(value="/gen-empi")
+    public Result generateEmpi(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
+        Result rs = new Result();
+        try{
+            checkBindResult(bindResult);
+            EmpiVO result = mService.generateEmpi(param);
+            rs = new Result(result);
+        }catch (CoBusinessException e) {
+            log.error("", e);
+            rs = new Result(e.getCode(), e);
+        }catch (Exception e) {
+            log.error("", e);
+            rs = new Result(SYS_ERROR, e);
+        }
+        return rs;
+    }
+
+    /**
      * 获取empi号码（根据patientId）
      */
     @ResponseBody
@@ -57,52 +78,6 @@ public class EmpiApiController extends ControllerBase {
     }
 
 
-//    /**
-//     *
-//     *  360患者视图信息
-//     *
-//     * 根据住院号，门诊号，姓名，查找patient信息
-//     *  或者patientid获取empi及所有住院、门诊信息
-//     */
-//    @ResponseBody
-//    @RequestMapping(value="/find-patient-info")
-//    public Result findPatientInfo(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
-//        Result rs = new Result();
-//        try{
-//            checkBindResult(bindResult);
-//            EmpiVO result = mService.updateEmpiByPatientInfo(param);
-//            rs = new Result(result);
-//        }catch (CoBusinessException e) {
-//            log.error("", e);
-//            rs = new Result(e.getCode(), e);
-//        }catch (Exception e) {
-//            log.error("", e);
-//            rs = new Result(SYS_ERROR, e);
-//        }
-//        return rs;
-//    }
-
-
-    /**
-     * 获取empi号码
-     */
-    @ResponseBody
-    @RequestMapping(value="/get-empi")
-    public Result getEmpi(@RequestBody(required=true) EmpiVO param, BindingResult bindResult) {
-        Result rs = new Result();
-        try{
-            checkBindResult(bindResult);
-            EmpiVO result = mService.generateEmpi(param);
-            rs = new Result(result);
-        }catch (CoBusinessException e) {
-            log.error("", e);
-            rs = new Result(e.getCode(), e);
-        }catch (Exception e) {
-            log.error("", e);
-            rs = new Result(SYS_ERROR, e);
-        }
-        return rs;
-    }
 
 
 }

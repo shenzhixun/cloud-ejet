@@ -6,7 +6,7 @@ import lombok.Data;
 @Data
 public class PixEmpiRegisterExtModel extends CoBaseVO {
 	/**    */
- 	private Long id;
+ 	private Integer id;
 	/**  注册uuid号  */
  	private String regUuid;
 	/**  患者empi  */
@@ -31,6 +31,8 @@ public class PixEmpiRegisterExtModel extends CoBaseVO {
  	private String marriageStateName;
 	/**  联系电话  */
  	private String phone;
+ 	/** 出生地 */
+ 	private String birthAddress;
 	/**  联系人 省  */
  	private String addrProvince;
 	/**  联系人 地市  */

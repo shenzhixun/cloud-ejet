@@ -4,6 +4,7 @@ import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.comm.exception.ExceptionCode;
 import com.ejet.core.comm.PageBean;
 import com.github.pagehelper.PageHelper;
+import com.khsh.datac.empi.comm.Constant;
 import com.khsh.datac.empi.mapper.PixEmpiRDao;
 import com.khsh.datac.empi.model.PixEmpiRModel;
 import com.khsh.datac.empi.service.IPixEmpiRService;
@@ -68,11 +69,13 @@ public class PixEmpiRServiceImpl implements IPixEmpiRService {
 	 * @throws CoBusinessException
 	 */
 	public void queryAndInsert(List<PixEmpiRModel> list) throws CoBusinessException {
+
 		if(list!=null && list.size()>0) {
 			for (PixEmpiRModel item : list) {
 				try {
 					List<PixEmpiRModel> result = mDao.queryEmpiRelation(item);
 					if (result==null || result.size()==0) {
+						item.setRelFlag(Constant.REL_FLAG_MAIN);
 						insertAutoKey(item);
 					}
 				}catch (CoBusinessException e) {

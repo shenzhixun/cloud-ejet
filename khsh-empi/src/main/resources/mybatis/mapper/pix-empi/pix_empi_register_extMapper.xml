@@ -19,6 +19,7 @@
 			<if test="marriageState!=null and marriageState!='' ">and marriage_state=#{marriageState} </if>
 			<if test="marriageStateName!=null and marriageStateName!='' ">and marriage_state_name=#{marriageStateName} </if>
 			<if test="phone!=null and phone!='' ">and phone=#{phone} </if>
+			<if test="birthAddress!=null and birthAddress!='' ">and birth_address=#{birthAddress} </if>
 			<if test="addrProvince!=null and addrProvince!='' ">and addr_province=#{addrProvince} </if>
 			<if test="addrCity!=null and addrCity!='' ">and addr_city=#{addrCity} </if>
 			<if test="addrArea!=null and addrArea!='' ">and addr_area=#{addrArea} </if>
@@ -57,6 +58,7 @@
 			<if test="marriageState!=null and marriageState!='' "> marriage_state=#{marriageState}, </if>
 			<if test="marriageStateName!=null and marriageStateName!='' "> marriage_state_name=#{marriageStateName}, </if>
 			<if test="phone!=null and phone!='' "> phone=#{phone}, </if>
+			<if test="birthAddress!=null and birthAddress!='' "> birth_address=#{birthAddress}, </if>
 			<if test="addrProvince!=null and addrProvince!='' "> addr_province=#{addrProvince}, </if>
 			<if test="addrCity!=null and addrCity!='' "> addr_city=#{addrCity}, </if>
 			<if test="addrArea!=null and addrArea!='' "> addr_area=#{addrArea}, </if>
@@ -80,13 +82,13 @@
 		 INSERT INTO pix_empi_register_ext (
  			reg_uuid, empi, country, country_name, 
  			nation, nation_name, edu_degree, job, job_name, 
- 			marriage_state, marriage_state_name, phone, addr_province, addr_city, 
+ 			marriage_state, marriage_state_name, phone, birth_address, addr_province, addr_city,
  			addr_area, addr_detail, zip_code, email, work_dept, 
  			work_address, status, remark, create_by, create_time, 
  			update_time, ext, gson_ext ) 	 VALUES ( 
  			#{regUuid}, #{empi}, #{country}, #{countryName}, 
  			#{nation}, #{nationName}, #{eduDegree}, #{job}, #{jobName}, 
- 			#{marriageState}, #{marriageStateName}, #{phone}, #{addrProvince}, #{addrCity}, 
+ 			#{marriageState}, #{marriageStateName}, #{phone}, #{birthAddress}, #{addrProvince}, #{addrCity},
  			#{addrArea}, #{addrDetail}, #{zipCode}, #{email}, #{workDept}, 
  			#{workAddress}, #{status}, #{remark}, #{createBy}, #{createTime}, 
  			#{updateTime}, #{ext}, #{gsonExt} ) 
@@ -96,14 +98,14 @@
 		 INSERT INTO pix_empi_register_ext (
  			reg_uuid, empi, country, country_name, 
  			nation, nation_name, edu_degree, job, job_name, 
- 			marriage_state, marriage_state_name, phone, addr_province, addr_city, 
+ 			marriage_state, marriage_state_name, phone, birth_address, addr_province, addr_city,
  			addr_area, addr_detail, zip_code, email, work_dept, 
  			work_address, status, remark, create_by, create_time, 
  			update_time, ext, gson_ext,  id ) 
 		 VALUES( 
  			#{regUuid}, #{empi}, #{country}, #{countryName}, 
  			#{nation}, #{nationName}, #{eduDegree}, #{job}, #{jobName}, 
- 			#{marriageState}, #{marriageStateName}, #{phone}, #{addrProvince}, #{addrCity}, 
+ 			#{marriageState}, #{marriageStateName}, #{phone}, #{birthAddress}, #{addrProvince}, #{addrCity},
  			#{addrArea}, #{addrDetail}, #{zipCode}, #{email}, #{workDept}, 
  			#{workAddress}, #{status}, #{remark}, #{createBy}, #{createTime}, 
  			#{updateTime}, #{ext}, #{gsonExt},  #{id} ) 

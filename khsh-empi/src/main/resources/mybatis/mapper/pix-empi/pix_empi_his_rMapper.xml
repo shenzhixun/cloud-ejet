@@ -63,7 +63,7 @@
 			<if test="diagCategCode!=null and diagCategCode!='' "> diag_categ_code=#{diagCategCode}, </if>
 			<if test="diagCode!=null and diagCode!='' "> diag_code=#{diagCode}, </if>
 			<if test="diagName!=null and diagName!='' "> diag_name=#{diagName}, </if>
-			<if test="diagBasic!=null and diagBasic!='' "> diag_basic=#{diagBasic}, </if>
+			<if test="diagBasis!=null and diagBasis!='' "> diag_basis=#{diagBasis}, </if>
 			<if test="visitDoctorName!=null and visitDoctorName!='' "> visit_doctor_name=#{visitDoctorName}, </if>
 			<if test="diagDate!=null and diagDate!='' "> diag_date=#{diagDate}, </if>
 			<if test="status!=null and status!='' "> status=#{status}, </if>
@@ -80,27 +80,35 @@
 
 	<insert  id="insertAutoKey" parameterType="com.khsh.datac.empi.model.PixEmpiHisRModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_his_r (
- 			empi, reg_corp_id, patient_id, visit_type, 
- 			visit_type_code, inpatient_id, in_hospital_id, in_hospital_date, bed_id, 
- 			in_dept_name, out_dept_name, status, remark, create_by, 
- 			create_time, update_time, ext ) 	 VALUES ( 
- 			#{empi}, #{regCorpId}, #{patientId}, #{visitType}, 
- 			#{visitTypeCode}, #{inpatientId}, #{inHospitalId}, #{inHospitalDate}, #{bedId}, 
- 			#{inDeptName}, #{outDeptName}, #{status}, #{remark}, #{createBy}, 
- 			#{createTime}, #{updateTime}, #{ext} ) 
+ 			empi, reg_corp_id, reg_corp_name, patient_id,
+ 			inpatient_id, visit_type, visit_type_code, in_hospital_id, in_hospital_date,
+ 			out_hospital_date, hospital_num, in_dept_name, out_dept_name, bed_id,
+ 			diag_categ_code, diag_code, diag_name, diag_basis, visit_doctor_name,
+ 			diag_date, status, remark, create_by, create_time,
+ 			update_time, ext, diag_desc, diag_result ) 	 VALUES (
+ 			#{empi}, #{regCorpId}, #{regCorpName}, #{patientId},
+ 			#{inpatientId}, #{visitType}, #{visitTypeCode}, #{inHospitalId}, #{inHospitalDate},
+ 			#{outHospitalDate}, #{hospitalNum}, #{inDeptName}, #{outDeptName}, #{bedId},
+ 			#{diagCategCode}, #{diagCode}, #{diagName}, #{diagBasis}, #{visitDoctorName},
+ 			#{diagDate}, #{status}, #{remark}, #{createBy}, #{createTime},
+ 			#{updateTime}, #{ext}, #{diagDesc}, #{diagResult} )
 	</insert>
 
 	<insert  id="insertSingle" parameterType="com.khsh.datac.empi.model.PixEmpiHisRModel" useGeneratedKeys="true" keyProperty="id" >
 		 INSERT INTO pix_empi_his_r (
- 			empi, reg_corp_id, patient_id, visit_type, 
- 			visit_type_code, inpatient_id, in_hospital_id, in_hospital_date, bed_id, 
- 			in_dept_name, out_dept_name, status, remark, create_by, 
- 			create_time, update_time, ext,  id ) 
-		 VALUES( 
- 			#{empi}, #{regCorpId}, #{patientId}, #{visitType}, 
- 			#{visitTypeCode}, #{inpatientId}, #{inHospitalId}, #{inHospitalDate}, #{bedId}, 
- 			#{inDeptName}, #{outDeptName}, #{status}, #{remark}, #{createBy}, 
- 			#{createTime}, #{updateTime}, #{ext},  #{id} ) 
+ 			empi, reg_corp_id, reg_corp_name, patient_id,
+ 			inpatient_id, visit_type, visit_type_code, in_hospital_id, in_hospital_date,
+ 			out_hospital_date, hospital_num, in_dept_name, out_dept_name, bed_id,
+ 			diag_categ_code, diag_code, diag_name, diag_basis, visit_doctor_name,
+ 			diag_date, status, remark, create_by, create_time,
+ 			update_time, ext, diag_desc, diag_result,  id )
+		 VALUES(
+ 			#{empi}, #{regCorpId}, #{regCorpName}, #{patientId},
+ 			#{inpatientId}, #{visitType}, #{visitTypeCode}, #{inHospitalId}, #{inHospitalDate},
+ 			#{outHospitalDate}, #{hospitalNum}, #{inDeptName}, #{outDeptName}, #{bedId},
+ 			#{diagCategCode}, #{diagCode}, #{diagName}, #{diagBasis}, #{visitDoctorName},
+ 			#{diagDate}, #{status}, #{remark}, #{createBy}, #{createTime},
+ 			#{updateTime}, #{ext}, #{diagDesc}, #{diagResult},  #{id} )
 	</insert>
 
 	<delete  id="delete" parameterType="com.khsh.datac.empi.model.PixEmpiHisRModel" >

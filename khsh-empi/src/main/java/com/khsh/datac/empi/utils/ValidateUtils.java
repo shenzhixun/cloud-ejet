@@ -87,7 +87,6 @@ public class ValidateUtils {
                     if(model.getSex()==null) {
                         model.setSex(Integer.valueOf((tmp[1]))%2);
                     }
-                    model.setEmpiFlag(Constant.EMPI_FLAG_ENABLE);
                 }
             } catch (CoBusinessException e) {
                 log.error("", e);
