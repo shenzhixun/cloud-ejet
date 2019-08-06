@@ -85,9 +85,42 @@
 
     <build>
         <!-- 生成的项目jar包的名字-->
-        <finalName>empi-service</finalName>
+        <finalName>empi</finalName>
         <!--源代码路径-->
         <sourceDirectory>src/main/java</sourceDirectory>
+
+        <!--<resources>
+            &lt;!&ndash;这两个resource节点负责把配置文件拷贝到classes目录下，保证运行时可以找到配置文件&ndash;&gt;
+            <resource>
+                &lt;!&ndash;开启filter功能，将路径中的属性名替换为对应的属性值&ndash;&gt;
+                <filtering>true</filtering>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>**/application*.yml</include>
+                    <include>**/application*.yaml</include>
+                    <include>**/application*.properties</include>
+                    <include>**/logback-spring.xml</include>
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>**/application*.yml</exclude>
+                    <exclude>**/application*.yaml</exclude>
+                    <exclude>**/application*.properties</exclude>
+                    <exclude>**/logback-spring.xml</exclude>
+                </excludes>
+            </resource>
+
+            &lt;!&ndash;compile 和 package 时都会使用resource节点的配置&ndash;&gt;
+            &lt;!&ndash;resource 节点可通过配置将制定目录的文件在打包后拷贝到制定目录&ndash;&gt;
+            &lt;!&ndash;如果只有这一个resource节点，或者如果把这个resource节点配置在最前面，则会直接把配置文件打包到conf目录classes目录下不会有配置文件，导致IDEA运行时找不到配置文件&ndash;&gt;
+            <resource>
+                <directory>src/main/resources</directory>
+                <targetPath>${project.build.directory}/install/conf</targetPath>
+            </resource>
+        </resources>-->
 
         <plugins>
             <!-- 打JAR包 -->
@@ -96,10 +129,10 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <!-- 不打包资源文件（配置文件和依赖包分开） -->
-                    <excludes>
-                        <exclude>*.**</exclude>
-                        <exclude>*/*.xml</exclude>
-                    </excludes>
+                    <!--<excludes>-->
+                    <!--<exclude>*.**</exclude>-->
+                    <!--<exclude>*/*.xml</exclude>-->
+                    <!--</excludes>-->
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
@@ -112,7 +145,7 @@
                         </manifest>
                         <!--将资源文件目录添加到classpath中，打包后运行项目时则会在该目录下加载配置文件-->
                         <manifestEntries>
-                            <Class-Path>./resources/ libs/ejet-comm-utils-2.0.0.jar </Class-Path>
+                            <Class-Path>./resources/ libs/ejet-comm-utils-1.0-SNAPSHOT.jar libs/ejet-comm-result-1.0-SNAPSHOT.jar libs/ejet-comm-web-1.0-SNAPSHOT.jar libs/ejet-comm-web-db-1.0-SNAPSHOT.jar </Class-Path>
                         </manifestEntries>
                     </archive>
                     <outputDirectory>${project.build.directory}/install/</outputDirectory>
@@ -150,7 +183,7 @@
                         <configuration>
                             <resources>
                                 <resource>
-                                    <directory>src/main/resourcAuthServiceImples</directory>
+                                    <directory>src/main/resources</directory>
                                     <!--<excludes>
                                         <include>src/main/resources/mybatis/*</include>
                                     </excludes>-->
@@ -176,6 +209,8 @@
 
         </plugins>
     </build>
+
+
 
 
 </project>

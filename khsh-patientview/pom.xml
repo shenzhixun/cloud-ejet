@@ -76,7 +76,7 @@
 
     <build>
         <!-- 生成的项目jar包的名字-->
-        <finalName>ejet-demo</finalName>
+        <finalName>patientview</finalName>
         <!--源代码路径-->
         <sourceDirectory>src/main/java</sourceDirectory>
 
@@ -120,10 +120,10 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
                     <!-- 不打包资源文件（配置文件和依赖包分开） -->
-                    <excludes>
-                        <exclude>*.**</exclude>
-                        <exclude>*/*.xml</exclude>
-                    </excludes>
+                    <!--<excludes>-->
+                        <!--<exclude>*.**</exclude>-->
+                        <!--<exclude>*/*.xml</exclude>-->
+                    <!--</excludes>-->
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
@@ -132,7 +132,7 @@
                             <!-- jar包不包含唯一版本标识 -->
                             <useUniqueVersions>false</useUniqueVersions>
                             <!--指定入口类 -->
-                            <mainClass>com.whlyy.yyt.Application</mainClass>
+                            <mainClass>com.khsh.datacent.patientview.PatientViewApplication</mainClass>
                         </manifest>
                         <!--将资源文件目录添加到classpath中，打包后运行项目时则会在该目录下加载配置文件-->
                         <manifestEntries>

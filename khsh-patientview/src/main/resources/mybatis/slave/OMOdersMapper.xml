@@ -10,7 +10,7 @@
         <if test = "empi!=null  and empi!=''">
             and empi=#{empi}
         </if>
-        <if test = "visitType!=null  and visitType!=''">
+        <if test = "visitType!=null and visitType!=''">
             and visit_type=#{visitType}
         </if>
         <if test = "inHospitalId!=null  and inHospitalId!=''">

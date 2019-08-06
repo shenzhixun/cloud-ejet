@@ -21,11 +21,11 @@ import java.util.List;
  */
 @Slf4j
 @SpringBootApplication
-public class PatientViewApp extends SpringBootServletInitializer {
+public class PatientViewApplication extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(PatientViewApp.class);
+        return application.sources(PatientViewApplication.class);
     }
 
     static {
@@ -34,7 +34,7 @@ public class PatientViewApp extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         List<Class> list  = new ArrayList<>();
-        list.add(PatientViewApp.class);      //本项目
+        list.add(PatientViewApplication.class);      //本项目
         list.add(CommWebApplication.class);         //基础项目
         SpringApplication.run(list.toArray(new Class[list.size()]), args);
     }

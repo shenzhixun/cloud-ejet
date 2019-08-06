@@ -54,9 +54,11 @@
         <module>../ejet-comm-result</module>
         <module>../ejet-comm-web</module>
         <module>../ejet-comm-web-db</module>
-        <module>../khsh-empi</module>
-        <module>../ejet-dynamic-db</module>
         <module>../ejet-comm-web-uploadfile</module>
+        <module>../ejet-dynamic-db</module>
+
+        <module>../khsh-empi</module>
+        <module>../khsh-patientview</module>
     </modules>
 
     <dependencies>
