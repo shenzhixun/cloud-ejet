@@ -78,6 +78,9 @@ public class PatientServiceImpl {
      * @throws CoBusinessException
      */
     public PageBean<PatientRequestVO> queryPatientVisitsByPage(PatientRequestVO model, Integer pageNum, Integer pageSize) throws CoBusinessException {
+        if(model==null || StringUtils.isBlank(model.getEmpi())) {
+            throw new CoBusinessException("empi参数缺失!");
+        }
         HashSet<String> result = new HashSet<>();
         result.add(model.getEmpi());
 

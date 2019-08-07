@@ -18,6 +18,10 @@ public class OMOrdersDetailModel extends CoBaseVO {
     private String visitCorp;
     /** 就诊医疗机构名称 */
     private String visitCorpName;
+    /**  患者id  */
+    private java.lang.String patientId;
+    /**  患者id  */
+    private java.lang.String inpatientId;
     /**  就诊类型  */
     private String visitType;
     /**  就诊类型标识  */

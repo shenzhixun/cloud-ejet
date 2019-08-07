@@ -172,24 +172,31 @@
 
 
     <select  id="queryEmpiRelation" parameterType="com.khsh.datacent.patientview.model.PixEmpiRModel" resultType="com.khsh.datacent.patientview.model.PixEmpiRModel" >
-		SELECT * FROM pix_empi_r where 1=1
-        <if test=" (empi!=null and empi!='') or (relEmpi!=null and relEmpi!='') ">
-            <choose>
-                <when test=" (empi!=null and empi!='') and (relEmpi!=null and relEmpi!='') ">
-                    AND (empi=#{empi} OR rel_empi=#{empi})  OR (empi=#{relEmpi} OR rel_empi=#{relEmpi})
-                </when>
-                <when test=" (empi!=null and empi!='') ">
-                    AND empi=#{empi} OR rel_empi=#{empi}
-                </when>
-                <when test=" (rel_empi!=null and rel_empi!='') ">
-                    AND empi=#{relEmpi} OR rel_empi=#{relEmpi}
-                </when>
-                <otherwise>
+		SELECT * FROM pix_empi_r where
+        empi=#{empi} OR rel_empi=#{empi}
+        UNION ALL
+        SELECT B.* FROM  pix_empi_r B INNER JOIN (
+          SELECT empi FROM pix_empi_r
+          where empi=#{empi} OR rel_empi=#{empi}
+        ) T ON B.empi=T.empi
+        <!--<if test=" (empi!=null and empi!='') or (relEmpi!=null and relEmpi!='') ">-->
+            <!--<choose>-->
+                <!--<when test=" (empi!=null and empi!='') and (relEmpi!=null and relEmpi!='') ">-->
+                    <!--AND (empi=#{empi} OR rel_empi=#{empi})  OR (empi=#{relEmpi} OR rel_empi=#{relEmpi})-->
+                <!--</when>-->
+                <!--<when test=" (empi!=null and empi!='') ">-->
+                    <!--AND empi=#{empi} OR rel_empi=#{empi}-->
+                <!--</when>-->
+                <!--<when test=" (rel_empi!=null and rel_empi!='') ">-->
+                    <!--AND empi=#{relEmpi} OR rel_empi=#{relEmpi}-->
+                <!--</when>-->
+                <!--<otherwise>-->
 
-                </otherwise>
+                <!--</otherwise>-->
 
-            </choose>
-        </if>
-	</select>
+            <!--</choose>-->
+        <!--</if>-->
+
+    </select>
 
 </mapper>

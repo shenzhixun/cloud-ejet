@@ -7,8 +7,11 @@
             resultType="com.khsh.datacent.patientview.vo.OMOrdersDetailVO">
         select * from  om_orders_detail
         WHERE 1=1
-        <if test = "empi!=null  and empi!=''">
-            and empi=#{empi}
+        <if test = "patientId!=null  and patientId!=''">
+            and patient_id=#{patientId}
+        </if>
+        <if test = "inpatientId!=null  and inpatientId!=''">
+            and inpatient_id=#{inpatientId}
         </if>
         <if test = "visitType!=null and visitType!=''">
             and visit_type=#{visitType}
