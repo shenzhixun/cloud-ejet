@@ -105,5 +105,10 @@ public class EmpiVO extends PixEmpiRegisterVO implements Serializable {
     /** 社保卡 */
     private String shebaoCard;
 
+    /**
+     * visitType传值转换使用
+     */
+    private String visitTypeName;
+
 
 }

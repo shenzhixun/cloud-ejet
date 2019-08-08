@@ -83,6 +83,8 @@ public class EmpiServiceImpl implements IEmpiService {
      */
     public EmpiVO generateEmpi(EmpiVO model) throws CoBusinessException {
 
+        model.setVisitType(visitTypeFormat(model.getVisitTypeName()));
+
         //生成注册uuid和患者主索引
         String regUuid = UuidUtils.getUUID();
         model.setUuid(regUuid);

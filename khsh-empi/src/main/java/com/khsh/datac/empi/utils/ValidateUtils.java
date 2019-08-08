@@ -149,4 +149,17 @@ public class ValidateUtils {
     }
 
 
+    public static int visitTypeFormat(String visitTypeName) {
+        int visitType = 2;
+        try {
+            if(!StringUtils.isBlank(visitTypeName)) {
+                visitType = Integer.parseInt(visitTypeName);
+            }
+        }catch (Exception e) {
+
+        }
+        return visitType;
+    }
+
+
 }
