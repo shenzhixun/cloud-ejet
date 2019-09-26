@@ -1,12 +1,12 @@
-package com.khsh.datacent.patientview.vo;
+package com.khsh.datacent.patientview.dto;
 
+import com.khsh.datacent.patientview.vo.PatientVO;
 import lombok.Data;
 
 import java.util.HashSet;
 import java.util.List;
 
 /**
- * Copyright (C), 2016-2019, 武汉康华数海有限公司
  * FileName: PatientVO
  * Author:   ShenYijie
  * CreateDate:     2019-01-26 16:12
@@ -15,15 +15,7 @@ import java.util.List;
  * Version: 1.0
  */
 @Data
-public class PatientRequestVO extends PatientVO {
-    /**
-     * 性别名称
-     */
-    private String sexName;
-    /**
-     * 就诊类型
-     */
-    private String visitTypeName;
+public class PatientParam extends PatientVO {
 
     /**  患者查询关键字（姓名，住院号，或者门诊号，手机号，身份证号） */
     private String queryKeywords;
@@ -35,7 +27,11 @@ public class PatientRequestVO extends PatientVO {
     private List<String> visitTypes;
     /** 关联的empi信息列表 */
     private HashSet<String> empiRels;
-    
+
+    /** 请求查询类型 1: 根据住院号查询 2：根据patientid或者inpatientid查询 3：根据身份证查询 */
+    private Integer type;
+    /**  患者查询关键字（姓名，住院号，或者门诊号，手机号，身份证号） */
+    private String keywords;
 
 
 }

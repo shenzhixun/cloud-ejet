@@ -1,7 +1,7 @@
 package com.khsh.datacent.patientview.mapper.slave;
 
 import com.ejet.comm.exception.CoBusinessException;
-import com.khsh.datacent.patientview.vo.OMOrdersDetailVO;
+import com.khsh.datacent.patientview.vo.OMOrdersDetailResult;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -19,6 +19,6 @@ import java.util.List;
 @Mapper
 public interface OMOdersMapper {
 
-    public List<OMOrdersDetailVO> queryPatientOmOrdersByPage(OMOrdersDetailVO req) throws CoBusinessException;
+    public List<OMOrdersDetailResult> queryPatientOmOrdersByPage(OMOrdersDetailResult req) throws CoBusinessException;
 
 }

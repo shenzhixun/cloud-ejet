@@ -13,7 +13,7 @@ import lombok.Data;
  * Version: 1.0
  */
 @Data
-public class OMOrdersDetailVO extends OMOrdersDetailModel {
+public class OMOrdersDetailResult extends OMOrdersDetailModel {
 
     /**  患者主索引号  */
     private String empi;

@@ -6,8 +6,8 @@ import com.ejet.comm.exception.CoBusinessException;
 import com.ejet.core.base.ControllerBase;
 import com.ejet.core.comm.PageBean;
 import com.khsh.datacent.patientview.service.impl.PatientServiceImpl;
-import com.khsh.datacent.patientview.vo.OMOrdersDetailVO;
-import com.khsh.datacent.patientview.vo.PatientRequestVO;
+import com.khsh.datacent.patientview.vo.OMOrdersDetailResult;
+import com.khsh.datacent.patientview.vo.PatientResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,12 +44,12 @@ public class PatientController extends ControllerBase {
      */
     @ResponseBody
     @RequestMapping(value="/query-patient")
-    public Result queryPatientByPage(@RequestBody(required=true) Param<PatientRequestVO> param, BindingResult bindResult) {
+    public Result queryPatientByPage(@RequestBody(required=true) Param<PatientResult> param, BindingResult bindResult) {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);
             checkParam(param);
-            PageBean<PatientRequestVO> pageBean = mService.queryPatientByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
+            PageBean<PatientResult> pageBean = mService.queryPatientByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
             rs = new Result(pageBean.getPage(), pageBean.getResult());
         }catch (CoBusinessException e) {
             log.error("", e);
@@ -71,12 +71,12 @@ public class PatientController extends ControllerBase {
      */
     @ResponseBody
     @RequestMapping(value="/query-patient-visits")
-    public Result queryPatientVisitByPage(@RequestBody(required=true) Param<PatientRequestVO> param, BindingResult bindResult) {
+    public Result queryPatientVisitByPage(@RequestBody(required=true) Param<PatientResult> param, BindingResult bindResult) {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);
             checkParam(param);
-            PageBean<PatientRequestVO> pageBean = mService.queryPatientVisitsByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
+            PageBean<PatientResult> pageBean = mService.queryPatientVisitsByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
             rs = new Result(pageBean.getPage(), pageBean.getResult());
         }catch (CoBusinessException e) {
             log.error("", e);
@@ -95,12 +95,12 @@ public class PatientController extends ControllerBase {
      */
     @ResponseBody
     @RequestMapping(value="/omorders-by-page")
-    public Result queryPatientOmOrdersByPage(@RequestBody(required=true) Param<OMOrdersDetailVO> param, BindingResult bindResult) {
+    public Result queryPatientOmOrdersByPage(@RequestBody(required=true) Param<OMOrdersDetailResult> param, BindingResult bindResult) {
         Result rs = new Result();
         try{
             checkBindResult(bindResult);
             checkParam(param);
-            PageBean<OMOrdersDetailVO> pageBean = mService.queryPatientOmOrdersByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
+            PageBean<OMOrdersDetailResult> pageBean = mService.queryPatientOmOrdersByPage(param.getData(), param.getPage().getPageNum(), param.getPage().getPageSize());
             rs = new Result(pageBean.getPage(), pageBean.getResult());
         }catch (CoBusinessException e) {
             log.error("", e);
@@ -111,7 +111,6 @@ public class PatientController extends ControllerBase {
         }
         return rs;
     }
-
 
 
 }

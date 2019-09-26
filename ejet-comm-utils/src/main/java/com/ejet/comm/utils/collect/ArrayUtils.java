@@ -176,4 +176,14 @@ public class ArrayUtils {
         Integer[] array = ObjectUtils.transformIntArray(sourceArray);
         return getNext(array, value, defaultValue, isCircle);
     }
+
+    /**
+     * 是否为空
+     * @param data
+     * @return
+     */
+    public boolean isEmpty(byte[] data) {
+        return data!=null && data.length>0;
+    }
+
 }

@@ -71,8 +71,6 @@ public class PixEmpiHisRModel extends CoBaseVO {
 	/**  修改时间  */ 
  	private java.lang.String updateTime; 
 	/**  扩展  */ 
- 	private java.lang.String ext; 
-
-
+ 	private java.lang.String ext;
 
 }

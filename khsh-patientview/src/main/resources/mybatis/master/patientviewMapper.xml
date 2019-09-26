@@ -3,62 +3,9 @@
 <mapper namespace="com.khsh.datacent.patientview.mapper.master.PatientMapper">
 
 
-    <!--&lt;!&ndash; to_char(zy.rysj,'yyyymmdd') as inHospitalTime , to_char(zy.cysj,'yyyymmdd') &ndash;&gt;-->
-    <!--<select id="queryPatientVisitsByPage"  parameterType="com.khsh.datacent.patientview.vo.PatientVisitReqVO"-->
-            <!--resultType="com.khsh.datacent.patientview.vo.PatientVisitVO">-->
 
-        <!--select empi,name,sex,birthday,address,visitType,inHospitalTime,outHospitalTime,visitCorp,visitOrg,visitOrgName,diagnosis,hospitalNum from (-->
-        <!--select distinct p.personid as  empi, p.xm as name,p.xb as sex,p.csrq as birthday, p.gzdwdz as address,-->
-        <!--'2' as visitType, zy.rysj as inHospitalTime, zy.cysj as outHospitalTime,-->
-        <!--zy.yljgdm as visitCorp, zy.jzksbm as visitOrg,zy.jzksmc as visitOrgName, zy.zdmc as diagnosis, zy.cisid as hospitalNum-->
-        <!--from TB_YL_Patient_Information p-->
-        <!--left join TB_YL_ZY_Medical_Record zy on p.personid = zy.personid-->
-        <!--where zy.rysj is not null-->
-        <!--<if test = "queryKeywords != null ">-->
-            <!--and (p.xm like concat(concat('%',#{queryKeywords}),'%') or-->
-            <!--zy.cisid like concat(concat('%',#{queryKeywords}),'%'))-->
-        <!--</if>-->
-        <!--<if test = "inHospitalStartTime != null and inHospitalStartTime!='' and inHospitalEndTime != null and inHospitalEndTime!=''">-->
-            <!--and zy.rysj between #{inHospitalStartTime} and #{inHospitalEndTime}-->
-        <!--</if>-->
-        <!--<if test = "depts != null and depts.size() != 0">-->
-            <!--and zy.jzksbm IN-->
-            <!--<foreach collection="depts" index="index" item="dept" open="(" separator="," close=")">-->
-                <!--#{dept}-->
-            <!--</foreach>-->
-        <!--</if>-->
-        <!--union all-->
-        <!--select distinct p.personid as  empi, p.xm as name ,p.xb as sex,p.csrq as birthday, p.gzdwdz as address,-->
-        <!--'1' as visitType, mz.jzksrq as inHospitalTime,'' as outHospitalTime ,-->
-        <!--mz.yljgdm as visitCorp, mz.jzksbm as visitOrg,mz.jzksmc as visitOrgName, mz.mzzdmc as diagnosis, mz.jzlsh as hospitalNum-->
-        <!--from TB_YL_Patient_Information p-->
-        <!--left join TB_YL_MZ_Medical_Record mz on p.personid = mz.personid-->
-        <!--where mz.jzksrq is not null-->
-        <!--<if test = "queryKeywords != null and queryKeywords!='' ">-->
-            <!--and (p.xm like concat(concat('%',#{queryKeywords}),'%') or-->
-            <!--mz.jzlsh like concat(concat('%',#{queryKeywords}),'%'))-->
-        <!--</if>-->
-        <!--<if test = "inHospitalStartTime != null and inHospitalStartTime!='' and inHospitalEndTime != null and inHospitalEndTime!=''">-->
-            <!--and to_date(mz.jzksrq, 'YYYYMMDD') between #{inHospitalStartTime} and #{inHospitalEndTime}-->
-        <!--</if>-->
-        <!--<if test = "depts != null and depts.size() != 0">-->
-            <!--and mz.jzksbm IN-->
-            <!--<foreach collection="depts" index="index" item="dept" open="(" separator="," close=")">-->
-                <!--#{dept}-->
-            <!--</foreach>-->
-        <!--</if>-->
-        <!--) foo-->
-        <!--<if test = "visitTypes != null and visitTypes.size() != 0">-->
-        <!--where visitType in-->
-        <!--<foreach collection="visitTypes" index="index" item="visitType" open="(" separator="," close=")">-->
-            <!--#{visitType}-->
-        <!--</foreach>-->
-        <!--</if>-->
-        <!--order by empi-->
-    <!--</select>-->
-
-    <select id="queryPatientByPage"  parameterType="com.khsh.datacent.patientview.vo.PatientRequestVO"
-            resultType="com.khsh.datacent.patientview.vo.PatientRequestVO">
+    <select id="queryPatientByPage"  parameterType="com.khsh.datacent.patientview.vo.PatientResult"
+            resultType="com.khsh.datacent.patientview.vo.PatientResult">
 
           SELECT
           R.name, R.name_pin, R.age, R.sex, R.birthday, R.id_card, R.jiuzhen_card, R.huzhao_card,
@@ -112,8 +59,8 @@
 
 
 
-    <select id="queryPatientVisitsByPage"  parameterType="com.khsh.datacent.patientview.vo.PatientRequestVO"
-            resultType="com.khsh.datacent.patientview.vo.PatientRequestVO">
+    <select id="queryPatientVisitsByPage"  parameterType="com.khsh.datacent.patientview.vo.PatientResult"
+            resultType="com.khsh.datacent.patientview.vo.PatientResult">
 
         SELECT
         R.name, R.name_pin, R.age, R.sex, R.birthday, R.id_card, R.jiuzhen_card, R.huzhao_card,
@@ -198,5 +145,43 @@
         <!--</if>-->
 
     </select>
+
+    <select id="queryEmpi" parameterType="com.khsh.datacent.patientview.dto.PatientParam" resultType="string" >
+        SELECT B.empi FROM pix_empi_register B
+        WHERE B.id_card = '0000000000'
+        <if test = "idCard != null and idCard!='' ">
+            OR B.id_card=#{idCard}
+        </if>
+
+        <if test = "(patientId!=null and patientId!='') or (inpatientId!=null and inpatientId!='') or (inHospitalId!=null and inHospitalId!='') ">
+            <choose>
+                <when test=" patientId!=null and patientId!='' ">
+                    UNION ALL
+                    SELECT R.empi FROM pix_empi_his_r R
+                    WHERE upper(R.patient_id)=upper(#{patientId})
+                </when>
+                <when test=" inpatientId!=null and inpatientId!='' ">
+                    UNION ALL
+                    SELECT R.empi FROM pix_empi_his_r R
+                    WHERE upper(R.inpatient_id)=upper(#{inpatientId})
+                </when>
+                <when test=" inHospitalId!=null and inHospitalId!='' ">
+                    UNION ALL
+                    SELECT R.empi FROM pix_empi_his_r R
+                    WHERE R.in_hospital_id=#{inHospitalId}
+                </when>
+            </choose>
+
+
+        </if>
+
+    </select>
+
+    <select id="queryEmpiByIdcard" parameterType="com.khsh.datacent.patientview.dto.PatientParam" resultType="string" >
+        SELECT B.empi FROM pix_empi_register B
+        WHERE B.id_card=#{idCard}
+    </select>
+
+
 
 </mapper>

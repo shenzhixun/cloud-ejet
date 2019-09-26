@@ -3,8 +3,8 @@
 <mapper namespace="com.khsh.datacent.patientview.mapper.slave.OMOdersMapper">
 
     <!-- 查询医嘱信息 -->
-    <select id="queryPatientOmOrdersByPage"  parameterType="com.khsh.datacent.patientview.vo.OMOrdersDetailVO"
-            resultType="com.khsh.datacent.patientview.vo.OMOrdersDetailVO">
+    <select id="queryPatientOmOrdersByPage"  parameterType="com.khsh.datacent.patientview.vo.OMOrdersDetailResult"
+            resultType="com.khsh.datacent.patientview.vo.OMOrdersDetailResult">
         select * from  om_orders_detail
         WHERE 1=1
         <if test = "patientId!=null  and patientId!=''">

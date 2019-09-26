@@ -2,6 +2,7 @@ package com.khsh.datacent.patientview.vo;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +16,7 @@ import java.util.List;
  * Version: 1.0
  */
 @Data
-public class PatientVisitResultVO {
+public class PatientVisitResult implements Serializable {
     /**
      * 患者信息
      */
