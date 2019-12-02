@@ -33,8 +33,6 @@ public class PatientVO extends PixEmpiHisRModel {
     private java.lang.String yibaoCard;
     /**  医保卡名称  */
     private java.lang.String yibaoCardName;
-    /**  患者id  */
-    private java.lang.String patientId;
 
     /**  民族  */
     private java.lang.String nation;
@@ -48,10 +46,6 @@ public class PatientVO extends PixEmpiHisRModel {
     private java.lang.String phone;
     /**  联系人 详细地址  */
     private java.lang.String addrDetail;
-
-
-
-
 
 
 }
