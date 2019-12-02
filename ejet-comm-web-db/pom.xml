@@ -11,6 +11,7 @@
     </parent>
 
     <description>带DB启动入口</description>
+    <groupId>com.ejet</groupId>
     <artifactId>ejet-comm-web-db</artifactId>
     <version>${ejet-module.version}</version>
     <packaging>jar</packaging>

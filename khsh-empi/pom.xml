@@ -10,6 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <groupId>com.ejet</groupId>
     <artifactId>khsh-empi</artifactId>
     <version>${ejet-module.version}</version>
 

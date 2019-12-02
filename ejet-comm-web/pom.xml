@@ -12,6 +12,7 @@
     </parent>
 
     <description>启动入口</description>
+    <groupId>com.ejet</groupId>
     <artifactId>ejet-comm-web</artifactId>
     <version>${ejet-module.version}</version>
     <packaging>jar</packaging>
@@ -34,14 +35,14 @@
         <dependency>
             <groupId>net.sf.json-lib</groupId>
             <artifactId>json-lib</artifactId>
-            <!--<version>${netsfjson-lib.version}</version>-->
+            <version>${netsfjson-lib.version}</version>
             <classifier>jdk15</classifier>
         </dependency>
 
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <!--<version>${fastjson-lib.version}</version>-->
+            <version>${fastjson-lib.version}</version>
         </dependency>
 
         <dependency>
