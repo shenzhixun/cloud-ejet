@@ -23,7 +23,7 @@
         <servlet-api.version>3.1.0</servlet-api.version>
         <pagehelper.version>5.0.4</pagehelper.version>
         <druid.version>1.1.10</druid.version>
-        <mysql.version>5.1.4</mysql.version>
+        <mysql.version>8.0.16</mysql.version>
         <oracle.version>10.2.0.2.0</oracle.version>
         <pinyin.version>2.5.0</pinyin.version>
 
